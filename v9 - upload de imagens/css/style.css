@@ -1,0 +1,89 @@
+/*
+Header style
+*/
+body {
+  overflow-x: hidden;
+  font-family: arial;
+}
+
+ul {
+  width: 102%;
+  margin-top: 0;
+  list-style-type: none;
+  margin-left: -8px;
+  margin-right: -8px;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075)
+}
+
+li {
+  float: right;
+  padding: 14px 16px;
+}
+
+li a {
+  display: block;
+  color: #343a40;
+  text-align: center;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: lightgrey;
+}
+#left-element {
+  float: left;
+}
+#left-element a{
+  color: red;
+  font-weight: bold;
+}
+
+/*
+Search formulário
+*/
+#search-form{
+  display: flex;
+  align-items: center;
+}
+input{
+  margin-right: 10px;
+}
+
+/*
+Table Style
+*/
+
+th {
+  color: red;
+  height: 30px;
+}
+
+td {
+  height: 30px;
+}
+
+td a {
+  width: 100%;
+  color: inherit;
+  cursor: pointer;
+}
+
+tr:hover td {
+  background-color: lightgrey;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+table {
+  margin-top: 35px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
