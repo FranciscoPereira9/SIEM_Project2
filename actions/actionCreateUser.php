@@ -1,4 +1,5 @@
 <?php
+    //TODO: verificar se email já existe
     session_start();
 
     include_once "../includes/opendb.php";
