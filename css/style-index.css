@@ -1,0 +1,140 @@
+
+body {
+    background: url(../images/backgroung.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+/*--- HEADER --- */
+
+header {
+    margin: 20px 5px 5px 5px; 
+    height: 100px;
+}
+
+.header-container h1{
+    margin: 0;
+    font-size: 3vw;
+}
+
+.header-container h1 a {
+    text-decoration: none;
+    color: white;
+}
+
+.header-container span{
+    font-size: 2vw;
+}
+
+.header-container-a {
+    color: white;
+    grid-area: side;
+    text-align: center;
+    align-self: center;
+}
+
+.header-container-b {
+    color: white;
+    grid-area: header;
+    text-align: center;
+    align-self: center;
+
+}
+
+.header-container-c {
+    color: white;
+    grid-area: icon-user;
+    text-align: center;
+    align-self: center;
+}
+
+.header-container-c a i{
+    text-decoration: none;
+    color: white;
+}
+
+
+.header-container-d {
+    color: white;
+    grid-area: icon-cart;
+    text-align: center;
+    align-self: center;
+}
+
+.header-container-d a i{
+    text-decoration: none;
+    color: white;
+}
+
+
+.header-container{
+    font-family: 'Cairo', sans-serif;
+    display: grid;
+    grid-template-columns: 7.5% 82.5% 5% 5%;
+    grid-template-rows: 100%;
+    grid-template-areas: 
+      "side header icon-user icon-cart";
+}
+
+/*--- SIDE BAR ---*/
+#mainbox{
+    font-size: 24px;
+    cursor: pointer;
+    transition: all .6s;
+   }
+
+.sidemenu{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 0px;
+    background-color: #222;
+    z-index: 1;
+    padding-top: 100px;
+    overflow-x: hidden;
+    transition: all .5s;
+   }
+.sidemenu a{
+    padding: 8px 8px 8px 64px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #999;
+    display: block;
+   }
+.sidemenu a:hover{
+     color: white;
+   }
+.sidemenu .closebtn{
+    position: absolute;
+    top: 0px;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 32px;
+   }
+
+
+
+   
+/*--- BODY ---*/
+
+.search-box{
+    grid-area: search-box;
+    align-self: center;
+    justify-self: stretch;
+}
+
+main {
+    height: 800px;
+    display: grid;
+    grid-template-columns: auto 500px auto;
+    grid-template-rows: auto 50px auto;
+    grid-template-areas: 
+      ". . ."
+      ". search-box ."
+      ". . .";
+
+}
+
