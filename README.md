@@ -14,3 +14,8 @@ images - imagens
 includes - como abrir e fechar conexão a base de dados: evita que tenhamos sempre de fazer a conexão. Fazendo o include apenas precisamos referir variável global conn.
 
 pages - front-end do site. Inclui html das páginas.
+
+
+#Utilizadores
+user: email-user password-user
+admin: email-admin password-admin

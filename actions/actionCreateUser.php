@@ -4,8 +4,7 @@
 
     include_once "../includes/opendb.php";
     include_once "../database/user.php";
-    echo empty($_POST['OK']);
-    if (!empty($_POST['OK'])){
+    if (!empty($_POST['register'])){
         $firstname = $_POST['firstname'];
 	    $lastname = $_POST['lastname'];
 	    $email = $_POST['email'];
@@ -24,7 +23,7 @@
 
         //construção da query ou mensagem de erro
         if(!$dadosValidos){
-            $_SESSION['msgErro'] = "Erro nos formulário (um dos campos em falta)<p>";
+            $_SESSION['signinIncomplete'] = "All fields are required!<p>";
 
             //inserir dados em falta no formulário para aparecer
             $_SESSION['firstname'] = $firstname;
@@ -35,10 +34,14 @@
             header("Location: ../pages/user.php");
         }
         else {
-			
-			
 			//Se dados válidos, a query é executada e depois o script é redirecionado para a página de entrada
-			$result = createUser($firstname, $lastname, $email, $password_md5);
+			if(checkEmail($email)==0){
+			    createUser($firstname, $lastname, $email, $password_md5);
+                $_SESSION['signinSuccess'] = "Account created!<p>";
+            }else{
+                $_SESSION['signinUserFail'] = "User already in use!<p>";
+            }
+			
 
 		    header("Location: ../pages/user.php");
 		
