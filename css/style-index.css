@@ -24,10 +24,6 @@ header {
     color: white;
 }
 
-.header-container span{
-    font-size: 2vw;
-}
-
 .header-container-a {
     color: white;
     grid-area: side;
@@ -80,7 +76,7 @@ header {
 
 /*--- SIDE BAR ---*/
 #mainbox{
-    font-size: 24px;
+    font-size: 2vw;;
     cursor: pointer;
     transition: all .6s;
    }
