@@ -1,23 +1,37 @@
 <?php
 	session_start();
-	
+	if(!isset($_SESSION['cart'])){
+	$_SESSION['cart']=array();
+}
+if(!isset($_SESSION['username'])){
+	$_SESSION['username']='';
+}
+if(!isset($_SESSION['signinSuccess'])){
+	$_SESSION['signinSuccess']='';
+}
+if(!isset($_SESSION['signupIncomplete'])){
+	$_SESSION['signupIncomplete']='';
+}
+if(!isset($_SESSION['signupUserFail'])){
+	$_SESSION['signupUserFail']='';
+}
 ?>
 <html>
 	<body>
 		<h3> USER</h3>
 		<?php 
-			if(isset($_SESSION['signinSuccess'])){
+			if($_SESSION['signinSuccess']!=''){
 	 			echo $_SESSION['signinSuccess'];
 				$_SESSION['signinSuccess'] = NULL;
 			}
 		
-			if($_SESSION['username']){
+			if($_SESSION['username']!=''){
 				?>
 				<a href="../actions/actionLogout.php"> Logout </a>
 				<?php
 			}
 			else{
-				
+				echo $_SESSION['username'];
 				echo "<b>LOGIN:</b><br><br>";
 				echo "<form method=\"POST\" action=\"../actions/actionLogIn.php\">";
 				   echo"Login: 	<input type=\"text\" name=\"email_login\"></input><br>";
@@ -27,13 +41,13 @@
 				
 				echo"<b>SIGN IN:</b><br><br>";
 				
-					if(isset($_SESSION['signinIncomplete'])){
-						echo $_SESSION['signinIncomplete'];
-						$_SESSION['signinIncomplete']=NULL;
+					if($_SESSION['signupIncomplete']!=''){
+						echo $_SESSION['signupIncomplete'];
+						$_SESSION['signupIncomplete']=NULL;
 					}
-					if(isset($_SESSION['signinUserFail'])){
-						echo $_SESSION['signinUserFail'];
-						$_SESSION['signinUserFail']=NULL;
+					if($_SESSION['signupUserFail']!=''){
+						echo $_SESSION['signupUserFail'];
+						$_SESSION['signupUserFail']=NULL;
 					}
 				
 

@@ -12,7 +12,7 @@
         if (empty($email) ||  empty($password)){
 			
 			$dadosValidos = false;
-            echo $dadosValidos;
+            //echo $dadosValidos;
 			}
 		else {
 			$dadosValidos = true;
@@ -31,6 +31,7 @@
 			
             //Verifica se login é válido
 			$login = checkUserPassword($email, $password);
+			echo $login;
 
             if($login){
 				$_SESSION['username'] = $login;

@@ -4,17 +4,39 @@
 	session_start();
 	
 	include_once "../includes/opendb.php";
-	include_once "../database/product.php";
+	include_once "../database/db_product.php";
 	
-	$product_sku=$_GET['id'];
+		if(!isset($_SESSION['cart'])){
+	$_SESSION['cart']=array();
+}
+if(!isset($_SESSION['username'])){
+	$_SESSION['username']='';
+}
+
+if(!isset($_SESSION['msgErroCart'])){
+	$_SESSION['msgErroCart']='';
+}
+if(!isset($_SESSION['outOfStock'])){
+	$_SESSION['outOfStock']='';
+}
 	
-	$price=getPrice($product_sku);
-	$name=getProductName($product_sku);
+	$product_ean=$_GET['id'];
+	
+	$price=getPrice($product_ean);
+	$name=getProductName($product_ean);
 ?>
 
 <html>
     <body>
 	<h3><?php echo $name ?></h3>
+	<?php if($_SESSION['msgErroCart'] != ''){
+		echo $_SESSION['msgErroCart'];
+		$_SESSION['msgErroCart']='';
+	}
+	if($_SESSION['outOfStock']!=''){
+		echo$_SESSION['outOfStock'];
+		$_SESSION['outOfStock']='';
+	}?>
         <form method="POST" action="../actions/actionAdd2Cart.php">
         Size: <select name="size">
                     <option>XS</option>
@@ -38,7 +60,7 @@
 		   
 		   <?php echo "$price €<br>";?>
 		   
-		<input type="hidden" name="sku" value="<?php echo $product_sku; ?>">
+		<input type="hidden" name="ean" value="<?php echo $product_ean; ?>">
 		<input type="hidden" name="price" value="<?php echo $price; ?>">
 		<input type="hidden" name="name" value="<?php echo $name; ?>">
 
