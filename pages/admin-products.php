@@ -1,4 +1,7 @@
-<!doctype html>
+<?php
+  include '../database/db_functions.php';
+  include '../includes/opendb.php';
+?>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -57,8 +60,6 @@
       </thead>
       <tbody>
         <?php
-          include '../includes/opendb.php';
-          include '../database/db_functions.php';
             // Get orders
             $arr = get_db_products($conn);
             $a=1;
