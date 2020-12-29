@@ -1,3 +1,7 @@
+<?php
+  include '../database/db_functions.php';
+  include '../includes/opendb.php';
+?>
 <html>
     <head>
         <!-- Required meta tags -->
@@ -10,6 +14,9 @@
         <script src="https://kit.fontawesome.com/3ab706ac58.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+        <!-- jQuey CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Website Tittle -->
         <title>Fashion Store</title>
     </head>
     <body>
@@ -35,7 +42,23 @@
               <a href="#">MEN</a>
               <a href="#">WOMEN</a>
               <a href="#">CHILDREN</a>
-              <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>  
+              <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>
+              <div id="admin-benefits">
+                <a href="#">DASHBOARD</a>
+                <a href="#">ORDERS</a>
+                <a href="#">PRODUCTS</a>
+                <a href="#">CUSTOMERS</a>
+              </div>
+              <div id="currency">
+                <form action="">
+                  <select name="country" id="opt-country" form="country-form">
+                    <option value="portugal">Portugal (€)</option>
+                    <option value="spain">Spain (€)</option>
+                    <option value="france">France (€)</option>
+                    <option value="germany">Germany (€)</option>
+                  </select>
+                </form>
+              </div>
             </div>
       
             <h2>Dashboard</h2>
@@ -45,20 +68,26 @@
               <!-- KPIs -->
               <div class="kpis">
                   <div class= "kpi1"> 
-                    <h3>KPI1</h3>
+                    <?php
+                      printf("<h3>%.2f€</h3>", revenue_sales($conn)[0]);
+                    ?>
                     <p>Sales</p>
                   </div>
                   <div class= "kpi2">
-                    <h3>KPI2</h3>
+                    <?php
+                      printf("<h3>%.2f€</h3>", avg_cart($conn)[0]);
+                    ?>
                     <p>Average Cart</p>
                   </div>
                   <div class= "kpi3">
-                    <h3>KPI3</h3>
+                    <?php
+                      printf("<h3>%.0f</h3>", n_customers($conn)[0]);
+                    ?>
                     <p>Clients</p>
                   </div>
               </div>
               <!-- Chart -->
-              <div id="curve_chart" style="width: 100%; height: 600px" >
+              <div id="curve_chart" style="width: 100%; height: 70%" >
                   
               </div>
             
@@ -66,16 +95,13 @@
             <!-- Google Charts JavaScript API -->
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <script type="text/javascript">
-                google.charts.load('current', {'packages':['corechart']});
+                google.charts.load('current',{ callback: function () { drawChart(); $(window).resize(drawChart);}, packages:['corechart']});
                 google.charts.setOnLoadCallback(drawChart);
-
+                
                 function drawChart() {
                     var data = google.visualization.arrayToDataTable([
-                    ['Index', 'Sales'],
+                    ['Index', 'Sales in €'],
                     <?php
-                      include '../includes/opendb.php';
-                      include '../database/db_functions.php';
-
                       // Get data from db
                       $data = chart_data($conn);
 
@@ -85,10 +111,10 @@
                       foreach($data as $row){
                           
                           if($a < $n-1){
-                              echo "[$a,".$row["sum"]."],\n";
+                              echo "['".$row["date"]."',".$row["sum"]."],\n";
                           }
                           else{
-                              echo "[$a,".$row["sum"]."]";
+                              echo "['".$row["date"]."',".$row["sum"]."]";
                           }
                           $a++;
                       }
@@ -97,6 +123,7 @@
 
                     var options = {
                       // title: 'none',
+                      columnType: 'string',
                       curveType: 'function',
                       legend: { position: 'bottom' }
                     };
@@ -105,6 +132,7 @@
 
                     chart.draw(data, options);
                 }
+
             </script>
             
             
