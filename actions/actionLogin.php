@@ -2,7 +2,7 @@
     session_start();
 
     include_once "../includes/opendb.php";
-    include_once "../database/user.php";
+    include_once "../database/db_user.php";
     if (!empty($_POST['login'])){
 	    $email = $_POST['email_login'];
 	    $password = $_POST['password_login'];
@@ -32,11 +32,12 @@
             //Verifica se login é válido
 			$login = checkUserPassword($email, $password);
 
-            if($login==0){
-                $_SESSION['msgErroLogin'] = "Wrong username/password<p>";
+            if($login){
+				$_SESSION['username'] = $login;
+                
             }
             else{
-                $_SESSION['msgErroLogin'] = $email;
+                $_SESSION['msgErroLogin'] = "Wrong username/password<p>";
             }
 
 		    header("Location: ../pages/user.php");
