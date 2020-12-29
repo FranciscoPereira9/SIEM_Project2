@@ -1,5 +1,3 @@
-<html>
-
 <?php
 
 // Connect to DB
@@ -117,7 +115,6 @@
           exit;
         }
 
-      
       return pg_fetch_row($res);
     }
 
@@ -157,6 +154,28 @@
     }
 
 
+    // Chart Data
+    function chart_data($conn){
+      $query = "SELECT date, sum(price)
+                FROM (
+                  SELECT *
+                  FROM orders
+                  RIGHT JOIN products ON orders.product=products.sku) AS t
+                GROUP BY date
+                ORDER BY date ASC";
+      
+      $res = pg_exec($conn, $query);
+      if (!$res) {
+          echo "An error occurred.\n";
+          exit;
+        }
+
+      $arr = pg_fetch_all($res);
+      
+      return $arr;
+
+    }
+
     // Display array of values
     function display_arr($arr){
       foreach($arr as $n){
@@ -171,4 +190,3 @@
 
 
 ?>
-</html>

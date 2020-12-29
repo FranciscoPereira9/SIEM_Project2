@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
     <link rel="stylesheet" href="../css/style-admin-orders.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -59,7 +60,7 @@
           include '../includes/opendb.php';
           include '../database/db_functions.php';
             // Get orders
-            $arr = get_db_orders($conn);
+            $arr = get_db_products($conn);
             $a=1;
             foreach($arr as $n){
                 print("<tr>");
