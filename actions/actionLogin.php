@@ -30,12 +30,12 @@
         else {
 			
             //Verifica se login é válido
-			$login = checkUserPassword($email, $password);
-			echo $login;
+			$login= checkUserPassword($email, $password);
+			//echo $login;
 
             if($login){
 				$_SESSION['username'] = $login;
-                
+				$_SESSION['email'] = $email;                
             }
             else{
                 $_SESSION['msgErroLogin'] = "Wrong username/password<p>";

@@ -28,6 +28,36 @@ if(!isset($_SESSION['signupUserFail'])){
 			if($_SESSION['username']!=''){
 				?>
 				<a href="../actions/actionLogout.php"> Logout </a>
+				
+				<h2>Account:<h2>
+				<p></p>
+				<form method="POST" action="../actions/actionChangeUserSettings.php">
+					<p>Firstname: <input type="text" name="firstname"><br></p>
+					<p>Lastname: <input type="text" name="lastname"><br></p>
+					<p>Password: <input type="password" name="password"><br></p>
+					<p>Contact: <input type="text" name="phone"><br><br></p>
+					<p><input type="submit" name="save_changes_account" value="Save"></p>
+				</form>
+				<h2>Payment:</h2>
+				<p></p>
+				<form method="POST" action="../actions/actionChangeUserSettings.php">
+					<p><input type="radio" value="paypal" name="payment"> PayPal<br></p>
+					<p><input type="radio" value="mbway" name="payment"> MBway<br></p>
+					<p><input type="radio" value="credit_card" name="payment"> Credit Card<br></p>
+					<p><input type="radio" value="bitcoin" name="payment"> BitCoin<br><br></p>
+					<p><input type="submit" name="save_changes_payment" value="Save"></p>
+				</form>
+				
+				<h2>Shipping</h2>
+				<p></p>
+				<form method="POST" action="../actions/actionChangeUserSettings.php">
+					<p>Address: <input type="text" name="address"><br></p>
+					<p>Postal Code: <input type="text" name="postalcode"><br></p>
+					<p>City: <input type="text" name="city"><br></p>
+					<p>Country: <input type="text" name="country"><br><br></p>
+					
+					<p><input type="submit" name="save_changes_shipping" value="Save"></p>
+				</form>
 				<?php
 			}
 			else{
