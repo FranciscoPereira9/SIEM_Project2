@@ -3,7 +3,7 @@
     session_start();
 
     include_once "../includes/opendb.php";
-    include_once "../database/user.php";
+    include_once "../database/db_user.php";
     if (!empty($_POST['register'])){
         $firstname = $_POST['firstname'];
 	    $lastname = $_POST['lastname'];
@@ -37,9 +37,9 @@
 			//Se dados válidos, a query é executada e depois o script é redirecionado para a página de entrada
 			if(checkEmail($email)==0){
 			    createUser($firstname, $lastname, $email, $password_md5);
-                $_SESSION['signinSuccess'] = "Account created!<p>";
+                $_SESSION['signupSuccess'] = "Account created!<p>";
             }else{
-                $_SESSION['signinUserFail'] = "User already in use!<p>";
+                $_SESSION['signupUserFail'] = "User already in use!<p>";
             }
 			
 
