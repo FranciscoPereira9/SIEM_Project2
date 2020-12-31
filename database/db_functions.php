@@ -32,7 +32,7 @@
 
     //Function to get all products -> returns Array with all products
     function get_db_products($conn){
-      $query = "SELECT * FROM \"tp_php\".product;";
+      $query = "SELECT * FROM \"tp_php\".products;";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -66,11 +66,9 @@
 
       $res = pg_exec($conn, $query);
       if (!$res) {
-          echo "An error occurred.\n";
+          throw new Exception('Something went wrong. Coudn\'t add item to database.');
           exit;
         }
-
-
     }
 
     //Function to update stock
@@ -154,13 +152,13 @@
     }
 
 
-    // Chart Data
+    // Chart Data -> Orders per date
     function chart_data($conn){
       $query = "SELECT date, sum(price)
                 FROM (
                   SELECT *
                   FROM orders
-                  RIGHT JOIN products ON orders.product=products.sku) AS t
+                  LEFT JOIN products ON orders.product=products.sku) AS t
                 GROUP BY date
                 ORDER BY date ASC";
       

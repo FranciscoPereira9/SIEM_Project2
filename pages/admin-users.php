@@ -1,4 +1,5 @@
 <?php
+  session_start();
   include '../database/db_functions.php';
   include '../includes/opendb.php';
 ?>
@@ -22,7 +23,7 @@
           <span>&#9776;</span>
       </div>
       <div class="header-container-b">
-        <h1><a href="index.html">Fashion Store</a></h1>
+        <h1><a href="index.php">Fashion Store</a></h1>
       </div>
       <div class="header-container-c">
         <a href="user-view.html"><i class="far fa-user fa-2x"></i></a>
@@ -39,6 +40,29 @@
       <a href="#">WOMEN</a>
       <a href="#">CHILDREN</a>
       <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>  
+      <?php
+          if($_SESSION['username']== 'admin' &&  $_SESSION['password']== 'admin'){   
+      ?>
+      <div id="admin-benefits">
+        <a href="dashboard.php">DASHBOARD</a>
+        <a href="admin-orders.php">ORDERS</a>
+        <a href="admin-products.php">PRODUCTS</a>
+        <a href="admin-users.php">CUSTOMERS</a>
+        <a href="admin-new-item.php">ADD NEW ITEM</a>
+      </div>
+      <?php
+        }
+      ?>
+      <div id="currency">
+        <form action="">
+          <select name="country" id="opt-country" form="country-form">
+            <option value="portugal">Portugal (€)</option>
+            <option value="spain">Spain (€)</option>
+            <option value="france">France (€)</option>
+            <option value="germany">Germany (€)</option>
+          </select>
+        </form>
+      </div>
     </div>
 
     <!-- Search form -->
@@ -46,36 +70,34 @@
       <input class="form-control form-control-sm mr-3" type="text" placeholder=" Search... " aria-label="Search">
     </form>
 
-    <!-- Table with Orders -->
+    <!-- Table with Users -->
     <h2>Orders</h2>
     <table class="table table-striped table-dark">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <th scope="col">ID</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
         </tr>
       </thead>
       <tbody>
         <?php
             // Get orders
-            $arr = get_db_orders($conn);
-            $a=1;
+            $arr = get_db_users($conn);
             foreach($arr as $n){
                 print("<tr>");
-                print("<th scope=\"row\">$a</th>");
+                print("<th scope=\"row\">".$n['id']."</th>");
                 print("<td>");
-                echo $n['order_id'];
+                echo $n['first_name'];
                 print("</td>");
                 print("<td>");
-                echo $n['date'];
+                echo $n['last_name'];
                 print("</td>");
                 print("<td>");
-                echo $n['total_order_price'];
+                echo $n['email'];
                 print("</td>");
                 print("</tr>");
-                $a++;
               }
         ?>
       </tbody>

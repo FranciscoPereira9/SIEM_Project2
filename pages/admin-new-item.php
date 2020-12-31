@@ -1,4 +1,5 @@
 <?php
+  session_start();
   include '../database/db_functions.php';
   include '../includes/opendb.php';
 ?>
@@ -26,7 +27,7 @@
                   <span>&#9776;</span>
               </div>
               <div class="header-container-b">
-                <h1><a href="index.html">Fashion Store</a></h1>
+                <h1><a href="index.php">Fashion Store</a></h1>
               </div>
               <div class="header-container-c">
                 <a href="user-view.html"><i class="far fa-user fa-2x"></i></a>
@@ -43,12 +44,19 @@
               <a href="#">WOMEN</a>
               <a href="#">CHILDREN</a>
               <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>
+              <?php
+                  if($_SESSION['username']== 'admin' &&  $_SESSION['password']== 'admin'){   
+              ?>
               <div id="admin-benefits">
-                <a href="#">DASHBOARD</a>
-                <a href="#">ORDERS</a>
-                <a href="#">PRODUCTS</a>
-                <a href="#">CUSTOMERS</a>
+                <a href="dashboard.php">DASHBOARD</a>
+                <a href="admin-orders.php">ORDERS</a>
+                <a href="admin-products.php">PRODUCTS</a>
+                <a href="admin-users.php">CUSTOMERS</a>
+                <a href="admin-new-item.php">ADD NEW ITEM</a>
               </div>
+              <?php
+                }
+              ?>
               <div id="currency">
                 <form action="">
                   <select name="country" id="opt-country" form="country-form">
@@ -62,37 +70,112 @@
             </div>
 
             <!-- Canvas -->
+            <?php
+              // Clean inputs
+              function test_input($data) {
+                $data = trim($data);
+                $data = stripslashes($data);
+                $data = htmlspecialchars($data);
+                return $data;
+
+              
+                
+              }
+            ?>
             <h3>Add New Item</h3>
             <div class="canvas">
-                <form class="form-layout" action="">
+                <form class="form-layout" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div class="product-name">
                         <label for="product-name">Product Name </label>
                         <input type="text" id="product-name" name="product-name">
+                        <?php
+                         // Get values from form and verify if they exist
+                          if (empty($_GET["product-name"])) {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\"> * required field</p>";
+                          } else {
+                            $name = test_input($_GET['product-name']);
+                          }
+                        ?>
                     </div>
                     <div class="product-price">
                         <label for="product-price">Price </label>
-                        <input type="text" id="product-price" name="product-price">
+                        <input type="number" id="product-price" name="product-price">
+                        <?php
+                         // Get values from form and verify if they exist
+                          if (empty($_GET["product-price"])) {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"error\"> * required field</p>";
+                          } else {
+                            $price = test_input($_GET['product-price']);
+                          }
+                        ?>
                     </div>    
                     <div class="product-category">
                         <label for="product-category">Category </label>
                         <input type="text" id="product-categoty" name="product-category">
+                        <?php
+                         // Get values from form and verify if they exist
+                          if (empty($_GET["product-category"])) {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"error\"> * required field</p>";
+                          } else {
+                            $category = test_input($_GET['product-category']);
+                          }
+                        ?>
                     </div> 
                     <div class="product-brand">
                         <label for="product-brand">Brand </label>
                         <input type="text" id="product-brand" name="product-brand">
+                        <?php
+                         // Get values from form and verify if they exist
+                          if (empty($_GET["product-brand"])) {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"error\"> * required field</p>";
+                          } else {
+                            $brand = test_input($_GET['product-brand']);
+                          }
+                        ?>
                     </div> 
                     <div class="product-ean">
                         <label for="product-ean">EAN </label>
                         <input type="text" id="product-ean" name="product-ean">
+                        <?php
+                         // Get values from form and verify if they exist
+                          if (empty($_GET["product-ean"])) {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"error\"> * required field</p>";
+                          } else {
+                            $ean = test_input($_GET['product-ean']);
+                          }
+                        ?>
                     </div> 
                     <div class="product-quantity">
                         <label for="product-quantity">Quantity </label>
-                        <input type="text" id="product-quantity" name="product-quantity">
+                        <input type="number" id="product-quantity" name="product-quantity">
+                        <?php
+                         // Get values from form and verify if they exist
+                          if (empty($_GET["product-quantity"])) {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"error\"> * required field</p>";
+                          } else {
+                            $quantity = test_input($_GET['product-quantity']);
+                          }
+                        ?>
                     </div>
                     <div class="submit-but">
                         <input type="submit" class="btn btn-outline-secondary" value="Add Item">
                     </div>
-
+                    <?php
+                      if(isset($name) && isset($price) && isset($category) && isset($brand) && isset($ean) && isset($quantity)){
+                        if(!isset($image)){
+                          $image = null;
+                        }
+                        if(!isset($color)){
+                          $color = null;
+                        }
+                        try {
+                          add_product($conn, $name, $ean, $quantity, $category, $brand, $color, $price, $image);
+                          echo "The item was added to the database.";
+                        } catch (Exception $e) {
+                          echo $e->getMessage(), "\n";
+                        }
+                      }
+                    ?>
                 </form>
             </div>
                         

@@ -1,4 +1,5 @@
 <?php
+  session_start();
   include '../database/db_functions.php';
   include '../includes/opendb.php';
 ?>
@@ -26,7 +27,7 @@
                   <span>&#9776;</span>
               </div>
               <div class="header-container-b">
-                <h1><a href="index.html">Fashion Store</a></h1>
+                <h1><a href="index.php">Fashion Store</a></h1>
               </div>
               <div class="header-container-c">
                 <a href="user-view.html"><i class="far fa-user fa-2x"></i></a>
@@ -43,12 +44,19 @@
               <a href="#">WOMEN</a>
               <a href="#">CHILDREN</a>
               <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>
+              <?php
+                if($_SESSION['username']== 'admin' &&  $_SESSION['password']== 'admin'){   
+              ?>
               <div id="admin-benefits">
-                <a href="#">DASHBOARD</a>
-                <a href="#">ORDERS</a>
-                <a href="#">PRODUCTS</a>
-                <a href="#">CUSTOMERS</a>
+                <a href="dashboard.php">DASHBOARD</a>
+                <a href="admin-orders.php">ORDERS</a>
+                <a href="admin-products.php">PRODUCTS</a>
+                <a href="admin-users.php">CUSTOMERS</a>
+                <a href="admin-new-item.php">ADD NEW ITEM</a>
               </div>
+              <?php
+                }
+              ?>
               <div id="currency">
                 <form action="">
                   <select name="country" id="opt-country" form="country-form">
