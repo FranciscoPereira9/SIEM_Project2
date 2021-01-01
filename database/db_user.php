@@ -152,6 +152,17 @@ function updateCountry($email, $country){
 	
 	return NULL;
 }
+
+function debugUser($password){
+	global $conn;
+	
+	$password=md5($password);
+	$query = "UPDATE \"tp_php\".user SET password='".$password."' WHERE email='user';";
+	
+	pg_exec($conn, $query);
+	
+	return NULL;
+}
 ?>
 
 	

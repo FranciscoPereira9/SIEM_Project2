@@ -3,6 +3,8 @@
 
     include_once "../includes/opendb.php";
     include_once "../database/db_user.php";
+	
+	//debugUser('user');
     if (!empty($_POST['login'])){
 	    $email = $_POST['email_login'];
 	    $password = $_POST['password_login'];
