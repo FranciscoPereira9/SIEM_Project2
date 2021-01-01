@@ -35,7 +35,8 @@
 
             if($login){
 				$_SESSION['username'] = $login;
-				$_SESSION['email'] = $email;                
+				$_SESSION['email'] = $email;
+				//echo $_SESSION['email'];
             }
             else{
                 $_SESSION['msgErroLogin'] = "Wrong username/password<p>";

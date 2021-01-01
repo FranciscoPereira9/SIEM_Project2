@@ -13,6 +13,10 @@ if(!isset($_SESSION['username'])){
 	$_SESSION['username']='';
 }
 
+if(!isset($_SESSION['email'])){
+	$_SESSION['email']='';
+}
+
 if(!isset($_SESSION['msgErroCart'])){
 	$_SESSION['msgErroCart']='';
 }

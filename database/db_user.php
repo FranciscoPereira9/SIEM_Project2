@@ -61,6 +61,97 @@ function checkUserPassword($user, $password){
 		return 0;
 	}
 }
+
+function updateFirstname($email, $first_name){
+	global $conn;
+	
+	$query = "UPDATE \"tp_php\".user SET first_name='".$first_name."' WHERE email='".$email."';";
+	
+	pg_exec($conn, $query);
+	
+	return NULL;
+}
+
+function updateLastname($email, $last_name){
+	global $conn;
+	
+	$query = "UPDATE \"tp_php\".user SET last_name='".$last_name."' WHERE email='".$email."';";
+	
+	pg_exec($conn, $query);
+	
+	return NULL;
+}
+
+
+function updatePassword($email, $password){
+	global $conn;
+	
+	$query = "UPDATE \"tp_php\".user SET password='".$password."' WHERE email='".$email."';";
+	
+	pg_exec($conn, $query);
+	
+	return NULL;
+}
+
+function updatePhone($email, $phone){
+	global $conn;
+	
+	$query = "UPDATE \"tp_php\".user SET phone='".$phone."' WHERE email='".$email."';";
+	
+	pg_exec($conn, $query);
+	
+	return NULL;
+}
+
+function updatePayment($email, $payment){
+	global $conn;
+	
+	$query = "UPDATE \"tp_php\".user SET payment_method='".$payment."' WHERE email='".$email."';";
+	
+	pg_exec($conn, $query);
+	
+	return NULL;
+}
+
+function updateAddress($email, $address){
+	global $conn;
+	
+	$query = "UPDATE \"tp_php\".user SET address='".$address."' WHERE email='".$email."';";
+	
+	pg_exec($conn, $query);
+	
+	return NULL;
+}
+
+function updatePostalcode($email, $postalcode){
+	global $conn;
+	
+	$query = "UPDATE \"tp_php\".user SET postalcode='".$postalcode."' WHERE email='".$email."';";
+	
+	pg_exec($conn, $query);
+	
+	return NULL;
+}
+
+function updateCity($email, $city){
+	global $conn;
+	
+	$query = "UPDATE \"tp_php\".user SET city='".$city."' WHERE email='".$email."';";
+	
+	pg_exec($conn, $query);
+	
+	return NULL;
+}
+
+function updateCountry($email, $country){
+	global $conn;
+	
+	$query = "UPDATE \"tp_php\".user SET country='".$country."' WHERE email='".$email."';";
+	
+	pg_exec($conn, $query);
+	
+	return NULL;
+}
 ?>
 
 	
