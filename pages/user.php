@@ -19,6 +19,9 @@ if(!isset($_SESSION['signupIncomplete'])){
 if(!isset($_SESSION['signupUserFail'])){
 	$_SESSION['signupUserFail']='';
 }
+if(!isset($_SESSION['checkoutError'] )){
+	$_SESSION['checkoutError'] = '';
+}
 ?>
 <html>
 	<body>
@@ -67,6 +70,10 @@ if(!isset($_SESSION['signupUserFail'])){
 			else{
 				echo $_SESSION['username'];
 				echo "<b>LOGIN:</b><br><br>";
+				if($_SESSION['checkoutError'] != ''){
+					echo $_SESSION['checkoutError'];
+					$_SESSION['checkoutError']  = NULL;
+				}
 				echo "<form method=\"POST\" action=\"../actions/actionLogIn.php\">";
 				   echo"Login: 	<input type=\"text\" name=\"email_login\"></input><br>";
 				echo"Password: 	<input type=\"password\" name=\"password_login\"></input><br>";

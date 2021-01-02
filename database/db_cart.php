@@ -11,4 +11,14 @@ function get_sku($ean, $color){
 	
 	return $sku;
 }
+
+function getStock($sku){
+	global $conn;
+	
+	$query = "select stock from \"tp_php\".products where sku=".$sku.";";
+	$result = pg_exec($conn, $query);
+	$stock = pg_fetch_assoc($result)['stock'];
+	
+	return $stock;
+}
 ?>

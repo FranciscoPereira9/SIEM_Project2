@@ -91,4 +91,14 @@ function addOrder($order_id, $clientId, $destination, $postalcode, $city, $date,
 	
 	return NULL;
 }
+
+function updateStock($sku, $stock){
+	global $conn;
+	
+	$query = "UPDATE \"tp_php\".products SET stock=".$stock." WHERE sku=".$sku.";";
+	
+	pg_exec($conn, $query);
+	
+	return NULL;
+}
 ?>

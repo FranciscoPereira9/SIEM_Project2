@@ -8,6 +8,7 @@ function getAllProducts($product){
 	if(!empty($product)){
 		$query .= "AND name = '$product'";
 	}
+	$query .= "ORDER BY sku ASC";
 	$result = pg_exec($conn, $query);
 	return $result;
 	

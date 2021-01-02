@@ -6,11 +6,22 @@ session_start();
 
 // depois para limpar array: $_SESSION['cart']=array();
 //print_r($_SESSION['cart']);
+if(!isset($_SESSION['noItemsCart'])){
+	$_SESSION['noItemsCart']='';
+}
+
 ?>
 
 <html>
+<h3> CART </h3>
+<?php 
+if($_SESSION['noItemsCart']!=''){
+	echo $_SESSION['noItemsCart'];
+	$_SESSION['noItemsCart']=NULL;
+} ?>
 	<table >
 		<?php
+		//preciso Ajax aqui para alterar variável de sessão para quantidade
 			$total_price=0;
 			$cost=array();
 			foreach ($_SESSION['cart'] as $item){
@@ -21,6 +32,7 @@ session_start();
 				name=\"quantity\" value=\"".$item['quantity']."\"></form></td><td style=\"padding: 15\">".$full_price."</td></tr><br>";
 			}
 			$products = array_column($_SESSION['cart'], 'sku');
+			$quantity = array_column($_SESSION['cart'], 'quantity');
 			?>
 	</table>
 	<?php echo $total_price; ?>
@@ -32,6 +44,10 @@ session_start();
 			foreach($cost as $value)
 			{
 				echo '<input type="hidden" name="cost[]" value="'. $value. '">';
+			}
+			foreach($quantity as $value)
+			{
+				echo '<input type="hidden" name="quantity[]" value="'. $value. '">';
 			}
 		?>
 		<input type="hidden" name="total_cost" value="<?php echo $total_price; ?>">
