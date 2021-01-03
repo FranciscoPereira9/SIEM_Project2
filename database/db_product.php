@@ -6,7 +6,7 @@ function getAllProducts($product){
 	global $conn;
 	$query = "select * from \"tp_php\".products where 1=1";
 	if(!empty($product)){
-		$query .= "AND name = '$product'";
+		$query .= "AND name = '$product' OR color='$product' OR ean='$product' OR brand='$product'";
 	}
 	$query .= "ORDER BY sku ASC";
 	$result = pg_exec($conn, $query);

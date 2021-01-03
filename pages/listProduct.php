@@ -20,10 +20,16 @@ if(!isset($_SESSION['signupUserFail'])){
 }
 ?>
 <html>
+<form id="search" method="GET" action="listProduct.php">
+	<p><label for="Search">Search:<input type="text" name="product"/ value="<?php if(!empty($product)){echo $product;} ?>"></p> 
+</form>
     <?php
 
 
         $product='';
+		if(isset($_GET['product'])){
+			$product = $_GET['product'];
+		}
         
         //Filtrar resultados da pesquisa
         //TODO: por filtros também para marca, cor e qualquer cena que possa ser posta na bd
