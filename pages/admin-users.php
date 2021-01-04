@@ -15,6 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <title>Fashion Store</title>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   </head>
   <body>
   <header>
@@ -66,8 +68,9 @@
     </div>
 
     <!-- Search form -->
+    <script src="../js/show-hint.js"></script>
     <form class="form-inline search-box">
-      <input class="form-control form-control-sm mr-3" type="text" placeholder=" Search... " aria-label="Search">
+      <input class="form-control form-control-sm mr-3" type="text" placeholder=" Search... " aria-label="Search" id="fname" name="fname" onkeyup="showHint(this.value)">
     </form>
 
     <!-- Table with Users -->
@@ -79,26 +82,17 @@
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
           <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Country</th>
+          <th scope="col">City</th>
+          <th scope="col">Address</th>
+          <th scope="col">Postal Code</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="txtHint">
         <?php
-            // Get orders
-            $arr = get_db_users($conn);
-            foreach($arr as $n){
-                print("<tr>");
-                print("<th scope=\"row\">".$n['id']."</th>");
-                print("<td>");
-                echo $n['first_name'];
-                print("</td>");
-                print("<td>");
-                echo $n['last_name'];
-                print("</td>");
-                print("<td>");
-                echo $n['email'];
-                print("</td>");
-                print("</tr>");
-              }
+          include "../actions/load_content_users.php";
+          load_users_table($conn);
         ?>
       </tbody>
     </table>

@@ -15,6 +15,11 @@
     <script src="https://kit.fontawesome.com/3ab706ac58.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <title>Fashion Store</title>
   </head>
   <body>
@@ -71,6 +76,57 @@
       <input class="form-control form-control-sm mr-3" type="text" placeholder=" Search... " aria-label="Search">
     </form>
 
+    <!-- Filter Products -->
+    <div class="product-filters">
+        
+          <div>
+            <input type="hidden" value=0 id="min_hiden_price">
+            <input type="hidden" value=1000 id="max_hiden_price">
+            <p id="price_show">0 - 1000</p>
+            <div id="my_slider"></div> 
+          </div>
+          <div>
+            <select class="common_selector" id="category"> 
+              <option></option>
+              <?php
+                $categories = distinct_categories($conn);
+                foreach($categories as $row){ 
+                  ?>
+                  <option value="<?php echo $row['category'] ?>"><?php echo $row['category'] ?></option>
+                  <?php
+                }
+              ?>
+            </select>
+          </div>
+          <div>
+            <select class="common_selector" id="color">
+              <option></option> 
+              <?php
+                $categories = distinct_colors($conn);
+                foreach($categories as $row){ 
+                  ?>
+                  <option value="<?php echo $row['color'] ?>"><?php echo $row['color'] ?></option>
+                  <?php
+                }
+              ?>
+            </select>
+          </div>
+          <div>
+            <select class="common_selector" id="brand"> 
+              <option></option>
+              <?php
+                $categories = distinct_brands($conn);
+                foreach($categories as $row){ 
+                  ?>
+                  <option value="<?php echo $row['brand'] ?>"><?php echo $row['brand'] ?></option>
+                  <?php
+                }
+              ?>
+            </select>
+          </div>
+        
+    </div>
+
     <!-- Table with Products -->
     <h2>Products</h2>
     <table class="table table-striped table-dark">
@@ -82,28 +138,16 @@
           <th scope="col">Price</th>
         </tr>
       </thead>
-      <tbody>
-        <?php
-            // Get orders
-            $arr = get_db_products($conn);
-            foreach($arr as $n){
-                print("<tr>");
-                print("<th scope=\"row\">".$n['sku']."</th>");
-                print("<td>");
-                echo $n['name'];
-                print("</td>");
-                print("<td>");
-                echo $n['brand'];
-                print("</td>");
-                print("<td>");
-                echo $n['price'], " €";
-                print("</td>");
-                print("</tr>");
-              }
-        ?>
+      <tbody class="filter_data">
       </tbody>
     </table>
 
+
+    <!-- Refresh Filtered Page Script --> 
+    <style>
+      #loading { text-align:center; height: 150px;}
+    </style>
+    <script src="../js/products-filter.js"></script>
   </main>
   <script src="../js/side-bar.js"> </script>   
   <!-- Option 1: Bootstrap Bundle with Popper -->

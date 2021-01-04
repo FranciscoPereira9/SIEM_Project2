@@ -150,14 +150,19 @@ main h2{
     justify-self: stretch;
 }
 
+.product-filters{
+    grid-area: filter;
+}
+
 main {
     height: 800px;
     display: grid;
     grid-template-columns: repeat(20, 5%);
-    grid-template-rows: 10% 10% 80% auto;
+    grid-template-rows: 10% 10% 15% 65% auto;
     grid-template-areas: 
       ". . . . . . . . search-box search-box search-box search-box . . . . . . . ."
       ". . . . . . . . . header-table header-table . . . . . . . . ."
+      ". . . . . filter filter filter filter filter filter filter filter filter filter . . . . ."
       ". . . . . table-admin table-admin table-admin table-admin table-admin table-admin table-admin table-admin table-admin table-admin . . . . ."
       ". . . . . . . . . . . . . . . . . . . ."
 
