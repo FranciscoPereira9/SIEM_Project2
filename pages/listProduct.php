@@ -20,9 +20,17 @@ if(!isset($_SESSION['signupUserFail'])){
 }
 ?>
 <html>
-<form id="search" method="GET" action="listProduct.php">
+	<?php 
+		include_once "components/header.php";
+	?>
+<link href="../css/style-product-list.css" rel="stylesheet" >
+	<?php
+		include_once "components/search_bar.php";
+	?>
+<!--<form id="search" method="GET" action="listProduct.php">
 	<p><label for="Search">Search:<input type="text" name="product"/ value="<?php if(!empty($product)){echo $product;} ?>"></p> 
-</form>
+</form>-->
+<div class="flex-box">
     <?php
 
 
@@ -47,11 +55,21 @@ if(!isset($_SESSION['signupUserFail'])){
             while (isset($row["ean"])) {
                 if($row["ean"] != $last_ean){
 					$last_ean = $row["ean"];
+					$img_source =$row['img'];
+					$gender = $row['gender'];
+					$category = $row['category'];
+					$price = $row['price'];
+					echo "<div class=\"flex-element\">";
+					//echo "\"../images/products/".$gender."/".$category."/".$img_source.".jpg\"";
+					echo "<img src=\"../images/products/".$gender."/".$category."/".$img_source.".jpg\"><br>";
 					echo "<a href=\"product.php?id=".$row['ean']."\">".$row['name']."</a><br>";
+					echo "$price €<br>";
+					echo "</div>";
 					
 				}
                 $row = pg_fetch_assoc($products);
             }
         }
 	?>
+</div>
 </html>
