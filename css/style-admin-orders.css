@@ -150,15 +150,30 @@ main h2{
     justify-self: stretch;
 }
 
-.product-filters{
+.search-filter{
+    border-style: solid;
+    border-width: 0.7mm;
+    border-radius: 7mm;
+    padding: 5px 5%;
+    margin: 10px 0px;
     grid-area: filter;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.price-range-slider{
+    width: 90%;
+    text-align: center;
 }
 
 main {
     height: 800px;
     display: grid;
     grid-template-columns: repeat(20, 5%);
-    grid-template-rows: 10% 10% 15% 65% auto;
+    grid-template-rows: 20px 100px auto auto auto;
     grid-template-areas: 
       ". . . . . . . . search-box search-box search-box search-box . . . . . . . ."
       ". . . . . . . . . header-table header-table . . . . . . . . ."

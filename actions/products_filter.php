@@ -8,7 +8,6 @@ if(isset($_POST['action']))
     $query = "SELECT * 
             FROM \"tp_php\".products";
 
-    print_r($_POST);
     $first = true;// Variable to check if it's the first to append -> doesn't have AND
     // Min Max price restrictions
     if(isset($_POST["minimum_price"], $_POST["maximum_price"]))

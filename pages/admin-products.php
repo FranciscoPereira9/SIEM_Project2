@@ -71,21 +71,26 @@
       </div>
     </div>
 
+    <h2>Products</h2>
+
     <!-- Search form -->
+    <script src="../js/show-hint.js"></script>
     <form class="form-inline search-box">
-      <input class="form-control form-control-sm mr-3" type="text" placeholder=" Search... " aria-label="Search">
+      <input class="form-control form-control-sm mr-3" type="text" placeholder=" Search... " aria-label="Search" id="fname" name="fname" onkeyup="showProductsSearch(this.value)">
     </form>
 
     <!-- Filter Products -->
-    <div class="product-filters">
+    <div class="search-filter">
         
-          <div>
+          <div class="price-range-slider">
+            <label for="price_show">Price Range: </label>
             <input type="hidden" value=0 id="min_hiden_price">
             <input type="hidden" value=1000 id="max_hiden_price">
             <p id="price_show">0 - 1000</p>
             <div id="my_slider"></div> 
           </div>
           <div>
+            <label for="brand">Category</label>
             <select class="common_selector" id="category"> 
               <option></option>
               <?php
@@ -99,6 +104,7 @@
             </select>
           </div>
           <div>
+            <label for="brand">Color</label>
             <select class="common_selector" id="color">
               <option></option> 
               <?php
@@ -112,6 +118,7 @@
             </select>
           </div>
           <div>
+            <label for="brand">Brand</label>
             <select class="common_selector" id="brand"> 
               <option></option>
               <?php
@@ -128,7 +135,6 @@
     </div>
 
     <!-- Table with Products -->
-    <h2>Products</h2>
     <table class="table table-striped table-dark">
       <thead>
         <tr>
@@ -138,7 +144,7 @@
           <th scope="col">Price</th>
         </tr>
       </thead>
-      <tbody class="filter_data">
+      <tbody id="txtHint" class="filter_data">
       </tbody>
     </table>
 

@@ -1,4 +1,5 @@
 <?php
+//----------------- Not Being Used ---------------------------
 function load_users_table($conn) {
     $arr = get_db_users($conn);
     foreach($arr as $n){
@@ -39,5 +40,5 @@ function load_users_table($conn) {
         print("</tr>");
       }
 }
-
+//----------------- Not Being Used ---------------------------
 ?>

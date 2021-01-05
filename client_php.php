@@ -14,7 +14,7 @@ class ArrayValue implements JsonSerializable {
 }
 
 //Build JSON data
-$json_data = ['module'=>'management','202001' => 1, '202002' => 1];
+$json_data = ['module'=>'management','202001' => 1, '202002' => 1, '202003' => 1, '202004' => 1, '202005' => 1, '202006' => 1, '202007' => 1, '202008' => 1, '202009' => 1, '2020010' => 1];
 // Turn data to string
 $data = json_encode(new ArrayValue($json_data), JSON_PRETTY_PRINT);
 //$data = serialize($json_data);

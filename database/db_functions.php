@@ -33,6 +33,20 @@
       return $arr;
     }
 
+    // Searches word on all attributes of order
+    function get_db_orders_filtered($conn,$word){
+      $query = "SELECT * FROM \"tp_php\".orders
+                WHERE destination LIKE '%".$word."%' OR postcode LIKE '%".$word."%' OR city LIKE '%".$word."%' OR order_status LIKE '%".$word."%';";
+      $res = pg_exec($conn, $query);
+      if (!$res) {
+          echo "An error occurred.\n";
+          exit;
+        }
+      $arr = pg_fetch_all($res);
+      
+      return $arr;
+    }
+
     //  Total revenue in sales
     function revenue_sales($conn){
 
@@ -90,6 +104,33 @@
 
     }
 
+    // Get all Cities in Orders
+    function distinct_cities_orders($conn) {
+      $query = "SELECT DISTINCT city FROM \"tp_php\".orders;";
+      $res = pg_exec($conn, $query);
+      if (!$res) {
+          echo "An error occurred.\n";
+          exit;
+        }
+      $arr = pg_fetch_all($res);
+      
+      return $arr;
+      
+    }
+
+    // Get all Status in Orders
+    function distinct_order_status($conn) {
+      $query = "SELECT DISTINCT order_status FROM \"tp_php\".orders;";
+      $res = pg_exec($conn, $query);
+      if (!$res) {
+          echo "An error occurred.\n";
+          exit;
+        }
+      $arr = pg_fetch_all($res);
+      
+      return $arr;
+      
+    }
 
     // ---------------------------------- Users Related ----------------------------------------
 
@@ -134,12 +175,54 @@
       return pg_fetch_row($res);
     }
 
+    // Get all Cities in Users
+    function distinct_cities($conn) {
+      $query = "SELECT DISTINCT city FROM \"tp_php\".user;";
+      $res = pg_exec($conn, $query);
+      if (!$res) {
+          echo "An error occurred.\n";
+          exit;
+        }
+      $arr = pg_fetch_all($res);
+      
+      return $arr;
+      
+    }
+
+    // Get all Countries in Users
+    function distinct_countries($conn) {
+      $query = "SELECT DISTINCT country FROM \"tp_php\".user;";
+      $res = pg_exec($conn, $query);
+      if (!$res) {
+          echo "An error occurred.\n";
+          exit;
+        }
+      $arr = pg_fetch_all($res);
+      
+      return $arr;
+      
+    }
 
     // ---------------------------------- Products Related ----------------------------------------
 
     //Function to get all products -> returns Array with all products
     function get_db_products($conn){
       $query = "SELECT * FROM \"tp_php\".products;";
+      $res = pg_exec($conn, $query);
+      if (!$res) {
+          echo "An error occurred.\n";
+          exit;
+        }
+      $arr = pg_fetch_all($res);
+      
+      return $arr;
+    }
+
+    // Searches word on all attributes of user
+    function get_db_products_filtered($conn,$word){
+      $query = "SELECT * FROM \"tp_php\".products
+                WHERE name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
+                OR brand LIKE '%".$word."%' OR color LIKE '%".$word."%';";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
