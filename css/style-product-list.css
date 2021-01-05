@@ -1,0 +1,24 @@
+/*--- BACKGROUND --- */
+body {
+    background-color: rgb(190, 187, 187) !important;
+}
+/*--- FLEX-BOX --- */
+.flex-box {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+	  flex-wrap: wrap;
+	  margin-left:100px;
+	  margin-right:100px;
+    }
+
+.flex-element {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+	
+.flex-element img {
+	width:300px;
+	height:auto;
+}

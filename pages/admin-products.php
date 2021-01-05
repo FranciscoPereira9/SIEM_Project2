@@ -47,7 +47,7 @@
       <a href="#">CHILDREN</a>
       <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>  
       <?php
-          if($_SESSION['username']== 'admin' &&  $_SESSION['password']== 'admin'){   
+          if($_SESSION['email']== 'admin'){   
       ?>
       <div id="admin-benefits">
         <a href="dashboard.php">DASHBOARD</a>
