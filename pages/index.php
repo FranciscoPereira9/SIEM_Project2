@@ -33,8 +33,8 @@
     </header>
     <main>   
       <div id="menu" class="sidemenu">
-        <a href="#">MEN</a>
-        <a href="#">WOMEN</a>
+        <a href="listProduct.php?gender=Homem">MEN</a>
+        <a href="listProduct.php?gender=Mulher">WOMEN</a>
         <a href="#">CHILDREN</a>
         <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>   
         <?php
@@ -63,8 +63,10 @@
       </div>
       
       <!-- Search form -->
-      <form class="form-inline search-box">
-        <input class="form-control form-control-lg mr-3" type="text" placeholder=" Search... " aria-label="Search">
+      <form class="form-inline search-box" id="search" method="GET" action="listProduct.php">
+        <input class="form-control form-control-lg mr-3" type="text" placeholder=" Search... " aria-label="Search" name="product">
+		<p style="color:white">Women: <input type="radio" value="Mulher" name="gender">
+		Men: <input type="radio" value="Homem" name="gender" checked="checked"></p>
       </form>
 
     </main>

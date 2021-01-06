@@ -23,6 +23,7 @@ if (!empty($_POST['add2cart'])){
 	$name = $_POST['name'];
 	$price = $_POST['price'];
 	$img = $_POST['img'];
+	$gender = $_POST['gender'];
 	$quantity = 1;
 	
 	if (empty($ean) ||  empty($color)){
@@ -59,7 +60,7 @@ if (!empty($_POST['add2cart'])){
 		   }
 		}
 		print_r($_SESSION['cart']);
-	   header("Location: ../pages/product.php?id=".$ean."");
+	   header("Location: ../pages/product.php?id=".$ean."&gender=$gender");
 	 
    }
 	   

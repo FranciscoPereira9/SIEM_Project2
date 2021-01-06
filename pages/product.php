@@ -25,6 +25,7 @@ if(!isset($_SESSION['outOfStock'])){
 }
 	
 	$product_ean=$_GET['id'];
+	$gender=$_GET['gender'];
 	
 	$price=getPrice($product_ean);
 	$name=getProductName($product_ean);
@@ -107,6 +108,7 @@ if(!isset($_SESSION['outOfStock'])){
 		<input type="hidden" name="price" value="<?php echo $price; ?>">
 		<input type="hidden" name="name" value="<?php echo $name; ?>">
 		<input type="hidden" name="img" value="<?php echo $img_source; ?>">
+		<input type="hidden" name="gender" value="<?php echo $gender; ?>">
 
 
 		<input type="submit" name="add2cart" value="ADD TO CART"></input><br>

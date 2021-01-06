@@ -16,7 +16,6 @@
 			  margin-left:100px;
 			  margin-right:100px;
 			  margin-bottom: 50px;
-			  height: 20px;
 			}
 
 		.flex-element {
@@ -30,6 +29,8 @@
 		<div class="flex-element">
 			<form class="form-inline search-box" id="search" method="GET" action="listProduct.php">
 				<input class="form-control form-control-lg mr-3" type="text" placeholder=" Search... " aria-label="Search" name="product">
+				Women: <input type="radio" value="Mulher" name="gender" <?php if($_GET['gender']=="Mulher"){echo "checked=\"checked\"";}?>>
+				Men: <input type="radio" value="Homem" name="gender" <?php if($_GET['gender']=="Homem"){echo "checked=\"checked\"";}?>>
 			</form>
 		</div>
 		</div>

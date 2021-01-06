@@ -22,6 +22,9 @@ if(!isset($_SESSION['signupUserFail'])){
 if(!isset($_SESSION['checkoutError'] )){
 	$_SESSION['checkoutError'] = '';
 }
+
+include_once "../includes/opendb.php";
+include_once "../database/db_user.php";
 ?>
 <html>
 	<head>
@@ -52,10 +55,13 @@ if(!isset($_SESSION['checkoutError'] )){
 		<?php 
 			if($_SESSION['signinSuccess']!=''){
 	 			echo $_SESSION['signinSuccess'];
-				$_SESSION['signinSuccess'] = NULL;
+				$_SESSION['signinSuccess'] = '';
 			}
+			
 		
 			if($_SESSION['username']!=''){
+				$details = getUserDetails($_SESSION['email']);
+				
 				?>
 				<a href="../actions/actionLogout.php"> Logout </a>
 				
@@ -64,10 +70,10 @@ if(!isset($_SESSION['checkoutError'] )){
 				<p><b>Account:</b></p>
 				
 				<form method="POST" action="../actions/actionChangeUserSettings.php">
-					<p>Firstname:<br> <input type="text" name="firstname"><br></p>
-					<p>Lastname:<br> <input type="text" name="lastname"><br></p>
+					<p>Firstname:<br> <input type="text" name="firstname"  value="<?php echo $details['first_name'];?>"><br></p>
+					<p>Lastname:<br> <input type="text" name="lastname" value="<?php echo $details['last_name'];?>"><br></p>
 					<p>Password:<br> <input type="password" name="password"><br></p>
-					<p>Contact:<br> <input type="text" name="phone"><br><br></p>
+					<p>Contact:<br> <input type="text" name="phone" value="<?php echo $details['phone'];?>"><br><br></p>
 					<p><input type="submit" name="save_changes_account" value="Save"></p>
 				</form>
 				</div>
@@ -77,10 +83,10 @@ if(!isset($_SESSION['checkoutError'] )){
 				<p><b>Payment:</b></p>
 			
 				<form method="POST" action="../actions/actionChangeUserSettings.php">
-					<p><input type="radio" value="paypal" name="payment"> PayPal<br></p>
-					<p><input type="radio" value="mbway" name="payment"> MBway<br></p>
-					<p><input type="radio" value="credit_card" name="payment"> Credit Card<br></p>
-					<p><input type="radio" value="bitcoin" name="payment"> BitCoin<br><br></p>
+					<p><input type="radio" value="paypal" name="payment" <?php if ($details['payment_method']=='paypal'){echo "checked=\"checked\"";}?>> PayPal<br></p>
+					<p><input type="radio" value="mbway" name="payment"<?php if ($details['payment_method']=='mbway'){echo "checked=\"checked\"";}?>> MBway<br></p>
+					<p><input type="radio" value="credit_card" name="payment"<?php if ($details['payment_method']=='credit_card'){echo "checked=\"checked\"";}?>> Credit Card<br></p>
+					<p><input type="radio" value="bitcoin" name="payment"<?php if ($details['payment_method']=='bitcoin'){echo "checked=\"checked\"";}?>> BitCoin<br><br></p>
 					<p><input type="submit" name="save_changes_payment" value="Save"></p>
 				</form>
 				</div>	
@@ -90,10 +96,10 @@ if(!isset($_SESSION['checkoutError'] )){
 				<p><b>Shipping</b></p>
 			
 				<form method="POST" action="../actions/actionChangeUserSettings.php">
-					<p>Address:<br> <input type="text" name="address"><br></p>
-					<p>Postal Code:<br> <input type="text" name="postalcode"><br></p>
-					<p>City: <br><input type="text" name="city"><br></p>
-					<p>Country: <br><input type="text" name="country"><br><br></p>
+					<p>Address:<br> <input type="text" name="address" value="<?php echo $details['address'];?>"><br></p>
+					<p>Postal Code:<br> <input type="text" name="postalcode" value="<?php echo $details['postalcode'];?>"><br></p>
+					<p>City: <br><input type="text" name="city" value="<?php echo $details['city'];?>"><br></p>
+					<p>Country: <br><input type="text" name="country" value="<?php echo $details['country'];?>"><br><br></p>
 					<p><input type="submit" name="save_changes_shipping" value="Save"></p>
 				</form>
 				</div>
@@ -112,7 +118,7 @@ if(!isset($_SESSION['checkoutError'] )){
 				echo "<p style=\"padding:10px\"><b>SIGN IN:</b><p>";
 				if($_SESSION['checkoutError'] != ''){
 					echo $_SESSION['checkoutError'];
-					$_SESSION['checkoutError']  = NULL;
+					$_SESSION['checkoutError']  = '';
 				}
 				?>
 				</div>
@@ -131,11 +137,11 @@ if(!isset($_SESSION['checkoutError'] )){
 				
 					if($_SESSION['signupIncomplete']!=''){
 						echo $_SESSION['signupIncomplete'];
-						$_SESSION['signupIncomplete']=NULL;
+						$_SESSION['signupIncomplete']='';
 					}
 					if($_SESSION['signupUserFail']!=''){
 						echo $_SESSION['signupUserFail'];
-						$_SESSION['signupUserFail']=NULL;
+						$_SESSION['signupUserFail']='';
 					}
 				echo "</div>";
 

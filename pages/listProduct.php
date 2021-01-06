@@ -59,6 +59,10 @@ if(!isset($_SESSION['signupUserFail'])){
 				if(isset($_GET['product'])){
 					$product = $_GET['product'];
 				}
+				$gender='Homem';
+				if(isset($_GET['gender'])){
+					$gender = $_GET['gender'];
+				}
 				
 				//Filtrar resultados da pesquisa
 				//TODO: por filtros também para marca, cor e qualquer cena que possa ser posta na bd
@@ -66,7 +70,7 @@ if(!isset($_SESSION['signupUserFail'])){
 					$product = $_GET['product'];
 				}
 
-				$products = getAllProducts($product);
+				$products = getAllProducts($product, $gender);
 
 				if(pg_numrows($products)>0){
 					// Geração do HTML (tabela com a lista das cidades
@@ -82,8 +86,8 @@ if(!isset($_SESSION['signupUserFail'])){
 							$price = $row['price'];
 							echo "<div class=\"flex-element\">";
 							//echo "\"../images/products/".$gender."/".$category."/".$img_source.".jpg\"";
-							echo "<a href=\"product.php?id=".$row['ean']."\"><img src=\"../images/products/".$gender."/".$category."/".$img_source.".jpg\"></a><br>";
-							echo "<a href=\"product.php?id=".$row['ean']."\">".$row['name']."</a><br>";
+							echo "<a href=\"product.php?id=".$row['ean']."&gender=$gender\"><img src=\"../images/products/".$gender."/".$category."/".$img_source.".jpg\"></a><br>";
+							echo "<a href=\"product.php?id=".$row['ean']."&gender=$gender\">".$row['name']."</a><br>";
 							echo "<p><b>$price €</b></p>";
 							echo "</div>";
 							

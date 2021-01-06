@@ -163,6 +163,18 @@ function debugUser($password){
 	
 	return NULL;
 }
+
+function getUserDetails($email){
+	global $conn;
+	
+	$query = "SELECT * FROM \"tp_php\".user WHERE email='$email';";
+	
+	$res=pg_exec($conn, $query);
+	
+	$res = pg_fetch_assoc($res);
+	
+	return $res;
+}
 ?>
 
 	

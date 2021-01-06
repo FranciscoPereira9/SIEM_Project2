@@ -1,12 +1,12 @@
 <?php
 
 //TODO: por parâmetros para outros campos(marca, ean, cor...)
-function getAllProducts($product){
+function getAllProducts($product, $gender){
 	
 	global $conn;
-	$query = "select * from \"tp_php\".products where 1=1";
+	$query = "select * from \"tp_php\".products where gender='$gender'";
 	if(!empty($product)){
-		$query .= "AND name = '$product' OR color='$product' OR ean='$product' OR brand='$product'";
+		$query .= "AND (LOWER(name) LIKE LOWER('%$product%') OR LOWER(color) LIKE LOWER('%$product%') OR LOWER(ean) LIKE LOWER('%$product%') OR LOWER(brand) LIKE LOWER('%$product%'))";
 	}
 	$query .= "ORDER BY sku ASC";
 	$result = pg_exec($conn, $query);
