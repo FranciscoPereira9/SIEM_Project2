@@ -27,8 +27,8 @@
 </head>
 		<div class="flex-box">
 		<div class="flex-element">
-			<form class="form-inline search-box" id="search" method="GET" action="listProduct.php">
-				<input class="form-control form-control-lg mr-3" type="text" placeholder=" Search... " aria-label="Search" name="product">
+			<form class="form-inline search-box" id="search" method="GET" action="listProduct.php" >
+				<input class="form-control form-control-lg mr-3" type="text" placeholder=" Search... " aria-label="Search" name="product" value="<?php if(!empty($_GET['product'])){echo $_GET['product'];} ?>">
 				Women: <input type="radio" value="Mulher" name="gender" <?php if($_GET['gender']=="Mulher"){echo "checked=\"checked\"";}?>>
 				Men: <input type="radio" value="Homem" name="gender" <?php if($_GET['gender']=="Homem"){echo "checked=\"checked\"";}?>>
 			</form>
