@@ -32,10 +32,10 @@
         <h1><a href="index.php">Fashion Store</a></h1>
       </div>
       <div class="header-container-c">
-        <a href="user-view.html"><i class="far fa-user fa-2x"></i></a>
+        <a href="user.php"><i class="far fa-user fa-2x"></i></a>
       </div>
       <div class="header-container-d">
-        <a href="cart-view.html"><i class="fas fa-shopping-cart fa-2x"></i></a>
+        <a href="cart.php"><i class="fas fa-shopping-cart fa-2x"></i></a>
       </div>      
     </div>
   </header>

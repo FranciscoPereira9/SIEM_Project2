@@ -37,4 +37,20 @@ function getProductName($product_ean){
 	return $name;
 }
 
+function getImage($product_ean){
+	global $conn;
+	
+	$query = "select * from \"tp_php\".products where ean='".$product_ean."';";
+	
+	$result = pg_exec($conn, $query);
+	
+	$row = pg_fetch_assoc($result);
+	$gender = $row['gender'];
+	$category = $row['category'];
+	$img_source = $row['img'];
+	
+	$path="../images/products/".$gender."/".$category."/".$img_source.".jpg";
+	
+	return $path;
+}
 ?>

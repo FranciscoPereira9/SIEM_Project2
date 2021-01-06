@@ -9,48 +9,98 @@ session_start();
 if(!isset($_SESSION['noItemsCart'])){
 	$_SESSION['noItemsCart']='';
 }
-
 ?>
 
 <html>
-<h3> CART </h3>
-<?php 
-if($_SESSION['noItemsCart']!=''){
-	echo $_SESSION['noItemsCart'];
-	$_SESSION['noItemsCart']=NULL;
-} ?>
-	<table >
-		<?php
-		//preciso Ajax aqui para alterar variável de sessão para quantidade
-			$total_price=0;
-			$cost=array();
-			foreach ($_SESSION['cart'] as $item){
-				$full_price=$item['quantity']*$item['price'];
-				$cost[]=$full_price;
-				$total_price+=$full_price;
-				echo "<tr><td style=\"padding: 15\">".$item['name']."</td> <td style=\"padding: 15\"><form><input type=\"number\" \
-				name=\"quantity\" value=\"".$item['quantity']."\"></form></td><td style=\"padding: 15\">".$full_price."</td></tr><br>";
-			}
-			$products = array_column($_SESSION['cart'], 'sku');
-			$quantity = array_column($_SESSION['cart'], 'quantity');
-			?>
-	</table>
-	<?php echo $total_price; ?>
-	<form method="POST" action="../actions/actionCheckout.php">
-		<?php foreach($products as $value)
-			{
-				echo '<input type="hidden" name="products[]" value="'. $value. '">';
-			}
-			foreach($cost as $value)
-			{
-				echo '<input type="hidden" name="cost[]" value="'. $value. '">';
-			}
-			foreach($quantity as $value)
-			{
-				echo '<input type="hidden" name="quantity[]" value="'. $value. '">';
-			}
-		?>
-		<input type="hidden" name="total_cost" value="<?php echo $total_price; ?>">
-		<input type="submit" name="checkout" value="Checkout">
-	</form>
+
+	<head>
+		
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="../css/style-cart.css" rel="stylesheet" >
+		<!-- Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<script src="https://kit.fontawesome.com/3ab706ac58.js" crossorigin="anonymous"></script>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+		<!-- jQuery CDN -->
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		
+	</head>
+	<?php 
+		include_once "components/header.php";
+		include_once "components/side_bar.php";
+	?>
+	<h3 style="text-align: center; margin-bottom:50px;"> CART </h3>
+
+	<div class="container1">
+
+		
+		
+		
+		<div id="left">
+
+			<?php 
+			if($_SESSION['noItemsCart']!=''){
+				echo $_SESSION['noItemsCart'];
+				$_SESSION['noItemsCart']=NULL;
+			} ?>
+			<table >
+				<?php
+				//preciso Ajax aqui para alterar variável de sessão para quantidade
+					$total_price=0;
+					$cost=array();
+					foreach ($_SESSION['cart'] as $item){
+						$full_price=$item['quantity']*$item['price'];
+						$cost[]=$full_price;
+						$total_price+=$full_price;
+						$img = $item['img'];
+						echo "<tr> <td><img src= \"$img\"></td>";
+						echo "<td>".$item['name']."</td> <td><form><input type=\"number\" \
+						name=\"quantity\" value=\"".$item['quantity']."\"></form></td><td><b>".$full_price." €</b></td></tr><br>";
+					}
+					$products = array_column($_SESSION['cart'], 'sku');
+					$quantity = array_column($_SESSION['cart'], 'quantity');
+					?>
+			</table>
+		</div>
+			
+		<div id="right">
+			<table style="margin-bottom: 10px">
+				<tr>
+					<td>Items:</td>
+					<td><b><?php echo "$total_price €"; ?></b></td>
+				</tr>
+				<tr>
+					<td>Shipping:</td>
+					<td><b>0,00€</b></td>
+				</tr>
+				<tr style="border-top: 1px solid #666666">
+					<td><b>Total:</b></td>
+					<td><b><?php echo "$total_price €"; ?></b></td>
+				</tr>
+			</table>
+			<form method="POST" action="../actions/actionCheckout.php">
+				<?php foreach($products as $value)
+					{
+						echo '<input type="hidden" name="products[]" value="'. $value. '">';
+					}
+					foreach($cost as $value)
+					{
+						echo '<input type="hidden" name="cost[]" value="'. $value. '">';
+					}
+					foreach($quantity as $value)
+					{
+						echo '<input type="hidden" name="quantity[]" value="'. $value. '">';
+					}
+				?>
+				<input type="hidden" name="total_cost" value="<?php echo $total_price; ?>">
+				<input type="submit" name="checkout" value="Checkout">
+			</form>
+		</div>
+	</div>
 </html>

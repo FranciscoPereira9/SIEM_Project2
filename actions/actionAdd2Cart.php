@@ -22,6 +22,7 @@ if (!empty($_POST['add2cart'])){
 	$color = $_POST['color'];
 	$name = $_POST['name'];
 	$price = $_POST['price'];
+	$img = $_POST['img'];
 	$quantity = 1;
 	
 	if (empty($ean) ||  empty($color)){
@@ -47,7 +48,7 @@ if (!empty($_POST['add2cart'])){
 		   header("Location: ../pages/product.php?id=".$ean."");
 	   }else{
 		   if(!add_quantity_sku_cart($sku, $_SESSION['cart'])){
-			   $_SESSION['cart'][]=array("sku"=>"$sku", "price"=>"$price", "name"=>"$name", "color"=>"$color", "quantity"=>"$quantity");
+			   $_SESSION['cart'][]=array("sku"=>"$sku", "price"=>"$price", "name"=>"$name", "color"=>"$color", "quantity"=>"$quantity", "img"=>"$img");
 			   
 		   }else{
 			   foreach ($_SESSION['cart'] as &$item){

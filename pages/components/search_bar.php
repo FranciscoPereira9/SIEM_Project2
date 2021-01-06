@@ -3,10 +3,10 @@
 <head>
 	<style>
 		.search-box{
-			grid-area: search-box;
 			align-self: center;
 			justify-self: stretch;
 			width: 300px;
+			
 		}
 		.flex-box {
 			  display: flex;
@@ -15,6 +15,8 @@
 			  flex-wrap: wrap;
 			  margin-left:100px;
 			  margin-right:100px;
+			  margin-bottom: 50px;
+			  height: 20px;
 			}
 
 		.flex-element {

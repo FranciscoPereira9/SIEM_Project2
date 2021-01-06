@@ -1,0 +1,39 @@
+/*--- BACKGROUND --- */
+body {
+    background-color: #f5f5f5 !important;
+	font-family: 'Cairo', sans-serif;
+	
+}
+
+.container1{
+	background-color: #f5f5f5 !important;
+	font-family: 'Cairo', sans-serif;
+	display: flex;
+	margin-left:200px;
+	margin-right:200px;/*
+	justify-content: space-around;
+    align-items: center;
+	flex-wrap: wrap;*/
+	overflow-y:auto;
+	margin-bottom: 50px;
+}
+
+#left {
+    width: 50%;
+    display: inline-block;
+    height: 100%;
+	align-items:center;
+}
+#right {
+    width: 50%;
+    display: inline-block;
+    height: 100%;
+	align-items:center;
+	background: white;
+	border-style: 2px solid #666666;
+	padding: 20px;
+}
+
+.search-box{
+	align-items:center
+}
