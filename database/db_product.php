@@ -53,4 +53,16 @@ function getImage($product_ean){
 	
 	return $path;
 }
+
+function getBrand($product_ean){
+	global $conn;
+	
+	$query = "select brand from \"tp_php\".products where ean='".$product_ean."';";
+	
+	$result = pg_exec($conn, $query);
+	
+	$brand = pg_fetch_assoc($result)['brand'];
+	
+	return $brand;
+}
 ?>

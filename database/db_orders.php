@@ -19,7 +19,7 @@ function getLastOrderId(){
 function getClientId($email){
 	global $conn;
 	
-	$query = "SELECT id FROM \"tp_php\".user WHERE email='".$email."';";
+	$query = "SELECT id FROM \"tp_php\".customers WHERE email='".$email."';";
 	
 	$result = pg_exec($conn, $query);
 	
@@ -30,7 +30,7 @@ function getClientId($email){
 function getDestination($email){
 	global $conn;
 	
-	$query = "SELECT address FROM \"tp_php\".user WHERE email='".$email."';";
+	$query = "SELECT address FROM \"tp_php\".customers WHERE email='".$email."';";
 	
 	$result = pg_exec($conn, $query);
 	
@@ -47,7 +47,7 @@ function getDestination($email){
 function getPostalCode($email){
 	global $conn;
 	
-	$query = "SELECT postalcode FROM \"tp_php\".user WHERE email='".$email."';";
+	$query = "SELECT postalcode FROM \"tp_php\".customers WHERE email='".$email."';";
 	
 	$result = pg_exec($conn, $query);
 	
@@ -64,7 +64,7 @@ function getPostalCode($email){
 function getCity($email){
 	global $conn;
 	
-	$query = "SELECT city FROM \"tp_php\".user WHERE email='".$email."';";
+	$query = "SELECT city FROM \"tp_php\".customers WHERE email='".$email."';";
 	
 	$result = pg_exec($conn, $query);
 	

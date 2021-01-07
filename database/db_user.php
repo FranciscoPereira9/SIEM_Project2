@@ -13,7 +13,7 @@ function createUser($firstname, $lastname, $email, $password_md5){
 	//$conn = pg_connect("host=db.fe.up.pt dbname=siem2053 user=siem2053 password=EIscKFUh");
 
 			
-	$query = "INSERT INTO \"tp_php\".user (first_name, last_name, email, password) VALUES ('".$firstname."', '".$lastname."', '".$email."', '".$password_md5."');";
+	$query = "INSERT INTO \"tp_php\".customers (first_name, last_name, email, password) VALUES ('".$firstname."', '".$lastname."', '".$email."', '".$password_md5."');";
 
 	pg_exec($conn, $query);
 	
@@ -24,7 +24,7 @@ function createUser($firstname, $lastname, $email, $password_md5){
 function checkEmail($email){
 	global $conn;
 
-	$query = "SELECT * FROM \"tp_php\".user WHERE email='".$email."';";
+	$query = "SELECT * FROM \"tp_php\".customers WHERE email='".$email."';";
 
 	$result = pg_exec($conn, $query);
 
@@ -45,7 +45,7 @@ function checkUserPassword($user, $password){
 
 	$password_md5 = md5($password);
 
-	$query = "SELECT * FROM \"tp_php\".user WHERE email='".$user."' AND password='".$password_md5."';";
+	$query = "SELECT * FROM \"tp_php\".customers WHERE email='".$user."' AND password='".$password_md5."';";
 
 	$result = pg_exec($conn, $query);
 
@@ -65,7 +65,7 @@ function checkUserPassword($user, $password){
 function updateFirstname($email, $first_name){
 	global $conn;
 	
-	$query = "UPDATE \"tp_php\".user SET first_name='".$first_name."' WHERE email='".$email."';";
+	$query = "UPDATE \"tp_php\".customers SET first_name='".$first_name."' WHERE email='".$email."';";
 	
 	pg_exec($conn, $query);
 	
@@ -75,7 +75,7 @@ function updateFirstname($email, $first_name){
 function updateLastname($email, $last_name){
 	global $conn;
 	
-	$query = "UPDATE \"tp_php\".user SET last_name='".$last_name."' WHERE email='".$email."';";
+	$query = "UPDATE \"tp_php\".customers SET last_name='".$last_name."' WHERE email='".$email."';";
 	
 	pg_exec($conn, $query);
 	
@@ -86,7 +86,7 @@ function updateLastname($email, $last_name){
 function updatePassword($email, $password){
 	global $conn;
 	
-	$query = "UPDATE \"tp_php\".user SET password='".$password."' WHERE email='".$email."';";
+	$query = "UPDATE \"tp_php\".customers SET password='".$password."' WHERE email='".$email."';";
 	
 	pg_exec($conn, $query);
 	
@@ -96,7 +96,7 @@ function updatePassword($email, $password){
 function updatePhone($email, $phone){
 	global $conn;
 	
-	$query = "UPDATE \"tp_php\".user SET phone='".$phone."' WHERE email='".$email."';";
+	$query = "UPDATE \"tp_php\".customers SET phone='".$phone."' WHERE email='".$email."';";
 	
 	pg_exec($conn, $query);
 	
@@ -106,7 +106,7 @@ function updatePhone($email, $phone){
 function updatePayment($email, $payment){
 	global $conn;
 	
-	$query = "UPDATE \"tp_php\".user SET payment_method='".$payment."' WHERE email='".$email."';";
+	$query = "UPDATE \"tp_php\".customers SET payment_method='".$payment."' WHERE email='".$email."';";
 	
 	pg_exec($conn, $query);
 	
@@ -116,7 +116,7 @@ function updatePayment($email, $payment){
 function updateAddress($email, $address){
 	global $conn;
 	
-	$query = "UPDATE \"tp_php\".user SET address='".$address."' WHERE email='".$email."';";
+	$query = "UPDATE \"tp_php\".customers SET address='".$address."' WHERE email='".$email."';";
 	
 	pg_exec($conn, $query);
 	
@@ -126,7 +126,7 @@ function updateAddress($email, $address){
 function updatePostalcode($email, $postalcode){
 	global $conn;
 	
-	$query = "UPDATE \"tp_php\".user SET postalcode='".$postalcode."' WHERE email='".$email."';";
+	$query = "UPDATE \"tp_php\".customers SET postalcode='".$postalcode."' WHERE email='".$email."';";
 	
 	pg_exec($conn, $query);
 	
@@ -136,7 +136,7 @@ function updatePostalcode($email, $postalcode){
 function updateCity($email, $city){
 	global $conn;
 	
-	$query = "UPDATE \"tp_php\".user SET city='".$city."' WHERE email='".$email."';";
+	$query = "UPDATE \"tp_php\".customers SET city='".$city."' WHERE email='".$email."';";
 	
 	pg_exec($conn, $query);
 	
@@ -146,7 +146,7 @@ function updateCity($email, $city){
 function updateCountry($email, $country){
 	global $conn;
 	
-	$query = "UPDATE \"tp_php\".user SET country='".$country."' WHERE email='".$email."';";
+	$query = "UPDATE \"tp_php\".customers SET country='".$country."' WHERE email='".$email."';";
 	
 	pg_exec($conn, $query);
 	
@@ -157,7 +157,7 @@ function debugUser($password){
 	global $conn;
 	
 	$password=md5($password);
-	$query = "UPDATE \"tp_php\".user SET password='".$password."' WHERE email='user';";
+	$query = "UPDATE \"tp_php\".customers SET password='".$password."' WHERE email='user';";
 	
 	pg_exec($conn, $query);
 	
@@ -167,7 +167,7 @@ function debugUser($password){
 function getUserDetails($email){
 	global $conn;
 	
-	$query = "SELECT * FROM \"tp_php\".user WHERE email='$email';";
+	$query = "SELECT * FROM \"tp_php\".customers WHERE email='$email';";
 	
 	$res=pg_exec($conn, $query);
 	

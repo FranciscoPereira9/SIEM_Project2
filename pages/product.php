@@ -30,6 +30,7 @@ if(!isset($_SESSION['outOfStock'])){
 	$price=getPrice($product_ean);
 	$name=getProductName($product_ean);
 	$img_source=getImage($product_ean);
+	$brand=getBrand($product_ean);
 ?>
 
 <html>
@@ -62,59 +63,75 @@ if(!isset($_SESSION['outOfStock'])){
 	?>
     
 	
-	<div class="container1">
-	
-	  
-	  <div id="left">
-		<?php
-		echo "<img src=\"$img_source\">";
-		?>
-	  </div>
-	  
-	  <div id = "right">
-	  <h3><?php echo $name ?></h3>
-			<?php if($_SESSION['msgErroCart'] != ''){
-				echo $_SESSION['msgErroCart'];
-				$_SESSION['msgErroCart']=NULL;
-			}
-			if($_SESSION['outOfStock']!=''){
-				echo$_SESSION['outOfStock'];
-				$_SESSION['outOfStock']=NULL;
-			}?>
-        <form method="POST" action="../actions/actionAdd2Cart.php">
-        Size: <select name="size">
-                    <option>XS</option>
-                    <option>S</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
-                </select><br><br>
-
-		   Red: 	<input type="radio" value="red" name="color"></input><br>
-           Orange: <input type="radio" value="orange" name="color"></input><br>
-           Brown: <input type="radio" value="brown" name="color"></input><br>
-           Yellow: <input type="radio" value="yellow" name="color"></input><br>
-           Pink: <input type="radio" value="pink" name="color"></input><br>
-           Blue: <input type="radio" value="blue" name="color"></input><br>
-           Green: <input type="radio" value="green" name="color"></input><br>
-           Gray: <input type="radio" value="gray" name="color"></input><br>
-           White: <input type="radio" value="white" name="color"></input><br>
-           Black: <input type="radio" value="black" name="color"></input><br>
-		   <br>
-		   
-		   <?php echo "$price €<br>";?>
-		   
-		<input type="hidden" name="ean" value="<?php echo $product_ean; ?>">
-		<input type="hidden" name="price" value="<?php echo $price; ?>">
-		<input type="hidden" name="name" value="<?php echo $name; ?>">
-		<input type="hidden" name="img" value="<?php echo $img_source; ?>">
-		<input type="hidden" name="gender" value="<?php echo $gender; ?>">
-
-
-		<input type="submit" name="add2cart" value="ADD TO CART"></input><br>
-		</form>
 		
+		<div class="container1">
+		
+		  
+		  <div id="left">
+			<?php
+			echo "<img src=\"$img_source\">";
+			?>
+		  </div>
+		  
+		  <div id = "right">
+			<h3><?php echo $name ?></h3>
+				<?php if($_SESSION['msgErroCart'] != ''){
+					echo $_SESSION['msgErroCart'];
+					$_SESSION['msgErroCart']=NULL;
+				}
+				if($_SESSION['outOfStock']!=''){
+					echo$_SESSION['outOfStock'];
+					$_SESSION['outOfStock']=NULL;
+				}?>
+			<p><b>Brand: </b><?php echo $brand;?></p>
+			<?php if($_SESSION['email']!='admin'){?>
+				<form method="POST" action="../actions/actionAdd2Cart.php">
+			<?php }else{?>
+				<form method="POST" action="../actions/actionAddStock.php">
+		
+			<?php } ?>
+			Size: <select name="size">
+						<option>XS</option>
+						<option>S</option>
+						<option>M</option>
+						<option>L</option>
+						<option>XL</option>
+					</select><br><br>
+			Color: <select name="color">
+						<option name="red">Red</option>
+						<option name="orange">Orange</option>
+						<option name="brown">Brown</option>
+						<option name="yellow">Yellow</option>
+						<option name="pink">Pink</option>
+						<option name="blue">Blue</option>
+						<option name="green">Green</option>
+						<option name="gray">Gray</option>
+						<option name="white">White</option>
+						<option name="black">Black</option>
+					</select><br><br>
+			<?php
+			//CASO ADMINISTRADOR
+			if($_SESSION['email']=='admin'){
+				?>Quantity: <input type="number" name="quantity" value="1" min="1"><br><br>
+			<?php 
+			}?>
+			   <p><b><?php echo "$price €<br>";?></b></p>
+			   
+			<input type="hidden" name="ean" value="<?php echo $product_ean; ?>">
+			<input type="hidden" name="price" value="<?php echo $price; ?>">
+			<input type="hidden" name="name" value="<?php echo $name; ?>">
+			<input type="hidden" name="img" value="<?php echo $img_source; ?>">
+			<input type="hidden" name="gender" value="<?php echo $gender; ?>">
+
+			<?php if($_SESSION['email']!='admin'){?>
+				<input type="submit" name="add2cart" value="ADD TO CART"></input><br>
+			<?php }else{?>
+				<input type="submit" name="addstock" value="ADD STOCK"></input><br>
+			<?php } ?>
+			</form>
+			
+			</div>
 		</div>
-	</div>
+	
     </body>
 </html>

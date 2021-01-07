@@ -234,9 +234,9 @@
     }
 
     //Function to add product to DB
-    function add_product($conn, $product_name, $ean, $quantity, $category, $brand, $color, $price, $image) {
+    function add_product($conn, $product_name, $ean, $quantity, $category, $brand, $color, $price, $image, $gender) {
       $stock = 0;
-      $query = "INSERT INTO \"tp_php\".products(name, ean, stock, category, brand, color, price, img) VALUES ('".$product_name."', '".$ean."', '".($quantity)."', '".$category."', '".$brand."', '".$color."', '".$price."', '".$image."' );";
+      $query = "INSERT INTO \"tp_php\".products(name, ean, stock, category, brand, color, price, img, gender) VALUES ('".$product_name."', '".$ean."', '".($quantity)."', '".$category."', '".$brand."', '".$color."', '".$price."', '".$image."', '".$gender."' );";
       $res = pg_exec($conn, $query);
       if (!$res) {
           throw new Exception('Something went wrong. Coudn\'t add item to database.');

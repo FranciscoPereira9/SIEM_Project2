@@ -2,6 +2,37 @@
   session_start();
   include '../database/db_functions.php';
   include '../includes/opendb.php';
+  
+  if(!isset($_SESSION['nameError'])){
+	  $_SESSION['nameError']='';
+  }
+  if(!isset($_SESSION['quantityError'])){
+	  $_SESSION['quantityError']='';
+  }
+  if(!isset($_SESSION['colorError'])){
+	  $_SESSION['colorError']='';
+  }
+  if(!isset($_SESSION['priceError'])){
+	  $_SESSION['priceError']='';
+  }
+  if(!isset($_SESSION['categoryError'])){
+	  $_SESSION['categoryError']='';
+  }
+  if(!isset($_SESSION['brandError'])){
+	  $_SESSION['brandError']='';
+  }
+  if(!isset($_SESSION['eanError'])){
+	  $_SESSION['eanError']='';
+  }
+  if(!isset($_SESSION['genderError'])){
+	  $_SESSION['genderError']='';
+  }
+  if(!isset($_SESSION['imageError'])){
+	  $_SESSION['imageError']='';
+  } 
+  if(!isset($_SESSION['successAddItem'])){
+	  $_SESSION['successAddItem']='';
+  }
 ?>
 <html>
     <head>
@@ -83,99 +114,133 @@
               }
             ?>
             <h3>Add New Item</h3>
+			<p style="color:blue">
+			<?php  if($_SESSION['successAddItem']!=''){
+				echo $_SESSION['successAddItem'];
+				$_SESSION['successAddItem']=NULL;
+			}
+			?></p>
             <div class="canvas">
-                <form class="form-layout" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <form class="form-layout" action="../actions/actionAddNewItem.php" method="POST" enctype="multipart/form-data">
                     <div class="product-name">
-                        <label for="product-name">Product Name </label>
+                        <label for="product-name">Product Name </label><br>
                         <input type="text" id="product-name" name="product-name">
                         <?php
                          // Get values from form and verify if they exist
-                          if (empty($_GET["product-name"])) {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\"> * required field</p>";
-                          } else {
-                            $name = test_input($_GET['product-name']);
+                          if ($_SESSION['nameError']!='') {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['nameError']."</p>";
+							$_SESSION['nameError']=NULL;
                           }
                         ?>
                     </div>
                     <div class="product-price">
-                        <label for="product-price">Price </label>
-                        <input type="number" id="product-price" name="product-price">
+                        <label for="product-price">Price<br> </label><br>
+                        <input type="number" id="product-price" name="product-price"  value="0" min="0">
                         <?php
                          // Get values from form and verify if they exist
-                          if (empty($_GET["product-price"])) {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"error\"> * required field</p>";
-                          } else {
-                            $price = test_input($_GET['product-price']);
+                          if ($_SESSION['priceError']!='') {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['priceError']."</p>";
+							$_SESSION['priceError']=NULL;
                           }
                         ?>
                     </div>    
                     <div class="product-category">
-                        <label for="product-category">Category </label>
+                        <label for="product-category">Category<br> </label><br>
                         <input type="text" id="product-categoty" name="product-category">
                         <?php
                          // Get values from form and verify if they exist
-                          if (empty($_GET["product-category"])) {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"error\"> * required field</p>";
-                          } else {
-                            $category = test_input($_GET['product-category']);
+                          if ($_SESSION['categoryError']!='') {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['categoryError']."</p>";
+							$_SESSION['categoryError']=NULL;
                           }
                         ?>
                     </div> 
                     <div class="product-brand">
-                        <label for="product-brand">Brand </label>
+                        <label for="product-brand">Brand<br> </label><br>
                         <input type="text" id="product-brand" name="product-brand">
                         <?php
                          // Get values from form and verify if they exist
-                          if (empty($_GET["product-brand"])) {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"error\"> * required field</p>";
-                          } else {
-                            $brand = test_input($_GET['product-brand']);
+                          if ($_SESSION['brandError']!='') {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['brandError']."</p>";
+							$_SESSION['brandError']=NULL;
                           }
                         ?>
                     </div> 
                     <div class="product-ean">
-                        <label for="product-ean">EAN </label>
+                        <label for="product-ean">EAN </label><br>
                         <input type="text" id="product-ean" name="product-ean">
                         <?php
                          // Get values from form and verify if they exist
-                          if (empty($_GET["product-ean"])) {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"error\"> * required field</p>";
-                          } else {
-                            $ean = test_input($_GET['product-ean']);
+                          if ($_SESSION['eanError']!='') {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['eanError']."</p>";
+							$_SESSION['eanError']=NULL;
                           }
                         ?>
                     </div> 
                     <div class="product-quantity">
-                        <label for="product-quantity">Quantity </label>
-                        <input type="number" id="product-quantity" name="product-quantity">
+                        <label for="product-quantity">Quantity </label><br>
+                        <input type="number" id="product-quantity" name="product-quantity" value="0" min="0">
                         <?php
                          // Get values from form and verify if they exist
-                          if (empty($_GET["product-quantity"])) {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"error\"> * required field</p>";
-                          } else {
-                            $quantity = test_input($_GET['product-quantity']);
+                          if ($_SESSION['quantityError']!='') {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['quantityError']."</p>";
+							$_SESSION['quantityError']=NULL;
+                          }
+                        ?>
+                    </div>
+					
+					<div class="product-color">
+                        <label for="color">Color </label><br>
+						<select name="color">
+							<option name="red">Red</option>
+							<option name="orange">Orange</option>
+							<option name="brown">Brown</option>
+							<option name="yellow">Yellow</option>
+							<option name="pink">Pink</option>
+							<option name="blue">Blue</option>
+							<option name="green">Green</option>
+							<option name="gray">Gray</option>
+							<option name="white">White</option>
+							<option name="black">Black</option>
+						</select>
+                        <?php
+                         // Get values from form and verify if they exist
+                          if ($_SESSION['colorError']!='') {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['colorError']."</p>";
+							$_SESSION['colorError']=NULL;
+                          }
+                        ?>
+                    </div>
+					
+					 <div class="product-image">
+                        <label for="image">Image </label><br>
+                       <input type="file" name="image" id="image">
+                        <?php
+                         // Get values from form and verify if they exist
+                          if ($_SESSION['imageError']!='') {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['imageError']."</p>";
+							$_SESSION['imageError']=NULL;
                           }
                         ?>
                     </div>
                     <div class="submit-but">
-                        <input type="submit" class="btn btn-outline-secondary" value="Add Item">
+                        <input type="submit" class="btn btn-outline-secondary" value="Add Item" name="additem">
                     </div>
-                    <?php
-                      if(isset($name) && isset($price) && isset($category) && isset($brand) && isset($ean) && isset($quantity)){
-                        if(!isset($image)){
-                          $image = null;
-                        }
-                        if(!isset($color)){
-                          $color = null;
-                        }
-                        try {
-                          add_product($conn, $name, $ean, $quantity, $category, $brand, $color, $price, $image);
-                          echo "The item was added to the database.";
-                        } catch (Exception $e) {
-                          echo $e->getMessage(), "\n";
-                        }
-                      }
-                    ?>
+					
+					<div class="product-gender">
+                        <label for="gender">Gender </label><br>
+                        <select name="gender">
+							<option name="Homem">Men</option>
+							<option name="Mulher">Women</option>
+						</select>
+                        <?php
+                         // Get values from form and verify if they exist
+                          if ($_SESSION['genderError']!='') {
+                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['genderError']."</p>";
+                          }
+                        ?>
+                    </div> 
+                    
                 </form>
             </div>
                         

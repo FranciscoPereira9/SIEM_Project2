@@ -17,6 +17,9 @@ if(!isset($_SESSION['cart'])){
 
 include_once "../includes/opendb.php";
 include_once "../database/db_cart.php";
+
+
+
 if (!empty($_POST['add2cart'])){
 	$ean = $_POST['ean'];
 	$color = $_POST['color'];
@@ -39,14 +42,14 @@ if (!empty($_POST['add2cart'])){
 
             
 
-        header("Location: ../pages/product.php?id=".$ean."");
+        header("Location: ../pages/product.php?id=".$ean."&gender=$gender");
    }
    else{
 	   $sku=get_sku($ean, $color);
 	   
 	   if($sku==''){
 		   $_SESSION['outOfStock'] = "Item of this color out of stock!";
-		   header("Location: ../pages/product.php?id=".$ean."");
+		   header("Location: ../pages/product.php?id=".$ean."&gender=$gender");
 	   }else{
 		   if(!add_quantity_sku_cart($sku, $_SESSION['cart'])){
 			   $_SESSION['cart'][]=array("sku"=>"$sku", "price"=>"$price", "name"=>"$name", "color"=>"$color", "quantity"=>"$quantity", "img"=>"$img");

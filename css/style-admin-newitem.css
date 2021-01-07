@@ -140,7 +140,7 @@ main{
 .canvas{
     margin: 30px 25% 30px 25%;
     height: 600px;
-    background: rgb(207, 199, 199);
+    background: white;
     border-style: solid;
     border-color: rgb(51, 46, 46);
     border-radius: 5mm ;
@@ -150,13 +150,12 @@ main{
     margin:0;
     display: grid;
     grid-template-rows: repeat(6,99px);
-    grid-template-areas: 
-    ". submit"
+    grid-template-areas:  
     "name price"
     "category color"
-    "brand color"
+    "brand img"
     "EAN quantity"
-    "image image";
+	"gender submit";
     justify-items: end;
     align-items: center;
 }
@@ -192,6 +191,17 @@ main{
 }
 .product-quantity{
     grid-area: quantity;
+    padding: 0 15% 0 10%;
+}
+	
+
+.product-img{
+    grid-area: img;
+    padding: 0 15% 0 10%;
+}
+
+.product-gender{
+	grid-area: gender;
     padding: 0 15% 0 10%;
 }
 
