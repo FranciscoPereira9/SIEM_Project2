@@ -343,7 +343,7 @@
 
     //Function to get all men products -> returns Array with all products
     function get_db_men_products($conn){
-      $query = "SELECT * FROM \"tp_php\".products WHERE gender='Homem';";
+      $query = "SELECT * FROM \"tp_php\".products WHERE gender='Men';";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -356,7 +356,7 @@
 
     //Function to get all women products -> returns Array with all products
     function get_db_women_products($conn){
-      $query = "SELECT * FROM \"tp_php\".products WHERE gender='Mulher';";
+      $query = "SELECT * FROM \"tp_php\".products WHERE gender='Women';";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -370,7 +370,7 @@
     // Searches word on all attributes of men products
     function get_db_men_products_filtered($conn,$word){
       $query = "SELECT * FROM \"tp_php\".products
-                WHERE gender = 'Homem' AND name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
+                WHERE gender = 'Men' AND name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
                 OR brand LIKE '%".$word."%' OR color LIKE '%".$word."%';";
       $res = pg_exec($conn, $query);
       if (!$res) {
@@ -384,7 +384,7 @@
 
     function get_db_women_products_filtered($conn,$word){
       $query = "SELECT * FROM \"tp_php\".products
-                WHERE gender = 'Mulher' AND name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
+                WHERE gender = 'Women' AND name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
                 OR brand LIKE '%".$word."%' OR color LIKE '%".$word."%';";
       $res = pg_exec($conn, $query);
       if (!$res) {

@@ -40,8 +40,8 @@
         <main>   
             <!-- Side Bar -->
             <div id="menu" class="sidemenu">
-              <a href="listProduct.php?gender=Homem">MEN</a>
-              <a href="listProduct.php?gender=Mulher">WOMEN</a>
+              <a href="listProduct.php?gender=Men">MEN</a>
+              <a href="listProduct.php?gender=Women">WOMEN</a>
               <a href="#">CHILDREN</a>
               <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>
               <?php

@@ -55,7 +55,7 @@ function showUserProductsSearch(str) {
       document.getElementById("txtHint").innerHTML = this.responseText;
     }
   };
-  if(gender == "Homem"){
+  if(gender == "Men"){
     xmlhttp.open("GET", "../actions/getMenProductsFiltered.php?q=" + str, true);
     xmlhttp.send();
   }

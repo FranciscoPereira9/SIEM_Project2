@@ -1,6 +1,5 @@
 <?php
 
-//TODO: adicionar imagem
 	session_start();
 	
 	include_once "../includes/opendb.php";
@@ -107,16 +106,16 @@
 						<option>XL</option>
 					</select></td></tr>
 			<tr><td>Color:</td><td><select name="color">
-						<option name="red">Red</option>
-						<option name="orange">Orange</option>
-						<option name="brown">Brown</option>
-						<option name="yellow">Yellow</option>
-						<option name="pink">Pink</option>
-						<option name="blue">Blue</option>
-						<option name="green">Green</option>
-						<option name="gray">Gray</option>
-						<option name="white">White</option>
-						<option name="black">Black</option>
+						<?php if(checkStock($product_ean, 'Red')){?><option name="red">Red</option><?php }?>
+						<?php if(checkStock($product_ean, 'Orange')){?><option name="orange">Orange</option><?php }?>
+						<?php if(checkStock($product_ean, 'Brown')){?><option name="brown">Brown</option><?php }?>
+						<?php if(checkStock($product_ean, 'Yellow')){?><option name="yellow">Yellow</option><?php }?>
+						<?php if(checkStock($product_ean, 'Pink')){?><option name="pink">Pink</option><?php }?>
+						<?php if(checkStock($product_ean, 'Blue')){?><option name="blue">Blue</option><?php }?>
+						<?php if(checkStock($product_ean, 'Green')){?><option name="green">Green</option><?php }?>
+						<?php if(checkStock($product_ean, 'Gray')){?><option name="gray">Gray</option><?php }?>
+						<?php if(checkStock($product_ean, 'White')){?><option name="white">White</option><?php }?>
+						<?php if(checkStock($product_ean, 'Black')){?><option name="black">Black</option><?php }?>
 					</select></td></tr>
 			<?php
 			//CASO ADMINISTRADOR

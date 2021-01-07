@@ -20,8 +20,8 @@ function display_men_products($arr) {
     foreach($arr as $row){
         $output .= "
         <div class=\"flex-element\">
-            <a href=\"product.php?id=".$row['ean']."&gender=Homem\"><img src=\"../images/products/Homem/".$row['category']."/".$row['img'].".jpg\"></a><br>
-            <a href=\"product.php?id=".$row['ean']."&gender=Homem\">".$row['name']."</a><br>
+            <a href=\"product.php?id=".$row['ean']."&gender=Men\"><img src=\"../images/products/Men/".$row['category']."/".$row['img'].".jpg\"></a><br>
+            <a href=\"product.php?id=".$row['ean']."&gender=Men\">".$row['name']."</a><br>
             <p><b>".$row['price']." €</b></p>
         </div>"; 
       }

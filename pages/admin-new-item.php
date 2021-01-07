@@ -41,8 +41,8 @@
         <main>   
             <!-- Side Bar -->
             <div id="menu" class="sidemenu">
-              <a href="listProduct.php?gender=Homem">MEN</a>
-              <a href="listProduct.php?gender=Mulher">WOMEN</a>
+              <a href="listProduct.php?gender=Men">MEN</a>
+              <a href="listProduct.php?gender=Women">WOMEN</a>
               <a href="#">CHILDREN</a>
               <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>
               <?php
@@ -105,7 +105,7 @@
                     </div>
                     <div class="product-price">
                         <label for="product-price">Price<br> </label><br>
-                        <input type="number" id="product-price" name="product-price"  value="0" min="0">
+                        <input type="numeric" id="product-price" name="product-price"  value="0" min="0">
                         <?php
                          // Get values from form and verify if they exist
                           if ($_SESSION['priceError']!='') {
@@ -116,7 +116,15 @@
                     </div>    
                     <div class="product-category">
                         <label for="product-category">Category<br> </label><br>
-                        <input type="text" id="product-categoty" name="product-category">
+						<select name="product-category">
+							<option>Jackets</option>
+							<option>Sweatshirts</option>
+							<option>T-shirts</option>
+							<option>Jeans</option>
+							<option>Accessories</option>
+						</select>
+                        
+						
                         <?php
                          // Get values from form and verify if they exist
                           if ($_SESSION['categoryError']!='') {
@@ -200,8 +208,8 @@
 					<div class="product-gender">
                         <label for="gender">Gender </label><br>
                         <select name="gender">
-							<option name="Homem">Men</option>
-							<option name="Mulher">Women</option>
+							<option name="Men">Men</option>
+							<option name="Women">Women</option>
 						</select>
                         <?php
                          // Get values from form and verify if they exist

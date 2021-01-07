@@ -123,7 +123,7 @@ if(!isset($_SESSION['signupUserFail'])){
 					if(isset($_GET['product'])){
 						$product = $_GET['product'];
 					}
-					$gender='Homem';
+					$gender='Men';
 					if(isset($_GET['gender'])){
 						$gender = $_GET['gender'];
 					}

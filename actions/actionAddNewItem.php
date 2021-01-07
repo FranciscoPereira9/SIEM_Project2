@@ -14,12 +14,6 @@
 		$color=$_POST['color'];
 		$gender=$_POST['gender'];
 		
-		if($gender=='Men'){
-			$gender="Homem";
-		}
-		if($gender=='Women'){
-			$gender="Mulher";
-		}
 		
 		//VALIDAR IMAGEM
 		
@@ -54,15 +48,7 @@
 		  echo "2";
 		  $uploadOk = 0;
 		}
-		if($imageFileType == "jpg"){
-			$image=substr($_FILES["image"]["name"], 0, -4);
-		}
-		if($imageFileType == "png"){
-			$image=substr($_FILES["image"]["name"], 0, -4);
-		}
-		if($imageFileType == "jpeg"){
-			$image=substr($_FILES["image"]["name"], 0, -5);
-		}
+		
 		
 		if(empty($name) || empty($price) || empty($category) || empty($brand) || empty($ean) || empty($quantity) || empty($color) || empty($gender)){
 			$dadosValidos=false;
@@ -100,7 +86,9 @@
 			header("location: ../pages/admin-new-item.php");
 		}
 		else{
+			$image=$ean;
 			
+			$target_file=$target_dir.$ean.".".$imageFileType;
 			//FAZ UPLOAD IMAGEM
 			
 			// Check if $uploadOk is set to 0 by an error

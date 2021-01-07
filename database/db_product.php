@@ -65,4 +65,25 @@ function getBrand($product_ean){
 	
 	return $brand;
 }
+
+function checkStock($ean, $color){
+	global $conn;
+	
+	$query = "select stock from \"tp_php\".products where ean='".$ean."' and color='$color';";
+	$result = pg_exec($conn, $query);
+	
+	if(pg_num_rows($result)==0){
+		return false;
+	}else{
+		$stock = pg_fetch_assoc($result)['stock'];
+		
+		if($stock>0){
+			return true;
+			
+		}else{
+			return false;
+		}
+	}
+}
+	
 ?>
