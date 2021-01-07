@@ -229,6 +229,37 @@
       
     }
 
+    // Updates user total_spent
+    function update_user_spent($conn, $client_id, $spent) {
+      
+        // Get total_spent at the moment
+        $query = "SELECT * FROM \"tp_php\".customers WHERE id = ".$client_id.";";
+
+        $res = pg_exec($conn, $query);
+        if (!$res) {
+        echo "An error occurred.\n";
+        exit;
+        }
+        $arr = pg_fetch_all($res);
+
+        // Calculate new total
+        $total_spent = $arr[0]['total_spent'] + $spent;
+
+        // Update to db
+        $query = "UPDATE \"tp_php\".customers
+                  SET total_spent = ".$total_spent.", column2 = value2, ...
+                  WHERE email = '".$client_id."';";
+
+        $res = pg_exec($conn, $query);
+        if (!$res) {
+            echo "An error occurred.\n";
+            exit;
+          }
+        $arr = pg_fetch_all($res);
+
+        return $arr;
+    }
+
     // ---------------------------------- Products Related ----------------------------------------
 
     //Function to get all products -> returns Array with all products

@@ -63,6 +63,7 @@ if(!empty($_POST['checkout'])){
 					$newStock = $stock - $quantity[$key];
 					echo $newStock;
 					updateStock($item, $newStock);
+					update_user_spent($conn, $client_id, $spent);
 				}
 				
 				//reinicia array de sessão
