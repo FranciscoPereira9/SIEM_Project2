@@ -45,7 +45,7 @@
               <a href="#">CHILDREN</a>
               <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>
               <?php
-                if($_SESSION['username']== 'admin' &&  $_SESSION['password']== 'admin'){   
+                if($_SESSION['email']== 'admin'){ 
               ?>
               <div id="admin-benefits">
                 <a href="dashboard.php">DASHBOARD</a>
@@ -131,9 +131,21 @@
 
                     var options = {
                       // title: 'none',
+                      backgroundColor: '#3c3c3c',
+                      legendTextStyle: { color: '#FFF' },
                       columnType: 'string',
                       curveType: 'function',
-                      legend: { position: 'bottom' }
+                      legend: { position: 'bottom' },
+                      vAxis: {
+                        textStyle:{color: '#FFF'},
+                        titleTextStyle:{color: '#FFF'},
+                        gridlines: {color: '#787878'}
+                      },
+                      hAxis: {
+                        textStyle:{color: '#FFF'},
+                        titleTextStyle:{color: '#FFF'},
+                        gridlines: {color: '#787878'}
+                      }
                     };
 
                     var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));

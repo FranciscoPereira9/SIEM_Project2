@@ -26,7 +26,10 @@
         </div>
         <div class="header-container-d">
           <a href="cart.php"><i class="fas fa-shopping-cart fa-2x"></i></a>
-        </div>      
+        </div>    
+        <div class="header-container-e">
+          <a href="#">Logout</a>
+        </div>    
       </div>
     </header>
 </body>

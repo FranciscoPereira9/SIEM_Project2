@@ -37,11 +37,7 @@ session_start();
 	?>
 	<h3 style="text-align: center; margin-bottom:50px;"> CART </h3>
 
-	<div class="container1">
-
-		
-		
-		
+	<div class="container1">	
 		<div id="left">
 
 			<?php
@@ -51,31 +47,34 @@ session_start();
 					$_SESSION['noItemsCart']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
 				}?>
 			
-			<table >
+			<table id="table-left">
 				<?php
 				//preciso Ajax aqui para alterar variável de sessão para quantidade
 					$total_price=0;
 					$cost=array();
+					$n=0;
 					foreach ($_SESSION['cart'] as $item){
 						$full_price=$item['quantity']*$item['price'];
 						$cost[]=$full_price;
 						$total_price+=$full_price;
 						$img = $item['img'];
-						echo "<tr> <td><img src= \"$img\"></td>";
-						echo "<td>".$item['name']."</td> <td><form><input type=\"number\" \
-						name=\"quantity\" value=\"".$item['quantity']."\"></form></td><td><b>".$full_price." €</b></td></tr><br>";
+						echo "<tr id=\"product".$n."\"> <td><img src= \"$img\"></td>";
+						echo "<td>".$item['name']."</td> 
+							<td><form><input type=\"number\" class='common_selector' id=\"quantity".$n."\" name=\"quantity\" value=\"".$item['quantity']."\"></form></td>
+							<td id='price_multiplied".$n."'> </tr><br>";
+						$n=$n+1;
 					}
 					$products = array_column($_SESSION['cart'], 'sku');
 					$quantity = array_column($_SESSION['cart'], 'quantity');
 					?>
 			</table>
 		</div>
-			
+		<script src="../js/change_cart_price.js"></script>  
 		<div id="right">
 			<table style="margin-bottom: 10px">
 				<tr>
 					<td>Items:</td>
-					<td><b><?php echo "$total_price €"; ?></b></td>
+					<td id="items_price"><b><?php echo "$total_price €"; ?></b></td>
 				</tr>
 				<tr>
 					<td>Shipping:</td>
@@ -83,7 +82,7 @@ session_start();
 				</tr>
 				<tr style="border-top: 1px solid #666666">
 					<td><b>Total:</b></td>
-					<td><b><?php echo "$total_price €"; ?></b></td>
+					<td id="total_price"><b><?php echo "$total_price €"; ?></b></td>
 				</tr>
 			</table>
 			<form method="POST" action="../actions/actionCheckout.php">

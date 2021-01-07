@@ -89,6 +89,20 @@
             <div id="my_slider"></div> 
           </div>
           <div>
+            <label for="pay_method">Payment Method</label>
+            <select class="common_selector" id="pay_method"> 
+              <option></option>
+              <?php
+                $pay_methods = distinct_payment_methods($conn);
+                foreach($pay_methods as $row){ 
+                  ?>
+                  <option value="<?php echo $row['payment_method'] ?>"><?php echo $row['payment_method'] ?></option>
+                  <?php
+                }
+              ?>
+            </select>
+          </div>
+          <div>
             <label for="city">City</label>
             <select class="common_selector" id="city"> 
               <option></option>
@@ -125,8 +139,9 @@
           <tr>
             <th scope="col">Order ID</th>
             <th scope="col">Date</th>
-            <th scope="col">Satus</th>
             <th scope="col">Client</th>
+            <th scope="col">Status</th>
+            <th scope="col">Payment Method</th>
             <th scope="col">Destination</th>
             <th scope="col">Post Code</th>
             <th scope="col">City</th>
