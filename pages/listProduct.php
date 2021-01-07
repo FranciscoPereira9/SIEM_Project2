@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	include_once "../database/db_functions.php";
 	include_once "../includes/opendb.php";
 	include_once "../database/db_product.php";
 	
@@ -20,11 +21,6 @@ if(!isset($_SESSION['signupUserFail'])){
 }
 ?>
 <html>
-	<?php 
-		include_once "components/header.php";
-		include_once "components/side_bar.php";
-	?>
-	
 	<head>
 		
 		<!-- Required meta tags -->
@@ -44,58 +40,132 @@ if(!isset($_SESSION['signupUserFail'])){
 		
 	</head>
 	<body>
-		<?php
-			include_once "components/search_bar.php";
+		<?php 
+			include_once "components/header.php";
+			include_once "components/side_bar.php";
 		?>
-	<!--<form id="search" method="GET" action="listProduct.php">
+		<?php
+			//include_once "components/search_bar.php";
+		?>
+	 	<!--<form id="search" method="GET" action="listProduct.php">
 		<p><label for="Search">Search:<input type="text" name="product"/ value="<?php if(!empty($product)){echo $product;} ?>"></p> 
-	</form>-->
+		</form>-->
+		<div class="plano">
 
-		<div class="flex-box">
-			<?php
+			<!-- Search form -->
+			<script src="../js/show-hint.js"></script>
+			<form class="form-inline search-box">
+				<input class="form-control form-control-sm mr-3" type="text" placeholder=" Search... " aria-label="Search" id="fname" name="fname" onkeyup="showUserProductsSearch(this.value)">
+			</form>
 
 
-				$product='';
-				if(isset($_GET['product'])){
-					$product = $_GET['product'];
-				}
-				$gender='Homem';
-				if(isset($_GET['gender'])){
-					$gender = $_GET['gender'];
-				}
-				
-				//Filtrar resultados da pesquisa
-				//TODO: por filtros também para marca, cor e qualquer cena que possa ser posta na bd
-				if(isset($_GET['product'])){
-					$product = $_GET['product'];
-				}
-
-				$products = getAllProducts($product, $gender);
-
-				if(pg_numrows($products)>0){
-					// Geração do HTML (tabela com a lista das cidades
-
-					$row = pg_fetch_assoc($products);
-					$last_ean = '';
-					while (isset($row["ean"])) {
-						if($row["ean"] != $last_ean){
-							$last_ean = $row["ean"];
-							$img_source =$row['img'];
-							$gender = $row['gender'];
-							$category = $row['category'];
-							$price = $row['price'];
-							echo "<div class=\"flex-element\">";
-							//echo "\"../images/products/".$gender."/".$category."/".$img_source.".jpg\"";
-							echo "<a href=\"product.php?id=".$row['ean']."&gender=$gender\"><img src=\"../images/products/".$gender."/".$category."/".$img_source.".jpg\"></a><br>";
-							echo "<a href=\"product.php?id=".$row['ean']."&gender=$gender\">".$row['name']."</a><br>";
-							echo "<p><b>$price €</b></p>";
-							echo "</div>";
-							
+			<!-- Filter Products -->
+			<div class="search-filter">       
+				<div class="price-range-slider">
+					<label for="price_show">Price Range: </label>
+					<input type="hidden" value=0 id="min_hiden_price">
+					<input type="hidden" value=1000 id="max_hiden_price">
+					<p id="price_show">0 - 1000</p>
+					<div id="my_slider"></div> 
+				</div>
+				<div>
+					<label for="brand">Category</label>
+					<select class="common_selector" id="category"> 
+						<option></option>
+						<?php
+						$categories = distinct_categories($conn);
+						foreach($categories as $row){ 
+							?>
+							<option value="<?php echo $row['category'] ?>"><?php echo $row['category'] ?></option>
+							<?php
 						}
-						$row = pg_fetch_assoc($products);
+						?>
+					</select>
+				</div>
+				<div>
+					<label for="brand">Color</label>
+					<select class="common_selector" id="color">
+						<option></option> 
+						<?php
+						$categories = distinct_colors($conn);
+						foreach($categories as $row){ 
+							?>
+							<option value="<?php echo $row['color'] ?>"><?php echo $row['color'] ?></option>
+							<?php
+						}
+						?>
+					</select>
+				</div>
+				<div>
+					<label for="brand">Brand</label>
+					<select class="common_selector" id="brand"> 
+						<option></option>
+						<?php
+						$categories = distinct_brands($conn);
+						foreach($categories as $row){ 
+							?>
+							<option value="<?php echo $row['brand'] ?>"><?php echo $row['brand'] ?></option>
+							<?php
+						}
+						?>
+					</select>
+				</div>
+			</div>
+
+
+			<div class="flex-box filter_data" id="txtHint">
+				<?php
+				/*
+
+					$product='';
+					if(isset($_GET['product'])){
+						$product = $_GET['product'];
 					}
-				}
-			?>
-		</div>
+					$gender='Homem';
+					if(isset($_GET['gender'])){
+						$gender = $_GET['gender'];
+					}
+					
+					//Filtrar resultados da pesquisa
+					//TODO: por filtros também para marca, cor e qualquer cena que possa ser posta na bd
+					if(isset($_GET['product'])){
+						$product = $_GET['product'];
+					}
+
+					$products = getAllProducts($product, $gender);
+
+					if(pg_numrows($products)>0){
+						// Geração do HTML (tabela com a lista das cidades
+
+						$row = pg_fetch_assoc($products);
+						$last_ean = '';
+						while (isset($row["ean"])) {
+							if($row["ean"] != $last_ean){
+								$last_ean = $row["ean"];
+								$img_source =$row['img'];
+								$gender = $row['gender'];
+								$category = $row['category'];
+								$price = $row['price'];
+								echo "<div class=\"flex-element\">";
+								//echo "\"../images/products/".$gender."/".$category."/".$img_source.".jpg\"";
+								echo "<a href=\"product.php?id=".$row['ean']."&gender=$gender\"><img src=\"../images/products/".$gender."/".$category."/".$img_source.".jpg\"></a><br>";
+								echo "<a href=\"product.php?id=".$row['ean']."&gender=$gender\">".$row['name']."</a><br>";
+								echo "<p><b>$price €</b></p>";
+								echo "</div>";
+								
+							}
+							$row = pg_fetch_assoc($products);
+						}
+					}
+					*/
+				?>
+			</div>
+		</div>		
+		<!-- Refresh Filtered Page Script --> 
+		<style>
+		#loading { text-align:center; height: 150px;}
+		</style>
+		<script src="../js/products-filter-user.js"></script>
 	</body>
+
 </html>

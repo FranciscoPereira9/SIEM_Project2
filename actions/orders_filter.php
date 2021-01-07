@@ -6,7 +6,9 @@ $output="";
 if(isset($_POST['action']))
 {
     $query = "SELECT * 
-            FROM \"tp_php\".orders";
+              FROM \"tp_php\".orders 
+              JOIN customers
+              ON orders.client = customers.id";
 
     $first = true;// Variable to check if it's the first to append -> doesn't have AND
     // Min Max price restrictions
@@ -20,7 +22,7 @@ if(isset($_POST['action']))
     {
         $city = $_POST["city"];
         if($first){$query .= "WHERE city IN('".$city."')";$first = false;}
-        else{$query .= "AND city IN('".$city."')";}
+        else{$query .= "AND orders.city IN('".$city."')";}
     }
     // Status restrictions
     if(isset($_POST["order_status"]) && !empty($_POST["order_status"]))
@@ -37,12 +39,13 @@ if(isset($_POST['action']))
             $output .= "<tr>
             <th scope=\"row\">".$n['order_id']."</th>
             <td>".$n['date']."</td>
+            <td>".$n['first_name']." ".$n['last_name']."</td>
             <td>".$n['order_status']."</td>
-            <td>".$n['client']."</td>
+            <td>".$n['payment_method']."</td>
             <td>".$n['destination']."</td>
             <td>".$n['postcode']."</td>
             <td>".$n['city']."</td>
-            <td>".$n['product_price']."</td>
+            <td>".$n['product_price']." €</td>
             </tr>";         
         }
     }
@@ -53,19 +56,23 @@ if(isset($_POST['action']))
 }
 else{
     $query = "SELECT * 
-              FROM \"tp_php\".orders";
+              FROM \"tp_php\".orders 
+              JOIN customers
+              ON orders.client = customers.id";
+
     $result_array = query_execute($conn,$query);
     foreach($result_array as $n){
         $output .= "<tr>
         <th scope=\"row\">".$n['order_id']."</th>
         <td>".$n['date']."</td>
+        <td>".$n['first_name']." ".$n['last_name']."</td>
         <td>".$n['order_status']."</td>
-        <td>".$n['client']."</td>
+        <td>".$n['payment_method']."</td>
         <td>".$n['destination']."</td>
         <td>".$n['postcode']."</td>
         <td>".$n['city']."</td>
-        <td>".$n['product_price']."</td>
-        </tr>";             
+        <td>".$n['product_price']." €</td>
+        </tr>";  
     }
     echo $output;
 

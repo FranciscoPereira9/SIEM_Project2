@@ -6,7 +6,7 @@ $output="";
 if(isset($_POST['action']))
 {
     $query = "SELECT * 
-            FROM \"tp_php\".user";
+            FROM \"tp_php\".customers";
 
     $first = true;// Variable to check if it's the first to append -> doesn't have AND
     // Min Max price restrictions
@@ -54,7 +54,7 @@ if(isset($_POST['action']))
 }
 else{
     $query = "SELECT * 
-              FROM \"tp_php\".user";
+              FROM \"tp_php\".customers";
     $result_array = query_execute($conn,$query);
     foreach($result_array as $n){
         $output .= "<tr>

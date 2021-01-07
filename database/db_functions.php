@@ -7,7 +7,10 @@
 
     //Function to get all orders -> returns Array with all results
     function get_db_orders($conn){
-      $query = "SELECT * FROM \"tp_php\".orders;";
+      $query = "SELECT * 
+                FROM \"tp_php\".orders 
+                JOIN customers
+                ON orders.client = customers.id;";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -21,7 +24,9 @@
     // Get specific order
     function get_order($conn, $order_id){
       $query = "SELECT * 
-                FROM \"tp_php\".orders
+                FROM \"tp_php\".orders 
+                JOIN customers
+                ON orders.client = customers.id
                 WHERE order_id = '".$order_id."';";
       $res = pg_exec($conn, $query);
       if (!$res) {
@@ -35,8 +40,11 @@
 
     // Searches word on all attributes of order
     function get_db_orders_filtered($conn,$word){
-      $query = "SELECT * FROM \"tp_php\".orders
-                WHERE destination LIKE '%".$word."%' OR postcode LIKE '%".$word."%' OR city LIKE '%".$word."%' OR order_status LIKE '%".$word."%';";
+      $query = "SELECT * 
+                FROM \"tp_php\".orders 
+                JOIN customers
+                ON orders.client = customers.id
+                WHERE destination LIKE '%".$word."%' OR postcode LIKE '%".$word."%' OR orders.city LIKE '%".$word."%' OR order_status LIKE '%".$word."%' OR payment_method LIKE '%".$word."%';";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -132,11 +140,29 @@
       
     }
 
+    // Get all Payment Methods in Orders
+    function distinct_payment_methods($conn) {
+      $query = "SELECT DISTINCT payment_method
+                FROM \"tp_php\".orders 
+                JOIN customers
+                ON orders.client = customers.id";
+                
+      $res = pg_exec($conn, $query);
+      if (!$res) {
+          echo "An error occurred.\n";
+          exit;
+        }
+      $arr = pg_fetch_all($res);
+      
+      return $arr;
+      
+    }
+
     // ---------------------------------- Users Related ----------------------------------------
 
     //Function to get all users -> returns Array with all results
     function get_db_users($conn){
-      $query = "SELECT * FROM \"tp_php\".user;";
+      $query = "SELECT * FROM \"tp_php\".customers;";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -149,7 +175,7 @@
 
     // Searches word on all attributes of user
     function get_db_users_filtered($conn,$word){
-      $query = "SELECT * FROM \"tp_php\".user
+      $query = "SELECT * FROM \"tp_php\".customers
                 WHERE first_name LIKE '%".$word."%' OR last_name LIKE '%".$word."%' OR email LIKE '%".$word."%' OR address LIKE '%".$word."%'
                 OR country LIKE '%".$word."%' OR city LIKE '%".$word."%' OR phone LIKE '%".$word."%' OR postalcode LIKE '%".$word."%';";
       $res = pg_exec($conn, $query);
@@ -165,7 +191,7 @@
     //Function to get number of clients
     function n_customers($conn){
 
-      $query = "SELECT COUNT(id) FROM \"tp_php\".user;";
+      $query = "SELECT COUNT(id) FROM \"tp_php\".customers;";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -177,7 +203,7 @@
 
     // Get all Cities in Users
     function distinct_cities($conn) {
-      $query = "SELECT DISTINCT city FROM \"tp_php\".user;";
+      $query = "SELECT DISTINCT city FROM \"tp_php\".customers;";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -191,7 +217,7 @@
 
     // Get all Countries in Users
     function distinct_countries($conn) {
-      $query = "SELECT DISTINCT country FROM \"tp_php\".user;";
+      $query = "SELECT DISTINCT country FROM \"tp_php\".customers;";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -234,9 +260,9 @@
     }
 
     //Function to add product to DB
-    function add_product($conn, $product_name, $ean, $quantity, $category, $brand, $color, $price, $image) {
+    function add_product($conn, $product_name, $ean, $quantity, $category, $brand, $color, $price, $image, $gender) {
       $stock = 0;
-      $query = "INSERT INTO \"tp_php\".products(name, ean, stock, category, brand, color, price, img) VALUES ('".$product_name."', '".$ean."', '".($quantity)."', '".$category."', '".$brand."', '".$color."', '".$price."', '".$image."' );";
+      $query = "INSERT INTO \"tp_php\".products(name, ean, stock, category, brand, color, price, img, gender) VALUES ('".$product_name."', '".$ean."', '".($quantity)."', '".$category."', '".$brand."', '".$color."', '".$price."', '".$image."', '".$gender."' );";
       $res = pg_exec($conn, $query);
       if (!$res) {
           throw new Exception('Something went wrong. Coudn\'t add item to database.');
@@ -305,6 +331,61 @@
     // Get all Product Colour's in Store
     function distinct_colors($conn) {
       $query = "SELECT DISTINCT color FROM \"tp_php\".products;";
+      $res = pg_exec($conn, $query);
+      if (!$res) {
+          echo "An error occurred.\n";
+          exit;
+        }
+      $arr = pg_fetch_all($res);
+      
+      return $arr;
+    }
+
+    //Function to get all men products -> returns Array with all products
+    function get_db_men_products($conn){
+      $query = "SELECT * FROM \"tp_php\".products WHERE gender='Homem';";
+      $res = pg_exec($conn, $query);
+      if (!$res) {
+          echo "An error occurred.\n";
+          exit;
+        }
+      $arr = pg_fetch_all($res);
+      
+      return $arr;
+    }
+
+    //Function to get all women products -> returns Array with all products
+    function get_db_women_products($conn){
+      $query = "SELECT * FROM \"tp_php\".products WHERE gender='Mulher';";
+      $res = pg_exec($conn, $query);
+      if (!$res) {
+          echo "An error occurred.\n";
+          exit;
+        }
+      $arr = pg_fetch_all($res);
+      
+      return $arr;
+    }
+
+    // Searches word on all attributes of men products
+    function get_db_men_products_filtered($conn,$word){
+      $query = "SELECT * FROM \"tp_php\".products
+                WHERE gender = 'Homem' AND name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
+                OR brand LIKE '%".$word."%' OR color LIKE '%".$word."%';";
+      $res = pg_exec($conn, $query);
+      if (!$res) {
+          echo "An error occurred.\n";
+          exit;
+        }
+      $arr = pg_fetch_all($res);
+      
+      return $arr;
+    }
+
+    function get_db_women_products_filtered($conn,$word){
+      $query = "SELECT * FROM \"tp_php\".products
+                WHERE gender = 'Mulher' AND name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
+                OR brand LIKE '%".$word."%' OR color LIKE '%".$word."%';";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
