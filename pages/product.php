@@ -5,24 +5,7 @@
 	
 	include_once "../includes/opendb.php";
 	include_once "../database/db_product.php";
-	
-		if(!isset($_SESSION['cart'])){
-	$_SESSION['cart']=array();
-}
-if(!isset($_SESSION['username'])){
-	$_SESSION['username']='';
-}
 
-if(!isset($_SESSION['email'])){
-	$_SESSION['email']='';
-}
-
-if(!isset($_SESSION['msgErroCart'])){
-	$_SESSION['msgErroCart']='';
-}
-if(!isset($_SESSION['outOfStock'])){
-	$_SESSION['outOfStock']='';
-}
 	
 	$product_ean=$_GET['id'];
 	$gender=$_GET['gender'];
@@ -52,6 +35,8 @@ if(!isset($_SESSION['outOfStock'])){
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		
+		
+		<title>Fashion Store</title>
 	</head>
 	
 	<body>
@@ -75,14 +60,37 @@ if(!isset($_SESSION['outOfStock'])){
 		  
 		  <div id = "right">
 			<h3><?php echo $name ?></h3>
-				<?php if($_SESSION['msgErroCart'] != ''){
-					echo $_SESSION['msgErroCart'];
-					$_SESSION['msgErroCart']=NULL;
+			
+				<?php 
+				//VARIÁVEL SESSÃO OUT OF STOCK
+				if(!empty($_SESSION['outOfStock'])){
+					?><p class="error"> <?php echo $_SESSION['outOfStock'];?> </p>
+					<?php
+					$_SESSION['outOfStock']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
 				}
-				if($_SESSION['outOfStock']!=''){
-					echo$_SESSION['outOfStock'];
-					$_SESSION['outOfStock']=NULL;
-				}?>
+				
+				//VARIAVEL SESSAO SUCESSO A ADICIONAR A CARRINHO
+				if(!empty($_SESSION['cartSuccess'])){
+					?><p class="success"> <?php echo $_SESSION['cartSuccess'];?> </p>
+					<?php
+					$_SESSION['cartSuccess']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+				}
+				
+				//VARIAVEL SESSAO ADICIONAR STOCK INCOMPLETO
+				if(!empty($_SESSION['msgErroAddStock'])){
+					?><p class="error"> <?php echo $_SESSION['msgErroAddStock'];?> </p>
+					<?php
+					$_SESSION['msgErroAddStock']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+				}
+				
+				
+				//VARIAVEL SESSAO SUCESSO ADICIOANR STOCK
+				if(!empty($_SESSION['addStockSuccess'])){
+					?><p class="success"> <?php echo $_SESSION['addStockSuccess'];?> </p>
+					<?php
+					$_SESSION['addStockSuccess']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+				}
+				?>
 			<p><b>Brand: </b><?php echo $brand;?></p>
 			<?php if($_SESSION['email']!='admin'){?>
 				<form method="POST" action="../actions/actionAdd2Cart.php">
@@ -90,14 +98,15 @@ if(!isset($_SESSION['outOfStock'])){
 				<form method="POST" action="../actions/actionAddStock.php">
 		
 			<?php } ?>
-			Size: <select name="size">
+			<table>
+			<tr><td>Size:</td><td><select name="size">
 						<option>XS</option>
 						<option>S</option>
 						<option>M</option>
 						<option>L</option>
 						<option>XL</option>
-					</select><br><br>
-			Color: <select name="color">
+					</select></td></tr>
+			<tr><td>Color:</td><td><select name="color">
 						<option name="red">Red</option>
 						<option name="orange">Orange</option>
 						<option name="brown">Brown</option>
@@ -108,13 +117,14 @@ if(!isset($_SESSION['outOfStock'])){
 						<option name="gray">Gray</option>
 						<option name="white">White</option>
 						<option name="black">Black</option>
-					</select><br><br>
+					</select></td></tr>
 			<?php
 			//CASO ADMINISTRADOR
 			if($_SESSION['email']=='admin'){
-				?>Quantity: <input type="number" name="quantity" value="1" min="1"><br><br>
+				?><tr><td>Quantity: </td><td><input type="number" name="quantity" value="1" min="1"></td></tr>
 			<?php 
 			}?>
+			</table>
 			   <p><b><?php echo "$price €<br>";?></b></p>
 			   
 			<input type="hidden" name="ean" value="<?php echo $product_ean; ?>">
@@ -124,9 +134,9 @@ if(!isset($_SESSION['outOfStock'])){
 			<input type="hidden" name="gender" value="<?php echo $gender; ?>">
 
 			<?php if($_SESSION['email']!='admin'){?>
-				<input type="submit" name="add2cart" value="ADD TO CART"></input><br>
+				<input type="submit" name="add2cart" value="ADD TO CART" class="btn btn-outline-secondary"></input><br>
 			<?php }else{?>
-				<input type="submit" name="addstock" value="ADD STOCK"></input><br>
+				<input type="submit" name="addstock" value="ADD STOCK" class="btn btn-outline-secondary"></input><br>
 			<?php } ?>
 			</form>
 			

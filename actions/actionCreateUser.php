@@ -1,5 +1,4 @@
 <?php
-    //TODO: verificar se email já existe
     session_start();
 
     include_once "../includes/opendb.php";
@@ -23,7 +22,7 @@
 
         //construção da query ou mensagem de erro
         if(!$dadosValidos){
-            $_SESSION['signinIncomplete'] = "All fields are required!<p>";
+            $_SESSION['signupIncomplete'] = "* All fields are required!";
 
             //inserir dados em falta no formulário para aparecer
             $_SESSION['firstname'] = $firstname;
@@ -37,9 +36,9 @@
 			//Se dados válidos, a query é executada e depois o script é redirecionado para a página de entrada
 			if(checkEmail($email)==0){
 			    createUser($firstname, $lastname, $email, $password_md5);
-                $_SESSION['signupSuccess'] = "Account created!<p>";
+                $_SESSION['signupSuccess'] = "Account created!";
             }else{
-                $_SESSION['signupUserFail'] = "User already in use!<p>";
+                $_SESSION['signupUserFail'] = "* User already in use!";
             }
 			
 

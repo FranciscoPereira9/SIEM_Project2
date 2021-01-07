@@ -30,10 +30,24 @@ body {
     height: 100%;
 	align-items:center;
 	background: white;
-	border-style: 2px solid #666666;
+	border-style: solid;
+    border-color: #666666;
+    border-radius: 5mm ;
 	padding: 20px;
 }
 
 .search-box{
 	align-items:center
+}
+
+.error{
+    color: red !important;
+	padding: 0 0 0 10;
+	font-size: 12px;
+}
+
+.success{
+	color:blue !important;
+	padding: 0 0 0 10;
+	font-size: 12px;
 }

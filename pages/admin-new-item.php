@@ -3,36 +3,6 @@
   include '../database/db_functions.php';
   include '../includes/opendb.php';
   
-  if(!isset($_SESSION['nameError'])){
-	  $_SESSION['nameError']='';
-  }
-  if(!isset($_SESSION['quantityError'])){
-	  $_SESSION['quantityError']='';
-  }
-  if(!isset($_SESSION['colorError'])){
-	  $_SESSION['colorError']='';
-  }
-  if(!isset($_SESSION['priceError'])){
-	  $_SESSION['priceError']='';
-  }
-  if(!isset($_SESSION['categoryError'])){
-	  $_SESSION['categoryError']='';
-  }
-  if(!isset($_SESSION['brandError'])){
-	  $_SESSION['brandError']='';
-  }
-  if(!isset($_SESSION['eanError'])){
-	  $_SESSION['eanError']='';
-  }
-  if(!isset($_SESSION['genderError'])){
-	  $_SESSION['genderError']='';
-  }
-  if(!isset($_SESSION['imageError'])){
-	  $_SESSION['imageError']='';
-  } 
-  if(!isset($_SESSION['successAddItem'])){
-	  $_SESSION['successAddItem']='';
-  }
 ?>
 <html>
     <head>

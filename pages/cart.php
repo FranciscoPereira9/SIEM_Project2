@@ -6,9 +6,7 @@ session_start();
 
 // depois para limpar array: $_SESSION['cart']=array();
 //print_r($_SESSION['cart']);
-if(!isset($_SESSION['noItemsCart'])){
-	$_SESSION['noItemsCart']='';
-}
+
 ?>
 
 <html>
@@ -30,6 +28,8 @@ if(!isset($_SESSION['noItemsCart'])){
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		
+		<title>Fashion Store</title>
+		
 	</head>
 	<?php 
 		include_once "components/header.php";
@@ -44,11 +44,13 @@ if(!isset($_SESSION['noItemsCart'])){
 		
 		<div id="left">
 
-			<?php 
-			if($_SESSION['noItemsCart']!=''){
-				echo $_SESSION['noItemsCart'];
-				$_SESSION['noItemsCart']=NULL;
-			} ?>
+			<?php
+			if(!empty($_SESSION['noItemsCart'])||empty($_SESSION['cart'])){
+					?><p> <?php echo "There are no items on cart to checkout!";?> </p>
+					<?php
+					$_SESSION['noItemsCart']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+				}?>
+			
 			<table >
 				<?php
 				//preciso Ajax aqui para alterar variável de sessão para quantidade
@@ -99,7 +101,7 @@ if(!isset($_SESSION['noItemsCart'])){
 					}
 				?>
 				<input type="hidden" name="total_cost" value="<?php echo $total_price; ?>">
-				<input type="submit" name="checkout" value="Checkout">
+				<input type="submit" name="checkout" value="Checkout" class="btn btn-outline-secondary">
 			</form>
 		</div>
 	</div>

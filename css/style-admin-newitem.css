@@ -142,7 +142,7 @@ main{
     height: 600px;
     background: white;
     border-style: solid;
-    border-color: rgb(51, 46, 46);
+    border-color: #666666;
     border-radius: 5mm ;
 }
 

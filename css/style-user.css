@@ -16,6 +16,9 @@ body{
     align-items: center;
 	flex-wrap: wrap;*/
 	overflow-y:auto;
+	border-style: solid;
+    border-color: #666666;
+    border-radius: 5mm ;
 }
 
 .element{
@@ -37,6 +40,22 @@ body{
     height: 100%;
 	align-items:center;
 	border-left: solid 1px #666666;
+}
+
+.container1 p{
+	margin-bottom:0px;
+	
+}
+.error{
+    color: red !important;
+	padding: 0 0 0 10;
+	font-size: 12px;
+}
+
+.success{
+	color:blue !important;
+	padding: 0 0 0 10;
+	font-size: 12px;
 }
 
 table, td{

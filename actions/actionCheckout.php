@@ -46,12 +46,12 @@ if(!empty($_POST['checkout'])){
 		
 		if($destination==0 || $postalcode==0 || $city==0){
 			
-			$_SESSION['checkoutError'] = "User info is lacking!<b>";
+			$_SESSION['checkoutError'] = "*User info is lacking!";
 			header("Location: ../pages/user.php");
 			
 		}else{
 			if(empty($products)){
-				$_SESSION['noItemsCart'] = "There are no items on cart to checkout!<b>";
+				$_SESSION['noItemsCart'] = "There are no items on cart to checkout!";
 				header("Location:../pages/cart.php");
 			}
 			else{
@@ -67,6 +67,8 @@ if(!empty($_POST['checkout'])){
 				
 				//reinicia array de sessão
 				$_SESSION['cart']=array();
+				
+				$_SESSION['checkoutSuccess'] = "Checkout finished successfully!";
 				
 				header("Location:../pages/index.php");
 			}

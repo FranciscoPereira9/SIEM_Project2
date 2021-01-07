@@ -22,7 +22,7 @@
 
         //construção da query ou mensagem de erro
         if(!$dadosValidos){
-            $_SESSION['msgErroLogin'] = "Wrong username/password<p>";
+            $_SESSION['msgErroLogin'] = "* Wrong username/password<p>";
 
             //inserir dados no formulário para alterar
             $_SESSION['email_error'] = $email;
@@ -41,7 +41,7 @@
 				//echo $_SESSION['email'];
             }
             else{
-                $_SESSION['msgErroLogin'] = "Wrong username/password<p>";
+                $_SESSION['msgErroLogin'] = "* Wrong username/password<p>";
             }
 
 		    header("Location: ../pages/user.php");

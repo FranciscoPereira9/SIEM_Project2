@@ -16,7 +16,7 @@ body {
 	justify-content: space-around;
     align-items: center;
 	flex-wrap: wrap;*/
-	
+
 	margin-bottom: 50px;
 }
 
@@ -39,8 +39,9 @@ body {
 	
 	padding: 20px;
 	align-items: center;
-	border: 2px solid;
-	border-color: #666666;
+	border-style: solid;
+    border-color: #666666;
+    border-radius: 5mm ;
 }
 
 #left img{

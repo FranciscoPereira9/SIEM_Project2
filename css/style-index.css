@@ -139,6 +139,7 @@ header {
 /*--- BODY ---*/
 
 main {
+	text-align:center;
     height: 800px;
     display: grid;
     grid-template-columns: auto 500px auto;
@@ -147,6 +148,7 @@ main {
       ". . ."
       ". search-box ."
       ". . .";
+	  
 
 }
 
@@ -154,4 +156,9 @@ main {
     grid-area: search-box;
     align-self: center;
     justify-self: stretch;
+}
+
+p{
+	color:white;
+	text-align: center;
 }

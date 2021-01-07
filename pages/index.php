@@ -68,6 +68,12 @@
 		<p style="color:white">Women: <input type="radio" value="Mulher" name="gender">
 		Men: <input type="radio" value="Homem" name="gender" checked="checked"></p>
       </form>
+	  
+	  <?php if(!empty($_SESSION['checkoutSuccess'])){
+					?><p> <?php echo $_SESSION['checkoutSuccess'];?> </p>
+					<?php
+					$_SESSION['checkoutSuccess']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+				}?>
 
     </main>
     <script src="../js/side-bar.js"> </script>   

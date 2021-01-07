@@ -22,7 +22,7 @@ if (!empty($_POST['addstock'])){
 		$dadosValidos = true;
 	}
 	if(!$dadosValidos){
-        $_SESSION['msgErroAddStock'] = "All fields are required.<p>";
+        $_SESSION['msgErroAddStock'] = "* All fields are required.";
 
             
 
@@ -31,13 +31,17 @@ if (!empty($_POST['addstock'])){
    else{
 	$sku=get_sku($ean, $color);
 	   
+	   //VERIFICA SE PRODUTO EXISTE
 	   if($sku==''){
-		   $_SESSION['outOfStock'] = "Item not available!";
+		   //NÃO EXISTE
+		   $_SESSION['outOfStock'] = "* Item not available!";
 		   header("Location: ../pages/product.php?id=".$ean."&gender=$gender");
 	   }else{
+		   //EXISTE
 		   $stock=getStock($sku);
 		   $stock=$stock+$quantity;
 		   updateStock($sku, $stock);
+		    $_SESSION['addStockSuccess'] = "Stock has updated successfully!";
 		   header("Location: ../pages/product.php?id=".$ean."&gender=$gender");
 	   }
 	   

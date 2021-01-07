@@ -1,27 +1,6 @@
 <?php
-	session_start();
-	if(!isset($_SESSION['cart'])){
-	$_SESSION['cart']=array();
-}
-if(!isset($_SESSION['username'])){
-	$_SESSION['username']='';
-}
+session_start();
 
-if(!isset($_SESSION['email'])){
-	$_SESSION['email']='';
-}
-if(!isset($_SESSION['signinSuccess'])){
-	$_SESSION['signinSuccess']='';
-}
-if(!isset($_SESSION['signupIncomplete'])){
-	$_SESSION['signupIncomplete']='';
-}
-if(!isset($_SESSION['signupUserFail'])){
-	$_SESSION['signupUserFail']='';
-}
-if(!isset($_SESSION['checkoutError'] )){
-	$_SESSION['checkoutError'] = '';
-}
 
 include_once "../includes/opendb.php";
 include_once "../database/db_user.php";
@@ -44,6 +23,8 @@ include_once "../database/db_user.php";
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		
+		<title>Fashion Store</title>
+		
 	</head>
 	
 	<body>
@@ -53,10 +34,13 @@ include_once "../database/db_user.php";
 	?>
 	<div class="container1">
 		<?php 
-			if($_SESSION['signinSuccess']!=''){
-	 			echo $_SESSION['signinSuccess'];
-				$_SESSION['signinSuccess'] = '';
-			}
+			
+			
+			if(!empty($_SESSION['checkoutError'])){
+					?><p class="error"> <?php echo $_SESSION['checkoutError'];?> </p>
+					<?php
+					$_SESSION['checkoutError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+				}
 			
 		
 			if($_SESSION['username']!=''){
@@ -74,7 +58,7 @@ include_once "../database/db_user.php";
 					<p>Lastname:<br> <input type="text" name="lastname" value="<?php echo $details['last_name'];?>"><br></p>
 					<p>Password:<br> <input type="password" name="password"><br></p>
 					<p>Contact:<br> <input type="text" name="phone" value="<?php echo $details['phone'];?>"><br><br></p>
-					<p><input type="submit" name="save_changes_account" value="Save"></p>
+					<p><input type="submit" name="save_changes_account" value="Save" class="btn btn-outline-secondary"></p>
 				</form>
 				</div>
 				
@@ -87,7 +71,7 @@ include_once "../database/db_user.php";
 					<p><input type="radio" value="mbway" name="payment"<?php if ($details['payment_method']=='mbway'){echo "checked=\"checked\"";}?>> MBway<br></p>
 					<p><input type="radio" value="credit_card" name="payment"<?php if ($details['payment_method']=='credit_card'){echo "checked=\"checked\"";}?>> Credit Card<br></p>
 					<p><input type="radio" value="bitcoin" name="payment"<?php if ($details['payment_method']=='bitcoin'){echo "checked=\"checked\"";}?>> BitCoin<br><br></p>
-					<p><input type="submit" name="save_changes_payment" value="Save"></p>
+					<p><input type="submit" name="save_changes_payment" value="Save" class="btn btn-outline-secondary"></p>
 				</form>
 				</div>	
 				
@@ -100,7 +84,7 @@ include_once "../database/db_user.php";
 					<p>Postal Code:<br> <input type="text" name="postalcode" value="<?php echo $details['postalcode'];?>"><br></p>
 					<p>City: <br><input type="text" name="city" value="<?php echo $details['city'];?>"><br></p>
 					<p>Country: <br><input type="text" name="country" value="<?php echo $details['country'];?>"><br><br></p>
-					<p><input type="submit" name="save_changes_shipping" value="Save"></p>
+					<p><input type="submit" name="save_changes_shipping" value="Save" class="btn btn-outline-secondary"></p>
 				</form>
 				</div>
 				<?php
@@ -114,44 +98,68 @@ include_once "../database/db_user.php";
 				?>
 				<div id="left">
 				<div style="margin-bottom:20px"><?php
-				echo $_SESSION['username'];
-				echo "<p style=\"padding:10px\"><b>SIGN IN:</b><p>";
-				if($_SESSION['checkoutError'] != ''){
-					echo $_SESSION['checkoutError'];
-					$_SESSION['checkoutError']  = '';
+				echo "<p style=\"padding:10 0 0 10\"><b>SIGN IN:</b><p>";
+				//	ZONA DE MENSAGENS DE ERRO LOGIN
+				
+				if(!empty($_SESSION['signupSuccess'])){
+					?><p class="success"> <?php echo $_SESSION['signupSuccess'];?> </p>
+					<?php
+					$_SESSION['signupSuccess']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+				}
+				
+				
+				if(!empty($_SESSION['msgErroLogin'])){
+					?><p class="error"> <?php echo $_SESSION['msgErroLogin']; ?> </p>
+					<?php
+					$_SESSION['msgErroLogin']=NULL;
 				}
 				?>
+				
 				</div>
+				
+				
 				<form method="POST" action="../actions/actionLogIn.php">
+				
 				<table>
 				<tr><td>Login:</td><td><input type="text" name="email_login"></td></tr><br>
 				<tr><td>Password:</td><td><input type="password" name="password_login"></td></tr><br>
-				<tr><td><input type="submit" name="login" value="LOGIN"></td></tr>
+				<tr><td><input type="submit" name="login" value="LOGIN" class="btn btn-outline-secondary"></td></tr>
 				</table>
 				</form>
 				</div>
 				<div id="right">
 				<div style="margin-bottom:20px">
 				<?php
-				echo"<p style=\"padding:10px\"><b>SIGN UP:</b></p>";
+				echo"<p style=\"padding:10 0 0 10\"><b>SIGN UP:</b></p>";
 				
-					if($_SESSION['signupIncomplete']!=''){
-						echo $_SESSION['signupIncomplete'];
-						$_SESSION['signupIncomplete']='';
-					}
-					if($_SESSION['signupUserFail']!=''){
-						echo $_SESSION['signupUserFail'];
-						$_SESSION['signupUserFail']='';
-					}
+				//VERIFICAR ESTADO VARIÁVEIS DE SESSÃO
+				
+				if(!empty($_SESSION['signupIncomplete'])){
+					?><p class="error"> <?php echo $_SESSION['signupIncomplete'];?> </p>
+					<?php
+					$_SESSION['signupIncomplete']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+				}
+					
+				if(!empty($_SESSION['signupUserFail'])){
+					?><p class="error"> <?php echo $_SESSION['signupUserFail'];?> </p>
+					<?php
+					$_SESSION['signupUserFail']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+				}
+				
+				
+					
 				echo "</div>";
-
+				
+				
+				//IMPRIMIR FORMULARIO
+				
 				echo "<form method=\"POST\" action=\"../actions/actionCreateUser.php\">";
 				echo "<table>";
 				echo"<tr><td>Firstname:</td><td><input type=\"text\" name=\"firstname\"></td></tr>";
 				echo"<tr><td>Lastname:</td><td><input type=\"text\" name=\"lastname\"></td></tr>";
 				echo"<tr><td>Login:</td><td><input type=\"text\" name=\"email\"></td></tr>";
 				echo"<tr><td>Password:</td><td><input type=\"password\" name=\"password\"></td></tr>";
-				echo"<tr><td><input type=\"submit\" name=\"register\" value=\"REGISTER\"></input></td></tr>";
+				echo"<tr><td><input type=\"submit\" name=\"register\" value=\"REGISTER\" class=\"btn btn-outline-secondary\"></input></td></tr>";
 				echo "</table>";
 				echo"</form>";
 				echo"</div>";
