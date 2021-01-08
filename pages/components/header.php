@@ -27,9 +27,12 @@
         <div class="header-container-d">
           <a href="cart.php"><i class="fas fa-shopping-cart fa-2x"></i></a>
         </div>    
-        <div class="header-container-e">
-          <a href="#">Logout</a>
-        </div>    
+        <?php 
+		if(!empty($_SESSION['username'])){
+		?><div class="header-container-e">
+          <a href="../actions/actionLogout.php">Logout</a>
+        </div>   
+		<?php } ?>		
       </div>
     </header>
 </body>
