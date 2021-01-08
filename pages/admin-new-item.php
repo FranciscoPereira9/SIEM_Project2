@@ -109,7 +109,7 @@
 						<?php 
 							//VERIFY ERRORS
 							if(!empty($_SESSION['nameError'])){
-							?><p class="success"> <?php echo $_SESSION['nameError'];?> </p>
+							?><p class="error"> <?php echo $_SESSION['nameError'];?> </p>
 							<?php
 							$_SESSION['nameError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
 						}?>
@@ -120,7 +120,7 @@
                         <?php
                          // Get values from form and verify if they exist
                           if(!empty($_SESSION['priceError'])){
-							?><p class="success"> <?php echo $_SESSION['priceError'];?> </p>
+							?><p class="error"> <?php echo $_SESSION['priceError'];?> </p>
 							<?php
 							$_SESSION['priceError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
 						}?>
@@ -140,7 +140,7 @@
                          // Get values from form and verify if they exist
                         
 						if(!empty($_SESSION['categoryError'])){
-							?><p class="success"> <?php echo $_SESSION['categoryError'];?> </p>
+							?><p class="error"> <?php echo $_SESSION['categoryError'];?> </p>
 							<?php
 							$_SESSION['categoryError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
 						}?>
@@ -152,7 +152,7 @@
                          // Get values from form and verify if they exist
                        
 						if(!empty($_SESSION['brandError'])){
-							?><p class="success"> <?php echo $_SESSION['brandError'];?> </p>
+							?><p class="error"> <?php echo $_SESSION['brandError'];?> </p>
 							<?php
 							$_SESSION['brandError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
 						}?>
@@ -164,7 +164,7 @@
                         <?php
                          // Get values from form and verify if they exist
                           if(!empty($_SESSION['eanError'])){
-							?><p class="success"> <?php echo $_SESSION['eanError'];?> </p>
+							?><p class="error"> <?php echo $_SESSION['eanError'];?> </p>
 							<?php
 							$_SESSION['eanError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
 						}?>
@@ -175,7 +175,7 @@
                         <?php
                          // Get values from form and verify if they exist
                           if(!empty($_SESSION['quantityError'])){
-							?><p class="success"> <?php echo $_SESSION['quantityError'];?> </p>
+							?><p class="error"> <?php echo $_SESSION['quantityError'];?> </p>
 							<?php
 							$_SESSION['quantityError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
 						}?>
@@ -198,7 +198,7 @@
                         <?php
                          // Get values from form and verify if they exist
                           if(!empty($_SESSION['colorError'])){
-							?><p class="success"> <?php echo $_SESSION['colorError'];?> </p>
+							?><p class="error"> <?php echo $_SESSION['colorError'];?> </p>
 							<?php
 							$_SESSION['colorError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
 						}?>
@@ -210,7 +210,7 @@
                         <?php
                          // Get values from form and verify if they exist
                           if(!empty($_SESSION['imageError'])){
-							?><p class="success"> <?php echo $_SESSION['imageError'];?> </p>
+							?><p class="error"> <?php echo $_SESSION['imageError'];?> </p>
 							<?php
 							$_SESSION['imageError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
 						}?>
