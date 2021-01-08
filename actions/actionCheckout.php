@@ -18,7 +18,7 @@ if(!empty($_POST['checkout'])){
 
 	$total_cost=$_POST['total_cost'];
 
-	if($_SESSION['username']!=''){
+	if(!empty($_SESSION['username'])){
 		
 		$order_id = getLastOrderId();
 		//echo $order_id;
@@ -71,7 +71,7 @@ if(!empty($_POST['checkout'])){
 				
 				$_SESSION['checkoutSuccess'] = "Checkout finished successfully!";
 				
-				header("Location:../pages/index.php");
+				header("Location:../pages/cart.php");
 			}
 			
 		}		

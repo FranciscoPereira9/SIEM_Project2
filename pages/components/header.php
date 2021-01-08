@@ -30,7 +30,7 @@
         <?php 
 		if(!empty($_SESSION['username'])){
 		?><div class="header-container-e">
-          <a href="../actions/actionLogout.php">Logout</a>
+          <b><a href="../actions/actionLogout.php">Logout</a></b>
         </div>   
 		<?php } ?>		
       </div>

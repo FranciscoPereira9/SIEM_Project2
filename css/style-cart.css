@@ -60,3 +60,9 @@ body {
 	align-self: flex-end;
 }
 
+.success{
+	color:blue !important;
+	text-align: center !important;
+	padding: 10px;
+}
+

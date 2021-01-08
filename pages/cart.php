@@ -6,6 +6,8 @@ session_start();
 
 // depois para limpar array: $_SESSION['cart']=array();
 //print_r($_SESSION['cart']);
+include_once "../includes/opendb.php";
+include_once "../database/db_cart.php";
 
 ?>
 
@@ -41,11 +43,18 @@ session_start();
 		<div class="left">
 
 			<?php
-			if(!empty($_SESSION['noItemsCart'])||empty($_SESSION['cart'])){
-					?><p> <?php echo "There are no items on cart to checkout!";?> </p>
+			if((!empty($_SESSION['noItemsCart'])||empty($_SESSION['cart']))&&empty($_SESSION['checkoutSuccess'])){
+					?><p style="padding:10px"> <?php echo "There are no items on cart to checkout!";?> </p>
 					<?php
 					$_SESSION['noItemsCart']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
-				}?>
+				}
+			else{	
+			 if(!empty($_SESSION['checkoutSuccess'])){
+					?><p class="success"> <?php echo $_SESSION['checkoutSuccess'];?> </p>
+					<?php
+					$_SESSION['checkoutSuccess']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+				}
+			}?>
 			
 			<table id="table-left">
 				<?php
@@ -58,9 +67,10 @@ session_start();
 						$cost[]=$full_price;
 						$total_price+=$full_price;
 						$img = $item['img'];
+						$stock = getStock($item['sku']);
 						echo "<tr id=\"product".$n."\"> <td><img src= \"$img\"></td>";
 						echo "<td>".$item['name']."</td> 
-							<td><form><input type=\"number\" class='common_selector' id=\"quantity".$n."\" name=\"quantity\" value=\"".$item['quantity']."\"></form></td>
+							<td><form><input type=\"number\" class='common_selector' id=\"quantity".$n."\" name=\"quantity\" value=\"".$item['quantity']."\" max=\"".$stock."\" min=\"0\"></form></td>
 							<td id='price_multiplied".$n."'> </tr><br>";
 						$n=$n+1;
 					}

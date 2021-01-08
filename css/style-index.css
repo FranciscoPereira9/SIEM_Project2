@@ -64,14 +64,31 @@ header {
     color: white;
 }
 
+.header-container-e {
+    grid-area: logout;
+    text-align: center;
+}
+.header-container-e a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.header-container-e a:hover {
+    text-decoration: underline;
+    color: white;
+}
+
+
 
 .header-container{
     font-family: 'Cairo', sans-serif;
     display: grid;
-    grid-template-columns: 7.5% 82.5% 5% 5%;
+    grid-template-columns: 7.5% 5% 5% 65% 5% 5% 7.5%;
     grid-template-rows: 100%;
     grid-template-areas: 
-      "side header icon-user icon-cart";
+      "side . . header icon-user icon-cart logout";
+    align-items: center;
 }
 
 /*--- SIDE BAR ---*/

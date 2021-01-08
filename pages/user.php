@@ -43,11 +43,10 @@ include_once "../database/db_user.php";
 				}
 			
 		
-			if($_SESSION['username']!=''){
+			if(!empty($_SESSION['username'])){
 				$details = getUserDetails($_SESSION['email']);
 				
 				?>
-				<a href="../actions/actionLogout.php"> Logout </a>
 				
 				
 				<div class="element">

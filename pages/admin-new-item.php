@@ -3,6 +3,9 @@
   include '../database/db_functions.php';
   include '../includes/opendb.php';
   
+  if(!isset($_SESSION['successAddItem'])){
+	  $_SESSION['successAddItem']=null;
+  }
 ?>
 <html>
     <head>
@@ -35,7 +38,13 @@
               </div>
               <div class="header-container-d">
                 <a href="cart.php"><i class="fas fa-shopping-cart fa-2x"></i></a>
-              </div>      
+              </div>
+				<?php 
+					if(!empty($_SESSION['username'])){
+					?><div class="header-container-e">
+					  <b><a href="../actions/actionLogout.php">Logout</a></b>
+					</div>   
+				<?php } ?>			  
             </div>
         </header>
         <main>   
@@ -84,35 +93,37 @@
               }
             ?>
             <h3>Add New Item</h3>
-			<p style="color:blue">
-			<?php  if($_SESSION['successAddItem']!=''){
-				echo $_SESSION['successAddItem'];
-				$_SESSION['successAddItem']=NULL;
-			}
-			?></p>
+			<?php if(!empty($_SESSION['successAddItem'])){
+					?><p class="success"> <?php echo $_SESSION['successAddItem'];?> </p>
+					<?php
+					$_SESSION['successAddItem']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+				}?>
+			
             <div class="canvas">
+				
                 <form class="form-layout" action="../actions/actionAddNewItem.php" method="POST" enctype="multipart/form-data">
                     <div class="product-name">
                         <label for="product-name">Product Name </label><br>
                         <input type="text" id="product-name" name="product-name">
-                        <?php
-                         // Get values from form and verify if they exist
-                          if ($_SESSION['nameError']!='') {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['nameError']."</p>";
-							$_SESSION['nameError']=NULL;
-                          }
-                        ?>
+						
+						<?php 
+							//VERIFY ERRORS
+							if(!empty($_SESSION['nameError'])){
+							?><p class="success"> <?php echo $_SESSION['nameError'];?> </p>
+							<?php
+							$_SESSION['nameError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+						}?>
                     </div>
                     <div class="product-price">
                         <label for="product-price">Price<br> </label><br>
                         <input type="numeric" id="product-price" name="product-price"  value="0" min="0">
                         <?php
                          // Get values from form and verify if they exist
-                          if ($_SESSION['priceError']!='') {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['priceError']."</p>";
-							$_SESSION['priceError']=NULL;
-                          }
-                        ?>
+                          if(!empty($_SESSION['priceError'])){
+							?><p class="success"> <?php echo $_SESSION['priceError'];?> </p>
+							<?php
+							$_SESSION['priceError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+						}?>
                     </div>    
                     <div class="product-category">
                         <label for="product-category">Category<br> </label><br>
@@ -127,44 +138,47 @@
 						
                         <?php
                          // Get values from form and verify if they exist
-                          if ($_SESSION['categoryError']!='') {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['categoryError']."</p>";
-							$_SESSION['categoryError']=NULL;
-                          }
-                        ?>
+                        
+						if(!empty($_SESSION['categoryError'])){
+							?><p class="success"> <?php echo $_SESSION['categoryError'];?> </p>
+							<?php
+							$_SESSION['categoryError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+						}?>
                     </div> 
                     <div class="product-brand">
                         <label for="product-brand">Brand<br> </label><br>
                         <input type="text" id="product-brand" name="product-brand">
                         <?php
                          // Get values from form and verify if they exist
-                          if ($_SESSION['brandError']!='') {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['brandError']."</p>";
-							$_SESSION['brandError']=NULL;
-                          }
-                        ?>
+                       
+						if(!empty($_SESSION['brandError'])){
+							?><p class="success"> <?php echo $_SESSION['brandError'];?> </p>
+							<?php
+							$_SESSION['brandError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+						}?>
+                       
                     </div> 
                     <div class="product-ean">
                         <label for="product-ean">EAN </label><br>
                         <input type="text" id="product-ean" name="product-ean">
                         <?php
                          // Get values from form and verify if they exist
-                          if ($_SESSION['eanError']!='') {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['eanError']."</p>";
-							$_SESSION['eanError']=NULL;
-                          }
-                        ?>
+                          if(!empty($_SESSION['eanError'])){
+							?><p class="success"> <?php echo $_SESSION['eanError'];?> </p>
+							<?php
+							$_SESSION['eanError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+						}?>
                     </div> 
                     <div class="product-quantity">
                         <label for="product-quantity">Quantity </label><br>
                         <input type="number" id="product-quantity" name="product-quantity" value="0" min="0">
                         <?php
                          // Get values from form and verify if they exist
-                          if ($_SESSION['quantityError']!='') {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['quantityError']."</p>";
-							$_SESSION['quantityError']=NULL;
-                          }
-                        ?>
+                          if(!empty($_SESSION['quantityError'])){
+							?><p class="success"> <?php echo $_SESSION['quantityError'];?> </p>
+							<?php
+							$_SESSION['quantityError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+						}?>
                     </div>
 					
 					<div class="product-color">
@@ -183,11 +197,11 @@
 						</select>
                         <?php
                          // Get values from form and verify if they exist
-                          if ($_SESSION['colorError']!='') {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['colorError']."</p>";
-							$_SESSION['colorError']=NULL;
-                          }
-                        ?>
+                          if(!empty($_SESSION['colorError'])){
+							?><p class="success"> <?php echo $_SESSION['colorError'];?> </p>
+							<?php
+							$_SESSION['colorError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+						}?>
                     </div>
 					
 					 <div class="product-image">
@@ -195,11 +209,11 @@
                        <input type="file" name="image" id="image">
                         <?php
                          // Get values from form and verify if they exist
-                          if ($_SESSION['imageError']!='') {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['imageError']."</p>";
-							$_SESSION['imageError']=NULL;
-                          }
-                        ?>
+                          if(!empty($_SESSION['imageError'])){
+							?><p class="success"> <?php echo $_SESSION['imageError'];?> </p>
+							<?php
+							$_SESSION['imageError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+						}?>
                     </div>
                     <div class="submit-but">
                         <input type="submit" class="btn btn-outline-secondary" value="Add Item" name="additem">
@@ -213,10 +227,11 @@
 						</select>
                         <?php
                          // Get values from form and verify if they exist
-                          if ($_SESSION['genderError']!='') {
-                            echo "<br><p style=\"color:red; text-align:end;\" class=\"req\">".$_SESSION['genderError']."</p>";
-                          }
-                        ?>
+                          if(!empty($_SESSION['genderError'])){
+							?><p class="success"> <?php echo $_SESSION['genderError'];?> </p>
+							<?php
+							$_SESSION['genderError']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+						}?>
                     </div> 
                     
                 </form>
