@@ -230,7 +230,7 @@
     }
 
     // Updates user total_spent
-    function update_user_spent($conn, $client_id, $spent) {
+    function update_user_spent($conn, $client_id, $spent) {   
       
         // Get total_spent at the moment
         $query = "SELECT * FROM \"tp_php\".customers WHERE id = ".$client_id.";";
@@ -374,7 +374,9 @@
 
     //Function to get all men products -> returns Array with all products
     function get_db_men_products($conn){
-      $query = "SELECT * FROM \"tp_php\".products WHERE gender='Men';";
+      $query = "SELECT * FROM \"tp_php\".products 
+                WHERE gender='Men'
+                ORDER BY ean;";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -387,7 +389,9 @@
 
     //Function to get all women products -> returns Array with all products
     function get_db_women_products($conn){
-      $query = "SELECT * FROM \"tp_php\".products WHERE gender='Women';";
+      $query = "SELECT * FROM \"tp_php\".products
+                WHERE gender='Women'
+                ORDER BY ean;";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -401,8 +405,10 @@
     // Searches word on all attributes of men products
     function get_db_men_products_filtered($conn,$word){
       $query = "SELECT * FROM \"tp_php\".products
-                WHERE gender = 'Men' AND name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
-                OR brand LIKE '%".$word."%' OR color LIKE '%".$word."%';";
+                WHERE gender = 'Men' AND (name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
+                OR brand LIKE '%".$word."%' OR color LIKE '%".$word."%')
+                ORDER BY ean;";
+                
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -415,8 +421,9 @@
 
     function get_db_women_products_filtered($conn,$word){
       $query = "SELECT * FROM \"tp_php\".products
-                WHERE gender = 'Women' AND name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
-                OR brand LIKE '%".$word."%' OR color LIKE '%".$word."%';";
+                WHERE gender = 'Women' AND (name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
+                OR brand LIKE '%".$word."%' OR color LIKE '%".$word."%')
+                ORDER BY ean;";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";

@@ -32,17 +32,6 @@ function showOrdersSearch(str) {
   xmlhttp.send();
 }
 
-function showMensSearch(str) {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("txtHint").innerHTML = this.responseText;
-    }
-  };
-  xmlhttp.open("GET", "../actions/getMenProductsFiltered.php?q=" + str, true);
-  xmlhttp.send();
-}
-
 function showUserProductsSearch(str) {
   // Get gender from url
   const queryString = window.location.search;

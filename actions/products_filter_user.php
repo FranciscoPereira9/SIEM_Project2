@@ -38,7 +38,7 @@ if(isset($_POST['action']))
         if($first){$query .= " WHERE brand IN('".$brand."')";$first = false;}
         else{$query .= " AND brand IN('".$brand."')";}
     }
-
+    
     $query.=" ORDER BY ean;";
     $result_array = query_execute($conn,$query);
     if(!empty($result_array))

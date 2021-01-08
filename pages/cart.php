@@ -38,7 +38,7 @@ session_start();
 	<h3 style="text-align: center; margin-bottom:50px;"> CART </h3>
 
 	<div class="container1">	
-		<div id="left">
+		<div class="left">
 
 			<?php
 			if(!empty($_SESSION['noItemsCart'])||empty($_SESSION['cart'])){
@@ -68,6 +68,11 @@ session_start();
 					$quantity = array_column($_SESSION['cart'], 'quantity');
 					?>
 			</table>
+			<div id="clear-btn">
+				<form action="../actions/freeCart.php">
+					<input type="submit" name="clear-cart" value="Clear Cart" class="btn btn-outline-secondary">
+				</form>
+			</div>		
 		</div>
 		<script src="../js/change_cart_price.js"></script>  
 		<div id="right">

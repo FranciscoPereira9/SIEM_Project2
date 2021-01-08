@@ -20,7 +20,7 @@ body {
 	margin-bottom: 50px;
 }
 
-#left {
+.left {
     width: 70%;
     display: inline-block;
     height: 100%;
@@ -44,14 +44,19 @@ body {
     border-radius: 5mm ;
 }
 
-#left img{
+.left img{
 	height:100px;
 	width: auto;
 }
 .container1 td{
 	padding:15px;
 }
-#left input{
+.left input{
 	width: 100px;
+}
+
+/*-- Clear Button Position --*/
+#clear-btn {
+	align-self: flex-end;
 }
 
