@@ -247,8 +247,8 @@
 
         // Update to db
         $query = "UPDATE \"tp_php\".customers
-                  SET total_spent = ".$total_spent.", column2 = value2, ...
-                  WHERE email = '".$client_id."';";
+                  SET total_spent = ".$total_spent."
+                  WHERE id = '".$client_id."';";
 
         $res = pg_exec($conn, $query);
         if (!$res) {

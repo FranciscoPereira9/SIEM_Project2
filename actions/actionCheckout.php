@@ -4,9 +4,11 @@
 session_start();
 
 include_once "../includes/opendb.php";
+include_once "../database/db_functions.php";
 include_once "../database/db_orders.php";
 include_once "../database/db_cart.php"; //função que vai buscar stock existente
 
+var_dump($_SESSION);
 
 if(!empty($_POST['checkout'])){
 	
@@ -17,32 +19,24 @@ if(!empty($_POST['checkout'])){
 	$quantity=$_POST['quantity'];
 
 	$total_cost=$_POST['total_cost'];
+	
+	
 
 	if(!empty($_SESSION['username'])){
 		
 		$order_id = getLastOrderId();
-		//echo $order_id;
-		//echo "<br>";
 		$order_id = $order_id + 1;
-		//echo $order_id;
-		//echo "<br>";
+		// Get today's date
 		$today = date('Y-m-d');
-		//echo $today;
-		//echo "<br>";
+		// Get client ID 
 		$client_id = getClientId($_SESSION['email']);
-		//echo $client_id;
-		//echo "<br>";
+		// Get client Destination
 		$destination = getDestination($_SESSION['email']);
-		//echo $destination;
-		//echo "<br>";
+		// Get client Postal Code
 		$postalcode = getPostalcode($_SESSION['email']);
-		//echo $postalcode;
-		//echo "<br>";
+		// Get client city
 		$city = getcity($_SESSION['email']);
-		//echo $city;
-		//echo "<br>";
-		//echo $total_cost;
-		//echo "<br>";
+
 		
 		if($destination==0 || $postalcode==0 || $city==0){
 			
@@ -50,22 +44,30 @@ if(!empty($_POST['checkout'])){
 			header("Location: ../pages/user.php");
 			
 		}else{
-			if(empty($products)){
+			if(empty($_SESSION['cart'])){
 				$_SESSION['noItemsCart'] = "There are no items on cart to checkout!";
 				header("Location:../pages/cart.php");
 			}
 			else{
-				foreach($products as $key=>$item) {
-					//echo $item.'-'.$cost[$key];
-					//echo "<br>";
-					addOrder($order_id, $client_id, $destination, $postalcode, $city, $today, $total_cost, $item, $cost[$key]);
-					$stock = getStock($item);
-					$newStock = $stock - $quantity[$key];
-					echo $newStock;
-					updateStock($item, $newStock);
-					update_user_spent($conn, $client_id, $spent);
+				// Calculate total cost
+				$total_order_price = 0; 
+				foreach($_SESSION['cart'] as $n) {
+					$total_order_price += intval($n['quantity'])*intval($n['price']);
 				}
-				
+
+				// Place Orders for each item purchase -> individually
+				foreach($_SESSION['cart'] as $n) {
+					// Place order according to item quantity
+					for ($i = 1; $i <= intval($n['quantity']); $i++) {
+						addOrder($order_id, $client_id, $destination, $postalcode, $city, $today, $total_order_price, $n['sku'],  $n['price']);
+					}
+					// Update stock
+					$stock = getStock($n['sku']);
+					$newStock = $stock - intval($n['quantity']);
+					updateStock($n['sku'], $newStock);
+				}
+
+				update_user_spent($conn, $client_id, $total_order_price);
 				//reinicia array de sessão
 				$_SESSION['cart']=array();
 				
