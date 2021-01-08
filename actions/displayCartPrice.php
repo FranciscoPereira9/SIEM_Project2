@@ -9,6 +9,7 @@
         $quantity = $_POST['quantity']; 
         $_SESSION['cart'][$_POST['item']]['quantity']= $quantity;
         $output = $quantity*$_SESSION['cart'][$_POST['item']]['price'];
+        
         echo "<b>".$output." €</b>";
     }
 
