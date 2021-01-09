@@ -11,7 +11,8 @@
                       JOIN \"tp_php\".customers as customers
                       ON orders.client = customers.id 
                       JOIN \"tp_php\".products as products
-                      ON orders.product = products.sku;";
+                      ON orders.product = products.sku
+                ORDER BY order_id DESC;";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -48,7 +49,8 @@
                       JOIN \"tp_php\".products as products
                       ON orders.product = products.sku
                 WHERE destination LIKE '%".$word."%' OR postcode LIKE '%".$word."%' OR orders.city LIKE '%".$word."%' OR order_status LIKE '%".$word."%' OR payment_method LIKE '%".$word."%'
-                OR first_name LIKE '%".$word."%' OR last_name LIKE '%".$word."%' OR name LIKE '%".$word."%' OR brand LIKE '%".$word."%';";
+                OR first_name LIKE '%".$word."%' OR last_name LIKE '%".$word."%' OR name LIKE '%".$word."%' OR brand LIKE '%".$word."%'
+                ORDER BY order_id DESC;";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";

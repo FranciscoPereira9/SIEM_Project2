@@ -25,7 +25,6 @@
       <div id="menu" class="sidemenu">
         <a href="listProduct.php?gender=Men">MEN</a>
         <a href="listProduct.php?gender=Women">WOMEN</a>
-        <a href="#">CHILDREN</a>
         <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>   
         <?php
           if($_SESSION['email']== 'admin'){   

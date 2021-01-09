@@ -49,6 +49,7 @@ if(isset($_POST['action']))
             <td>".$n['city']."</td>
             <td>".$n['address']."</td>
             <td>".$n['postalcode']."</td>
+            <td>".$n['total_spent']." €</td>
             </tr>";         
         }
     }
@@ -73,6 +74,7 @@ else{
             <td>".$n['city']."</td>
             <td>".$n['address']."</td>
             <td>".$n['postalcode']."</td>
+            <td>".$n['total_spent']." €</td>
             </tr>";           
     }
     echo $output;

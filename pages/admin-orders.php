@@ -49,7 +49,6 @@
       <div id="menu" class="sidemenu">
         <a href="listProduct.php?gender=Men">MEN</a>
         <a href="listProduct.php?gender=Women">WOMEN</a>
-        <a href="#">CHILDREN</a>
         <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>  
         <?php
           if($_SESSION['email']== 'admin'){   
@@ -90,8 +89,8 @@
           <div class="price-range-slider">
             <label for="price_show">Price Range: </label>
             <input type="hidden" value=0 id="min_hiden_price">
-            <input type="hidden" value=1000 id="max_hiden_price">
-            <p id="price_show">0€ - 1000€</p>
+            <input type="hidden" value=5000 id="max_hiden_price">
+            <p id="price_show">0€ - 5000€</p>
             <div id="my_slider"></div> 
           </div>
           <div>
@@ -149,11 +148,11 @@
             <th scope="col">Status</th>
             <th scope="col">Payment Method</th>
             <th scope="col">Destination</th>
-            <th scope="col">Post Code</th>
             <th scope="col">City</th>
             <th scope="col">Product</th>
             <th scope="col">Product Brand</th>
             <th scope="col">Product Price</th>
+            <th scope="col">Total Order Price</th>
           </tr>
         </thead>
         <tbody id="txtHint" class="filter_data">

@@ -25,11 +25,11 @@ function display_orders_table($arr) {
         <td>".$n['order_status']."</td>
         <td>".$n['payment_method']."</td>
         <td>".$n['destination']."</td>
-        <td>".$n['postcode']."</td>
         <td>".$n['city']."</td>
         <td>".$n['name']."</td>
         <td>".$n['brand']."</td>
         <td>".$n['product_price']." €</td>
+        <td>".$n['total_order_price']." €</td>
         </tr>"; 
       }
     echo $output;

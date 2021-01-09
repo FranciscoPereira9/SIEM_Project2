@@ -50,6 +50,10 @@ function display_users_table($arr) {
         print("<td>");
         echo $n['postalcode'];
         print("</td>");
+
+        print("<td>");
+        echo $n['total_spent'];
+        print(" €</td>");
     
         print("</tr>");
       }

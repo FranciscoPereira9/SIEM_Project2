@@ -30,8 +30,8 @@ $(document).ready(function(){
         // Slider JS functionality
           range:true,
           min:0,
-          max:1000,
-          values:[0, 1000],
+          max:5000,
+          values:[0, 5000],
           step:10,
           stop:function(event, ui) // On slidding stop event
           {

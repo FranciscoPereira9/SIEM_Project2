@@ -36,6 +36,8 @@ if(isset($_POST['action']))
         else{$query .= "AND order_status IN('".$status."')";}
     }
 
+    // Order by date 
+    $query .= " ORDER BY order_id DESC";
     // Execute query
     $result_array = query_execute($conn,$query);
     // output orders found according to filter options
@@ -49,11 +51,11 @@ if(isset($_POST['action']))
             <td>".$n['order_status']."</td>
             <td>".$n['payment_method']."</td>
             <td>".$n['destination']."</td>
-            <td>".$n['postcode']."</td>
             <td>".$n['city']."</td>
             <td>".$n['name']."</td>
             <td>".$n['brand']."</td>
             <td>".$n['product_price']." €</td>
+            <td>".$n['total_order_price']." €</td>
             </tr>";         
         }
     }
@@ -69,7 +71,8 @@ else{
                     JOIN \"tp_php\".customers as customers
                     ON orders.client = customers.id 
                     JOIN \"tp_php\".products as products
-                    ON orders.product = products.sku";
+                    ON orders.product = products.sku
+                ORDER BY order_id DESC";
 
     $result_array = query_execute($conn,$query);
     foreach($result_array as $n){
@@ -80,11 +83,11 @@ else{
         <td>".$n['order_status']."</td>
         <td>".$n['payment_method']."</td>
         <td>".$n['destination']."</td>
-        <td>".$n['postcode']."</td>
         <td>".$n['city']."</td>
         <td>".$n['name']."</td>
         <td>".$n['brand']."</td>
         <td>".$n['product_price']." €</td>
+        <td>".$n['total_order_price']." €</td>
         </tr>";  
     }
     echo $output;
