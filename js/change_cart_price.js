@@ -47,8 +47,9 @@ $(document).ready(function(){
             price= parseFloat(price);
             total += price;
         }
-        document.getElementById('items_price').innerHTML = "<b>"+String(total)+"</b>";
-        document.getElementById('total_price').innerHTML = "<b>"+String(total)+"</b>";
+        total = Number((total).toFixed(2));
+        document.getElementById('items_price').innerHTML = "<b>"+String(total)+" €</b>";
+        document.getElementById('total_price').innerHTML = "<b>"+String(total)+" €</b>";
     };
 });
   

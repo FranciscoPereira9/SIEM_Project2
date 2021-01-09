@@ -14,25 +14,32 @@
 </head>
 <body>
 	<header>
-      <div class="header-container">
-        <div class="header-container-a" id="mainbox" onclick="openSideBar()"> 
-            <span>&#9776;</span>
-        </div>
-        <div class="header-container-b">
-          <h1><a href="index.php">Fashion Store</a></h1>
-        </div>
-        <div class="header-container-c">
-          <a href="user.php"><i class="far fa-user fa-2x"></i></a>
-        </div>
-        <div class="header-container-d">
-          <a href="cart.php"><i class="fas fa-shopping-cart fa-2x"></i></a>
-        </div>
-		 <?php 
-		if(!empty($_SESSION['username'])){
-		?><div class="header-container-e">
-          <b><a href="../actions/actionLogout.php">Logout</a></b>
-        </div>   
-		<?php } ?>
-      </div>
-    </header>
-</body>
+        <div class="header-container">
+          <div class="header-container-a" id="mainbox" onclick="openSideBar()"> 
+              <span>&#9776;</span>
+          </div>
+          <div class="header-container-b">
+            <h1><a href="index.php">Fashion Store</a></h1>
+          </div>
+          <div class="header-container-c">
+            <a href="user.php"><i class="far fa-user fa-2x"></i></a>
+          </div>
+          <div class="header-container-d">
+            <a href="cart.php"><i class="fas fa-shopping-cart fa-2x"></i></a>
+          </div>    
+          <?php 
+      if(!empty($_SESSION['username'])){
+        ?><div class="header-container-e">
+              <a href="../actions/actionLogout.php">Logout</a>
+            </div>   
+        <?php }
+        else{
+          ?>
+          <div class="header-container-e">
+              <a href="../pages/user.php">Login</a>
+            </div> 
+          <?php
+        } ?>		
+          </div>
+        </header>
+    </body>

@@ -1,5 +1,4 @@
 $(document).ready(function(){ 
-  filter_data();
   
   function filter_data() {
       $('.filter_data').html('<div id="loading" style="" ></div>');

@@ -7,7 +7,7 @@
 $q = $_REQUEST["q"];
 $arr = get_db_women_products($conn);
 // Lookup all users from array if $q is different from ""
-if ($q !== "") {
+if ($q !== "" && $q != 'null') {
     $arr = get_db_women_products_filtered($conn, $q);
 }
 

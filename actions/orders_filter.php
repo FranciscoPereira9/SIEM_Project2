@@ -5,10 +5,12 @@ include '../includes/opendb.php';
 $output="";
 if(isset($_POST['action']))
 {
-    $query = "SELECT * 
-              FROM \"tp_php\".orders 
-              JOIN customers
-              ON orders.client = customers.id";
+    $query =   "SELECT *
+                FROM \"tp_php\".orders as orders
+                    JOIN \"tp_php\".customers as customers
+                    ON orders.client = customers.id 
+                    JOIN \"tp_php\".products as products
+                    ON orders.product = products.sku";
 
     $first = true;// Variable to check if it's the first to append -> doesn't have AND
     // Min Max price restrictions
@@ -45,6 +47,8 @@ if(isset($_POST['action']))
             <td>".$n['destination']."</td>
             <td>".$n['postcode']."</td>
             <td>".$n['city']."</td>
+            <td>".$n['name']."</td>
+            <td>".$n['brand']."</td>
             <td>".$n['product_price']." €</td>
             </tr>";         
         }
@@ -55,10 +59,12 @@ if(isset($_POST['action']))
  echo $output;
 }
 else{
-    $query = "SELECT * 
-              FROM \"tp_php\".orders 
-              JOIN customers
-              ON orders.client = customers.id";
+    $query =   "SELECT *
+                FROM \"tp_php\".orders as orders
+                    JOIN \"tp_php\".customers as customers
+                    ON orders.client = customers.id 
+                    JOIN \"tp_php\".products as products
+                    ON orders.product = products.sku";
 
     $result_array = query_execute($conn,$query);
     foreach($result_array as $n){
@@ -71,6 +77,8 @@ else{
         <td>".$n['destination']."</td>
         <td>".$n['postcode']."</td>
         <td>".$n['city']."</td>
+        <td>".$n['name']."</td>
+        <td>".$n['brand']."</td>
         <td>".$n['product_price']." €</td>
         </tr>";  
     }

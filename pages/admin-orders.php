@@ -151,6 +151,8 @@
             <th scope="col">Destination</th>
             <th scope="col">Post Code</th>
             <th scope="col">City</th>
+            <th scope="col">Product</th>
+            <th scope="col">Product Brand</th>
             <th scope="col">Product Price</th>
           </tr>
         </thead>

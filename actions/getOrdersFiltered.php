@@ -26,6 +26,8 @@ function display_orders_table($arr) {
         <td>".$n['destination']."</td>
         <td>".$n['postcode']."</td>
         <td>".$n['city']."</td>
+        <td>".$n['name']."</td>
+        <td>".$n['brand']."</td>
         <td>".$n['product_price']." €</td>
         </tr>"; 
       }

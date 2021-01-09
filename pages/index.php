@@ -16,27 +16,10 @@
   </head>
   <body>
     <header>
-      <div class="header-container">
-        <div class="header-container-a" id="mainbox" onclick="openSideBar()"> 
-            <span>&#9776;</span>
-        </div>
-        <div class="header-container-b">
-          <h1><a href="index.php">Fashion Store</a></h1>
-        </div>
-        <div class="header-container-c">
-          <a href="user.php"><i class="far fa-user fa-2x"></i></a>
-        </div>
-        <div class="header-container-d">
-          <a href="cart.php"><i class="fas fa-shopping-cart fa-2x"></i></a>
-        </div>
-		 <?php 
-			if(!empty($_SESSION['username'])){
-			?>
-			<div class="header-container-e">
-				 <b><a href="../actions/actionLogout.php">Logout</a></b>
-			</div>   
-		<?php } ?>
-      </div>
+      <?php 
+        include_once "components/header_background.php";
+        include_once "components/side_bar.php";
+      ?>
     </header>
     <main>   
       <div id="menu" class="sidemenu">
@@ -70,14 +53,15 @@
       </div>
       
       <!-- Search form -->
+      <script src="../js/show-hint.js"></script>
       <form class="form-inline search-box" id="search" method="GET" action="listProduct.php">
-        <input class="form-control form-control-lg mr-3" type="text" placeholder=" Search... " aria-label="Search" name="product">
+        <input class="form-control form-control-lg mr-3" type="text" placeholder=" Search... " aria-label="Search" name="q">
 		<p style="color:white">Women: <input type="radio" value="Women" name="gender">
 		Men: <input type="radio" value="Men" name="gender" checked="checked"></p>
       </form>
 	  
 	  <?php if(!empty($_SESSION['checkoutSuccess'])){
-					?><p> <?php echo $_SESSION['checkoutSuccess'];?> </p>
+					?><p> <?php #echo $_SESSION['checkoutSuccess'];?> </p>
 					<?php
 					$_SESSION['checkoutSuccess']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
 				}?>

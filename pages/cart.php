@@ -77,12 +77,7 @@ include_once "../database/db_cart.php";
 					$products = array_column($_SESSION['cart'], 'sku');
 					$quantity = array_column($_SESSION['cart'], 'quantity');
 					?>
-			</table>
-			<div id="clear-btn">
-				<form action="../actions/freeCart.php">
-					<input type="submit" name="clear-cart" value="Clear Cart" class="btn btn-outline-secondary">
-				</form>
-			</div>		
+			</table>					
 		</div>
 		<script src="../js/change_cart_price.js"></script>  
 		<div id="right">
@@ -116,6 +111,11 @@ include_once "../database/db_cart.php";
 				?>
 				<input type="hidden" name="total_cost" value="<?php echo $total_price; ?>">
 				<input type="submit" name="checkout" value="Checkout" class="btn btn-outline-secondary">
+			</form>
+		</div>
+		<div id="clear-btn">
+			<form action="../actions/freeCart.php">
+				<input type="submit" name="clear-cart" value="Clear Cart" class="btn btn-outline-secondary">
 			</form>
 		</div>
 	</div>

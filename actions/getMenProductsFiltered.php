@@ -1,13 +1,12 @@
 <?php
- include '../database/db_functions.php';
- include '../includes/opendb.php';
+ include_once '../database/db_functions.php';
+ include_once '../includes/opendb.php';
 
 // Get the q parameter from URL
-
 $q = $_REQUEST["q"];
 $arr = get_db_men_products($conn);
 // Lookup all users from array if $q is different from ""
-if ($q !== "") {
+if ($q !== "" && $q != 'null') {
     $arr = get_db_men_products_filtered($conn, $q);
 }
 

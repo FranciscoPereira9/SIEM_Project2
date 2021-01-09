@@ -52,18 +52,18 @@ if(!empty($_POST['checkout'])){
 				// Calculate total cost
 				$total_order_price = 0; 
 				foreach($_SESSION['cart'] as $n) {
-					$total_order_price += intval($n['quantity'])*intval($n['price']);
+					$total_order_price += floatval($n['quantity'])*floatval($n['price']);
 				}
 
 				// Place Orders for each item purchase -> individually
 				foreach($_SESSION['cart'] as $n) {
 					// Place order according to item quantity
-					for ($i = 1; $i <= intval($n['quantity']); $i++) {
+					for ($i = 1; $i <= floatval($n['quantity']); $i++) {
 						addOrder($order_id, $client_id, $destination, $postalcode, $city, $today, $total_order_price, $n['sku'],  $n['price']);
 					}
 					// Update stock
 					$stock = getStock($n['sku']);
-					$newStock = $stock - intval($n['quantity']);
+					$newStock = $stock - floatval($n['quantity']);
 					updateStock($n['sku'], $newStock);
 				}
 

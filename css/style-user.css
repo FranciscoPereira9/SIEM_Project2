@@ -55,7 +55,8 @@ body{
 .success{
 	color:blue !important;
 	padding: 0 0 0 10;
-	font-size: 12px;
+	font-size: 16px;
+	width: 30%;
 }
 
 table, td{

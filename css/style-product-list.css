@@ -16,8 +16,8 @@ body {
       justify-content: space-around;
       align-items: center;
 	  flex-wrap: wrap;
-	  margin-left:100px;
-	  margin-right:100px;
+	  margin-left:5%;
+	  margin-right:5%;
 	  font-family: 'Cairo', sans-serif;
     }
 	
@@ -54,7 +54,7 @@ body {
     border-width: 0.7mm;
     border-radius: 7mm;
     padding: 5px 5%;
-    margin: 20px 0px;
+    margin: 20px 7.5%;
     grid-area: filter;
     display: flex;
     flex-direction: row;

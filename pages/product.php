@@ -42,11 +42,9 @@
 	<?php 
 		include_once "components/header.php";
 		include_once "components/side_bar.php";
-		include_once "components/search_bar.php";
+		#include_once "components/search_bar.php";
 		
-	?>
-    
-	
+	?>	
 		
 		<div class="container1">
 		

@@ -46,8 +46,7 @@ include_once "../database/db_user.php";
 			if(!empty($_SESSION['username'])){
 				$details = getUserDetails($_SESSION['email']);
 				
-				?>
-				
+				?>			
 				
 				<div class="element">
 				<p><b>Account:</b></p>
@@ -86,27 +85,16 @@ include_once "../database/db_user.php";
 					<p><input type="submit" name="save_changes_shipping" value="Save" class="btn btn-outline-secondary"></p>
 				</form>
 				</div>
-				<?php
+			<?php
 			}
-			
-			
-			
-			
-			
 			else{
-				?>
+			?>
 				<div id="left">
-				<div style="margin-bottom:20px"><?php
+				<div style="margin-bottom:20px">
+			<?php
 				echo "<p style=\"padding:10 0 0 10\"><b>SIGN IN:</b><p>";
-				//	ZONA DE MENSAGENS DE ERRO LOGIN
-				
-				if(!empty($_SESSION['signupSuccess'])){
-					?><p class="success"> <?php echo $_SESSION['signupSuccess'];?> </p>
-					<?php
-					$_SESSION['signupSuccess']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
-				}
-				
-				
+
+				//	ZONA DE MENSAGENS DE ERRO LOGIN				
 				if(!empty($_SESSION['msgErroLogin'])){
 					?><p class="error"> <?php echo $_SESSION['msgErroLogin']; ?> </p>
 					<?php
@@ -127,10 +115,10 @@ include_once "../database/db_user.php";
 				</form>
 				</div>
 				<div id="right">
-				<div style="margin-bottom:20px">
-				<?php
+					<div style="margin-bottom:20px">
+			<?php
 				echo"<p style=\"padding:10 0 0 10\"><b>SIGN UP:</b></p>";
-				
+		
 				//VERIFICAR ESTADO VARIÁVEIS DE SESSÃO
 				
 				if(!empty($_SESSION['signupIncomplete'])){
@@ -145,26 +133,31 @@ include_once "../database/db_user.php";
 					$_SESSION['signupUserFail']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
 				}
 				
-				
-					
-				echo "</div>";
-				
-				
-				//IMPRIMIR FORMULARIO
-				
-				echo "<form method=\"POST\" action=\"../actions/actionCreateUser.php\">";
-				echo "<table>";
-				echo"<tr><td>Firstname:</td><td><input type=\"text\" name=\"firstname\"></td></tr>";
-				echo"<tr><td>Lastname:</td><td><input type=\"text\" name=\"lastname\"></td></tr>";
-				echo"<tr><td>Login:</td><td><input type=\"text\" name=\"email\"></td></tr>";
-				echo"<tr><td>Password:</td><td><input type=\"password\" name=\"password\"></td></tr>";
-				echo"<tr><td><input type=\"submit\" name=\"register\" value=\"REGISTER\" class=\"btn btn-outline-secondary\"></input></td></tr>";
-				echo "</table>";
-				echo"</form>";
-				echo"</div>";
-				
+				// Print SIGN UP succesful message
+				if(!empty($_SESSION['signupSuccess'])){
+					?><p class="success"> <?php echo $_SESSION['signupSuccess'];?> </p>
+					<?php
+					$_SESSION['signupSuccess']  = NULL; //NULL PARA EVITAR QUE IMPRIMA LINHA BRANCA
+				}
+
+			?>					
+					</div>
+
+					<!-- FORMULÁRIO -->
+					<form method="POST" action="../actions/actionCreateUser.php">
+					<table>
+						<tr><td>Firstname:</td><td><input type="text" name="firstname"></td></tr>
+						<tr><td>Lastname:</td><td><input type="text" name="lastname"></td></tr>
+						<tr><td>Login:</td><td><input type="text" name="email"></td></tr>
+						<tr><td>Password:</td><td><input type="password" name="password"></td></tr>
+						<tr><td><input type="submit" name="register" value="REGISTER" class="btn btn-outline-secondary"></input></td></tr>
+					</table>
+					</form>
+
+				</div>
+			<?php
 			}
-		?>
+			?>
 		
 		
 	</body>

@@ -32,7 +32,14 @@
 		?><div class="header-container-e">
           <b><a href="../actions/actionLogout.php">Logout</a></b>
         </div>   
-		<?php } ?>		
+    <?php }
+    else{
+      ?>
+      <div class="header-container-e">
+          <a href="../pages/user.php">Login</a>
+        </div> 
+      <?php
+    } ?>		
       </div>
     </header>
 </body>

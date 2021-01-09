@@ -57,7 +57,10 @@ if(!isset($_SESSION['signupUserFail'])){
 			<!-- Search form -->
 			<script src="../js/show-hint.js"></script>
 			<form class="form-inline search-box">
-				<input class="form-control form-control-sm mr-3" type="text" placeholder=" Search... " aria-label="Search" id="fname" name="fname" onkeyup="showUserProductsSearch(this.value)">
+				<?php
+					echo "<input type=\"hidden\" name=\"gender\" value=".$_GET['gender'].">";
+				?>
+				<input class="form-control form-control-sm mr-3" type="text" placeholder=" Search... " aria-label="Search" id="q" name="q" onkeyup="showUserProductsSearch(this.value)">
 			</form>
 
 
@@ -116,51 +119,19 @@ if(!isset($_SESSION['signupUserFail'])){
 
 
 			<div class="flex-box filter_data" id="txtHint">
-				<?php
-				/*
-
-					$product='';
-					if(isset($_GET['product'])){
-						$product = $_GET['product'];
+				<script>
+					const queryString = window.location.search;
+					const urlParams = new URLSearchParams(queryString);
+					var q = urlParams.get('q');
+					if(q!=''){
+						console.log(q);
+						showUserProductsSearch(q);
 					}
-					$gender='Men';
-					if(isset($_GET['gender'])){
-						$gender = $_GET['gender'];
+					else{
+						filter_data();
 					}
 					
-					//Filtrar resultados da pesquisa
-					//TODO: por filtros também para marca, cor e qualquer cena que possa ser posta na bd
-					if(isset($_GET['product'])){
-						$product = $_GET['product'];
-					}
-
-					$products = getAllProducts($product, $gender);
-
-					if(pg_numrows($products)>0){
-						// Geração do HTML (tabela com a lista das cidades
-
-						$row = pg_fetch_assoc($products);
-						$last_ean = '';
-						while (isset($row["ean"])) {
-							if($row["ean"] != $last_ean){
-								$last_ean = $row["ean"];
-								$img_source =$row['img'];
-								$gender = $row['gender'];
-								$category = $row['category'];
-								$price = $row['price'];
-								echo "<div class=\"flex-element\">";
-								//echo "\"../images/products/".$gender."/".$category."/".$img_source.".jpg\"";
-								echo "<a href=\"product.php?id=".$row['ean']."&gender=$gender\"><img src=\"../images/products/".$gender."/".$category."/".$img_source.".jpg\"></a><br>";
-								echo "<a href=\"product.php?id=".$row['ean']."&gender=$gender\">".$row['name']."</a><br>";
-								echo "<p><b>$price €</b></p>";
-								echo "</div>";
-								
-							}
-							$row = pg_fetch_assoc($products);
-						}
-					}
-					*/
-				?>
+				</script>				
 			</div>
 		</div>		
 		<!-- Refresh Filtered Page Script --> 
