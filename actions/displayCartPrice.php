@@ -6,9 +6,11 @@
     if(isset($_POST['action'])){
         // Set quantity
         $quantity = $_POST['quantity']; 
+        // Updatye quantity session variable
         $_SESSION['cart'][$_POST['item']]['quantity']= $quantity;
+        // Send total price
         $output = $quantity*$_SESSION['cart'][$_POST['item']]['price'];
-        // Output
+        // Echo Output
         echo "<b>".$output." €</b>";
     }
 
