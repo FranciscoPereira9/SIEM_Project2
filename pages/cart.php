@@ -71,7 +71,7 @@ include_once "../database/db_cart.php";
 						echo "<tr id=\"product".$n."\"> <td><img src= \"$img\"></td>";
 						echo "<td>".$item['name']."</td> 
 							<td><form><input type=\"number\" class='common_selector' id=\"quantity".$n."\" name=\"quantity\" value=\"".$item['quantity']."\" max=\"".$stock."\" min=\"0\"></form></td>
-							<td id='price_multiplied".$n."'> </tr><br>";
+							<td id='price_multiplied".$n."'> </tr>";
 						$n=$n+1;
 					}
 					$products = array_column($_SESSION['cart'], 'sku');
