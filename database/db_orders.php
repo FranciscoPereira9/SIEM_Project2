@@ -1,5 +1,6 @@
 <?php
 
+//VAI BUSCAR ÚLTIMO ID DE ORDEM PARA QUE NOVA ORDEM A ACRESCENTAR
 function getLastOrderId(){
 	global $conn;
 	
@@ -16,6 +17,7 @@ function getLastOrderId(){
 	}
 }
 
+//VAI BUSCAR ID DO CLIENTE COM BASE NO EMAIL FORNECIDO
 function getClientId($email){
 	global $conn;
 	
@@ -27,6 +29,7 @@ function getClientId($email){
 	return $client_id;
 }
 
+//VAI BUSCAR MORADA DO UTILIZADOR COM O EMAIL MENCIONADO NO ARGUMENTO DE ENTRADA
 function getDestination($email){
 	global $conn;
 	
@@ -37,13 +40,14 @@ function getDestination($email){
 	$destination = pg_fetch_row($result)[0];
 	
 	if($destination==NULL){
-		return 0;
+		return null;
 	}
 	else{
 		
 		return $destination;
 	}
 }
+//VAI BUSCAR CÓDIGO POSTAL DO UTILIZADOR COM O EMAIL MENCIONADO NO ARGUMENTO DE ENTRADA
 function getPostalCode($email){
 	global $conn;
 	
@@ -54,13 +58,14 @@ function getPostalCode($email){
 	$postalcode = pg_fetch_row($result)[0];
 	
 	if($postalcode==NULL){
-		return 0;
+		return null;
 	}
 	else{
 		
 		return $postalcode;
 	}
 }
+//VAI BUSCAR CIDADE DO UTILIZADOR COM O EMAIL MENCIONADO NO ARGUMENTO DE ENTRADA
 function getCity($email){
 	global $conn;
 	
@@ -71,14 +76,32 @@ function getCity($email){
 	$city = pg_fetch_row($result)[0];
 	
 	if($city==NULL){
-		return 0;
+		return null;
 	}
 	else{
 		
 		return $city;
 	}
 }
-
+//VAI BUSCAR MÉTODO DE PAGAMENTO DO UTILIZADOR COM O EMAIL MENCIONADO NO ARGUMENTO DE ENTRADA
+function getPayment($email){
+	global $conn;
+	
+	$query = "SELECT payment_method FROM \"tp_php\".customers WHERE email='".$email."';";
+	
+	$result = pg_exec($conn, $query);
+	
+	$payment = pg_fetch_row($result)[0];
+	
+	if($payment==NULL){
+		return null;
+	}
+	else{
+		
+		return $payment;
+	}
+}
+//ADICIONA NOVA ENCOMENDA A BASE DE DADOS
 function addOrder($order_id, $clientId, $destination, $postalcode, $city, $date, $total_cost, $product, $product_price){
 	global $conn;
 	
@@ -91,7 +114,7 @@ function addOrder($order_id, $clientId, $destination, $postalcode, $city, $date,
 	
 	return NULL;
 }
-
+//ATUALIZA STOCK, QUER APÓS ENCOMENDA, QUER PARA ADICIONAR AO STOCK
 function updateStock($sku, $stock){
 	global $conn;
 	

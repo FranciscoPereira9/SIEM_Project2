@@ -61,7 +61,7 @@ function checkUserPassword($user, $password){
 		return 0;
 	}
 }
-
+//ATUALIZA NOME DO UTILIZADOR
 function updateFirstname($email, $first_name){
 	global $conn;
 	
@@ -71,7 +71,7 @@ function updateFirstname($email, $first_name){
 	
 	return NULL;
 }
-
+//ATUALIZA ULTIMO NOME DO USER
 function updateLastname($email, $last_name){
 	global $conn;
 	
@@ -82,7 +82,7 @@ function updateLastname($email, $last_name){
 	return NULL;
 }
 
-
+//ATUALIZA PALAVRA POASSE
 function updatePassword($email, $password){
 	global $conn;
 	
@@ -92,7 +92,7 @@ function updatePassword($email, $password){
 	
 	return NULL;
 }
-
+//ATUALIZA CONTACTO
 function updatePhone($email, $phone){
 	global $conn;
 	
@@ -102,7 +102,7 @@ function updatePhone($email, $phone){
 	
 	return NULL;
 }
-
+//ATUALIZA MÉTODO DE PAGAMENTO
 function updatePayment($email, $payment){
 	global $conn;
 	
@@ -112,7 +112,7 @@ function updatePayment($email, $payment){
 	
 	return NULL;
 }
-
+//ATUALIZA MORADA
 function updateAddress($email, $address){
 	global $conn;
 	
@@ -122,7 +122,7 @@ function updateAddress($email, $address){
 	
 	return NULL;
 }
-
+//ATUALIZA CODIGO POSTAL
 function updatePostalcode($email, $postalcode){
 	global $conn;
 	
@@ -132,7 +132,7 @@ function updatePostalcode($email, $postalcode){
 	
 	return NULL;
 }
-
+//ATUALIZA CIDADE
 function updateCity($email, $city){
 	global $conn;
 	
@@ -142,7 +142,7 @@ function updateCity($email, $city){
 	
 	return NULL;
 }
-
+//ATUALIZA PÁIS DE RESIDENCIA
 function updateCountry($email, $country){
 	global $conn;
 	
@@ -152,7 +152,7 @@ function updateCountry($email, $country){
 	
 	return NULL;
 }
-
+//FUNÇÃO USADA EM DEBGU
 function debugUser($password){
 	global $conn;
 	
@@ -163,7 +163,7 @@ function debugUser($password){
 	
 	return NULL;
 }
-
+//VAI BUSCAR TODAS AS INFORMAÇÕES DO UTILIZADOR
 function getUserDetails($email){
 	global $conn;
 	

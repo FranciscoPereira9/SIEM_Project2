@@ -1,6 +1,5 @@
 <?php
-
-//TODO: por parâmetros para outros campos(marca, ean, cor...)
+//VAI BUSCAR TODOS PRODUTOS DA BASE DE DADOS
 function getAllProducts($product, $gender){
 	
 	global $conn;
@@ -13,7 +12,7 @@ function getAllProducts($product, $gender){
 	return $result;
 	
 }
-
+//VAI BUSCAR PREÇO DE PRODUTO COM BASE NO SEU EAN
 function getPrice($product_ean){
 	global $conn;
 	
@@ -24,7 +23,7 @@ function getPrice($product_ean){
 	
 	return $price;
 }
-
+//VAI BUSCAR NOME PRODUTO COM BASE NO SEU EAN
 function getProductName($product_ean){
 	global $conn;
 	
@@ -36,7 +35,7 @@ function getProductName($product_ean){
 
 	return $name;
 }
-
+//VAI BUSCAR CAMINHO DA IMAGEM DO PRODUTO COM BASE NO SEU EAN
 function getImage($product_ean){
 	global $conn;
 	
@@ -53,7 +52,7 @@ function getImage($product_ean){
 	
 	return $path;
 }
-
+//VAI BUSCAR MARCA DO PRODUTO COM BASE NO SEU EAN
 function getBrand($product_ean){
 	global $conn;
 	
@@ -65,7 +64,7 @@ function getBrand($product_ean){
 	
 	return $brand;
 }
-
+//VAI BUSCAR STOCK DO PRODUTO COM BASE NO SEU EAN E NA SUA COR
 function checkStock($ean, $color){
 	global $conn;
 	

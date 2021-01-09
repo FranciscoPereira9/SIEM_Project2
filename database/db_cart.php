@@ -1,6 +1,6 @@
 <?php
 
-
+//CONSTROI QUERY PARA IR BUSCAR SKU COM BASE NA COR E EAN DO PRODUTO
 function get_sku($ean, $color){
 	global $conn;
 	
@@ -12,6 +12,7 @@ function get_sku($ean, $color){
 	return $sku;
 }
 
+//VAI BUSCAR STOCK DE PRODUTO COM BASE NO SKU DESTE MESMO
 function getStock($sku){
 	global $conn;
 	

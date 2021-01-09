@@ -4,17 +4,15 @@
     include_once "../includes/opendb.php";
     include_once "../database/db_user.php";
 	
-	//debugUser('user');
     if (!empty($_POST['login'])){
 	    $email = $_POST['email_login'];
 	    $password = $_POST['password_login'];
 	    $password_md5 = md5($password);
 
-        //Validação dos dados
+        //Validação dos dados do formulário
         if (empty($email) ||  empty($password)){
 			
 			$dadosValidos = false;
-            //echo $dadosValidos;
 			}
 		else {
 			$dadosValidos = true;
@@ -24,7 +22,7 @@
         if(!$dadosValidos){
             $_SESSION['msgErroLogin'] = "* Wrong username/password<p>";
 
-            //inserir dados no formulário para alterar
+            //GERA MENSAGEM DE ERRO E REENCAMINHA PARA PÁGINA ANTERIOR
             $_SESSION['email_error'] = $email;
 
             header("Location: ../pages/user.php");
@@ -33,14 +31,13 @@
 			
             //Verifica se login é válido
 			$login= checkUserPassword($email, $password);
-			//echo $login;
 
             if($login){
 				$_SESSION['username'] = $login;
 				$_SESSION['email'] = $email;
-				//echo $_SESSION['email'];
             }
             else{
+				//LOGIN NÃO É VÁLIDO, ENTÃO GERA MENSAGEM DE ERRO
                 $_SESSION['msgErroLogin'] = "* Wrong username/password<p>";
             }
 

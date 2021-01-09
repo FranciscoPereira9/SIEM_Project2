@@ -8,10 +8,8 @@ include_once "../database/db_user.php";
 if(!empty($_POST['save_changes_account'])){
 	$firstname=$_POST['firstname'];
 	$lastname=$_POST['lastname'];
-	$password=md5($_POST['password']);
+	$password=$_POST['password'];
 	$phone=$_POST['phone'];
-	//echo $_SESSION['email'];
-	//echo $_SESSION['username'];
 	if(!empty($firstname)){
 		updateFirstname($_SESSION['email'], $firstname);
 	}
@@ -19,7 +17,7 @@ if(!empty($_POST['save_changes_account'])){
 		updateLastname($_SESSION['email'], $lastname);
 	}
 	if(!empty($password)){
-		updatePassword($_SESSION['email'], $password);
+		updatePassword($_SESSION['email'], md5($password));
 	}
 	if(!empty($phone)){
 		updatePhone($_SESSION['email'], $phone);
@@ -51,8 +49,6 @@ if(!empty($_POST['save_changes_shipping'])){
 		updateCountry($_SESSION['email'], $country);
 	}
 }
-// echo empty($_POST['firstname']);
-// echo $_POST['payment'];
-// echo $_POST['postalcode'];
+
 header("Location: ../pages/user.php");
 ?>
