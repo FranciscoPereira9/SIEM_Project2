@@ -3,10 +3,10 @@
  include '../includes/opendb.php';
 
 // Get the q parameter from URL
-
 $q = $_REQUEST["q"];
+// Get women products from DB
 $arr = get_db_women_products($conn);
-// Lookup all users from array if $q is different from ""
+// Lookup all products from array (if $q exists), where they have $q in it
 if ($q !== "" && $q != 'null') {
     $arr = get_db_women_products_filtered($conn, $q);
 }
@@ -14,7 +14,7 @@ if ($q !== "" && $q != 'null') {
 // Print orders
 display_women_products($arr);
 
-// Function to display table
+// Function to display products according to search
 function display_women_products($arr) {
     $last_ean="";
     $output = "";

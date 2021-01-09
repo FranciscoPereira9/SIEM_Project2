@@ -3,8 +3,10 @@ include '../database/db_functions.php';
 include '../includes/opendb.php';
 
 $output="";
+// Check if json action is set
 if(isset($_POST['action']))
 {
+    // Query to get all orders related information
     $query =   "SELECT *
                 FROM \"tp_php\".orders as orders
                     JOIN \"tp_php\".customers as customers
@@ -12,7 +14,7 @@ if(isset($_POST['action']))
                     JOIN \"tp_php\".products as products
                     ON orders.product = products.sku";
 
-    $first = true;// Variable to check if it's the first to append -> doesn't have AND
+    $first = true; // Variable to check if it's the first query to append -> if it is, doesn't have AND
     // Min Max price restrictions
     if(isset($_POST["minimum_price"], $_POST["maximum_price"]))
     {
@@ -34,7 +36,9 @@ if(isset($_POST['action']))
         else{$query .= "AND order_status IN('".$status."')";}
     }
 
+    // Execute query
     $result_array = query_execute($conn,$query);
+    // output orders found according to filter options
     if(!empty($result_array))
     {
         foreach($result_array as $n){
@@ -59,6 +63,7 @@ if(isset($_POST['action']))
  echo $output;
 }
 else{
+    // Output all orders if no filter restrictions
     $query =   "SELECT *
                 FROM \"tp_php\".orders as orders
                     JOIN \"tp_php\".customers as customers

@@ -4,14 +4,16 @@
 
 // Get the q parameter from URL
 $q = $_REQUEST["q"];
+// Get all products from DB
 $arr = get_db_products($conn);
-// Lookup all users from array if $q is different from ""
+// Lookup all products from array (if $q is different from ""), that contain $q
 if ($q !== "") {
     $arr = get_db_products_filtered($conn, $q);
 }
 // Print orders
 display_products_table($arr);
 
+// Function to display products table
 function display_products_table($arr) {
     foreach($arr as $n){
         print("<tr>");

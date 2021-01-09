@@ -4,14 +4,17 @@
 
 // Get the q parameter from URL
 $q = $_REQUEST["q"];
+// Get all users from DB
 $arr = get_db_users($conn);
 // Lookup all users from array if $q is different from ""
 if ($q !== "") {
     $arr = get_db_users_filtered($conn, $q);
 }
+
 // Print orders
 display_users_table($arr);
 
+// Function to display users table
 function display_users_table($arr) {
     foreach($arr as $n){
         print("<tr>");

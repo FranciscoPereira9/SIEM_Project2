@@ -1,7 +1,6 @@
 <?php
 
-// Connect to DB
-//$conn = pg_connect("host=db.fe.up.pt dbname=siem2053 user=siem2053 password=EIscKFUh");
+// Functions to query from database
 
     // ---------------------------------- Orders Related ----------------------------------------
 
@@ -280,7 +279,7 @@
       return $arr;
     }
 
-    // Searches word on all attributes of user
+    // Searches word on all attributes of Products
     function get_db_products_filtered($conn,$word){
       $query = "SELECT * FROM \"tp_php\".products
                 WHERE name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
@@ -424,6 +423,7 @@
       return $arr;
     }
 
+    // Searches word on all attributes of women products
     function get_db_women_products_filtered($conn,$word){
       $query = "SELECT * FROM \"tp_php\".products
                 WHERE gender = 'Women' AND (LOWER(name) LIKE LOWER('%".$word."%') OR LOWER(ean) LIKE LOWER('%".$word."%') OR LOWER(category) LIKE LOWER('%".$word."%')

@@ -3,9 +3,12 @@ include '../database/db_functions.php';
 include '../includes/opendb.php';
 
 $output="";
+// Get gender
 $gender = $_POST['gender'];
+// Check if json action is set
 if(isset($_POST['action']))
 {
+    // Query to get all producst according to gender
     $query = "SELECT * 
             FROM \"tp_php\".products
             WHERE gender = '".$gender."'";
@@ -40,9 +43,12 @@ if(isset($_POST['action']))
     }
     
     $query.=" ORDER BY ean;";
+    // Execute query
     $result_array = query_execute($conn,$query);
+    // display products found according to filter options
     if(!empty($result_array))
     {
+        // Check if repeated ean (in case of products with different colors) and don't print
         $last_ean = "";
         foreach($result_array as $row){
             if($row['ean']!=$last_ean){            
@@ -62,12 +68,16 @@ if(isset($_POST['action']))
  echo $output;
 }
 else{
+    // Output all products if no filter restrictions according to gender
     $query = "SELECT * 
               FROM \"tp_php\".products";
     $query.=" ORDER BY ean;";
+    // Execute query
     $result_array = query_execute($conn,$query);
+    // display products found according to filter options
     $last_ean = "";    
     foreach($result_array as $row){
+        // Check if repeated ean (in case of products with different colors) and don't print
         if($row['ean']!=$last_ean){
             $output .= "
                 <div class=\"flex-element\">
