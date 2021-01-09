@@ -13,21 +13,12 @@
     width: 0px;
     background-color: #222;
     z-index: 1;
+    padding-top: 100px;
     overflow-x: hidden;
     transition: all .5s;
    }
-
-   .up{
-       height: 50%;
-       padding-top: 30%;
-   }
-   .down{
-       padding-top: 30%;
-       height: 50%;
-   }
-
 .sidemenu a{
-    padding: 8px 8px 8px 35px;
+    padding: 8px 8px 8px 64px;
     text-decoration: none;
     font-size: 20px;
     color: #999;
@@ -36,28 +27,29 @@
 .sidemenu a:hover{
      color: white;
    }
-
 .sidemenu .closebtn{
     position: absolute;
     top: 0px;
     right: 25px;
     font-size: 36px;
+    margin-left: 32px;
    }
 
 #admin-benefits { 
     width: 100%;
-    padding-top: 5% ;
+    padding-top: 15px ;
     border-top: antiquewhite;
     border-top-style: solid;
+    position: absolute;
+    bottom: 150px;
    }
 
 #currency{
-    margin:0 20%;
-    padding-left: 10%;
-    height: 2.5%;
-    width: 50%;
+    padding-left: 64px;
+    height: 30px;
+    width: 70%;
     position: absolute;
-    bottom: 5%;
+    bottom: 40px;
    }
 
 #currency form select{

@@ -105,7 +105,7 @@ include_once "../database/db_user.php";
 				</div>
 				
 				
-				<form method="POST" action="../actions/actionLogIn.php">
+				<form method="POST" action="../actions/actionLogin.php">
 				
 				<table>
 				<tr><td>Login:</td><td><input type="text" name="email_login"></td></tr><br>

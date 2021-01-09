@@ -410,8 +410,8 @@
     // Searches word on all attributes of men products
     function get_db_men_products_filtered($conn,$word){
       $query = "SELECT * FROM \"tp_php\".products
-                WHERE gender = 'Men' AND (name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
-                OR brand LIKE '%".$word."%' OR color LIKE '%".$word."%')
+                WHERE gender = 'Men' AND (LOWER(name) LIKE LOWER('%".$word."%') OR LOWER(ean) LIKE LOWER('%".$word."%') OR LOWER(category) LIKE LOWER('%".$word."%')
+                OR LOWER(brand) LIKE LOWER('%".$word."%') OR LOWER(color) LIKE LOWER('%".$word."%'))
                 ORDER BY ean;";
                 
       $res = pg_exec($conn, $query);
@@ -426,8 +426,8 @@
 
     function get_db_women_products_filtered($conn,$word){
       $query = "SELECT * FROM \"tp_php\".products
-                WHERE gender = 'Women' AND (name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
-                OR brand LIKE '%".$word."%' OR color LIKE '%".$word."%')
+                WHERE gender = 'Women' AND (LOWER(name) LIKE LOWER('%".$word."%') OR LOWER(ean) LIKE LOWER('%".$word."%') OR LOWER(category) LIKE LOWER('%".$word."%')
+                OR LOWER(brand) LIKE LOWER('%".$word."%') OR LOWER(color) LIKE LOWER('%".$word."%'))
                 ORDER BY ean;";
       $res = pg_exec($conn, $query);
       if (!$res) {
