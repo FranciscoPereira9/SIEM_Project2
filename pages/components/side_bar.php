@@ -21,33 +21,39 @@
 		<main>
 			<!-- Side Bar -->
       <div id="menu" class="sidemenu">
-        <a href="listProduct.php?gender=Men">MEN</a>
-        <a href="listProduct.php?gender=Women">WOMEN</a>
-        <a href="#">CHILDREN</a>
-        <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>  
-        <?php
-          if($_SESSION['email']== 'admin'){   
-        ?>
-        <div id="admin-benefits">
-          <a href="dashboard.php">DASHBOARD</a>
-          <a href="admin-orders.php">ORDERS</a>
-          <a href="admin-products.php">PRODUCTS</a>
-          <a href="admin-users.php">CUSTOMERS</a>
-          <a href="admin-new-item.php">ADD NEW ITEM</a>
+        <div class="up">
+          <a href="listProduct.php?gender=Men">MEN</a>
+          <a href="listProduct.php?gender=Women">WOMEN</a>
+          <a href="#">CHILDREN</a>
+          <a href="#" class="closebtn" onclick="closeSideBar()">&times;</a>
         </div>
-        <?php
-          }
-        ?>
-        <div id="currency">
-          <form action="">
-            <select name="country" id="opt-country" form="country-form">
-              <option value="portugal">Portugal (€)</option>
-              <option value="spain">Spain (€)</option>
-              <option value="france">France (€)</option>
-              <option value="germany">Germany (€)</option>
-            </select>
-          </form>
+        <div class="down">
+          <?php
+            if($_SESSION['email']== 'admin'){   
+          ?>
+          <div id="admin-benefits">
+            <a href="dashboard.php">DASHBOARD</a>
+            <a href="admin-orders.php">ORDERS</a>
+            <a href="admin-products.php">PRODUCTS</a>
+            <a href="admin-users.php">CUSTOMERS</a>
+            <a href="admin-new-item.php">ADD NEW ITEM</a>
+          </div>
+          <?php
+            }
+          ?>
+          <div id="currency">
+            <form action="">
+              <select name="country" id="opt-country" form="country-form">
+                <option value="portugal">Portugal (€)</option>
+                <option value="spain">Spain (€)</option>
+                <option value="france">France (€)</option>
+                <option value="germany">Germany (€)</option>
+              </select>
+            </form>
+          </div>
         </div>
+            
+        
       </div>
 		</main>
 		<script src="../js/side-bar.js"> </script>
