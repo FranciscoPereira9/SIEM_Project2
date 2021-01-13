@@ -48,9 +48,11 @@
                       ON orders.client = customers.id 
                       JOIN \"tp_php\".products as products
                       ON orders.product = products.sku
-                WHERE destination LIKE '%".$word."%' OR postcode LIKE '%".$word."%' OR orders.city LIKE '%".$word."%' OR order_status LIKE '%".$word."%' OR payment_method LIKE '%".$word."%'
-                OR first_name LIKE '%".$word."%' OR last_name LIKE '%".$word."%' OR name LIKE '%".$word."%' OR brand LIKE '%".$word."%'
+                WHERE LOWER(destination) LIKE LOWER('%".$word."%') OR LOWER(postcode) LIKE LOWER('%".$word."%') OR LOWER(orders.city) LIKE LOWER('%".$word."%')
+                OR LOWER(order_status) LIKE LOWER('%".$word."%') OR LOWER(payment_method) LIKE LOWER('%".$word."%')
+                OR LOWER(first_name) LIKE LOWER('%".$word."%') OR LOWER(last_name) LIKE LOWER('%".$word."%') OR LOWER(name) LIKE LOWER('%".$word."%') OR LOWER(brand) LIKE LOWER('%".$word."%')
                 ORDER BY order_id DESC;";
+
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -168,7 +170,8 @@
 
     //Function to get all users -> returns Array with all results
     function get_db_users($conn){
-      $query = "SELECT * FROM \"tp_php\".customers;";
+      $query = "SELECT * FROM \"tp_php\".customers
+                ORDER BY id DESC;";
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -182,8 +185,10 @@
     // Searches word on all attributes of user
     function get_db_users_filtered($conn,$word){
       $query = "SELECT * FROM \"tp_php\".customers
-                WHERE first_name LIKE '%".$word."%' OR last_name LIKE '%".$word."%' OR email LIKE '%".$word."%' OR address LIKE '%".$word."%'
-                OR country LIKE '%".$word."%' OR city LIKE '%".$word."%' OR phone LIKE '%".$word."%' OR postalcode LIKE '%".$word."%';";
+                WHERE LOWER(first_name) LIKE LOWER('%".$word."%') OR LOWER(last_name) LIKE LOWER('%".$word."%') OR LOWER(email) LIKE LOWER('%".$word."%') OR LOWER(address) LIKE LOWER('%".$word."%')
+                OR LOWER(country) LIKE LOWER('%".$word."%') OR LOWER(city) LIKE LOWER('%".$word."%') OR LOWER(phone) LIKE LOWER('%".$word."%') OR LOWER(postalcode) LIKE LOWER('%".$word."%')
+                ORDER BY id DESC;";
+
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -270,7 +275,9 @@
 
     //Function to get all products -> returns Array with all products
     function get_db_products($conn){
-      $query = "SELECT * FROM \"tp_php\".products;";
+      $query = "SELECT * FROM \"tp_php\".products
+                ORDER BY sku DESC;";
+
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";
@@ -284,8 +291,10 @@
     // Searches word on all attributes of Products
     function get_db_products_filtered($conn,$word){
       $query = "SELECT * FROM \"tp_php\".products
-                WHERE name LIKE '%".$word."%' OR ean LIKE '%".$word."%' OR category LIKE '%".$word."%'
-                OR brand LIKE '%".$word."%' OR color LIKE '%".$word."%';";
+                WHERE LOWER(name) LIKE LOWER('%".$word."%') OR LOWER(ean) LIKE LOWER('%".$word."%') OR LOWER(category) LIKE LOWER('%".$word."%')
+                OR LOWER(brand) LIKE LOWER('%".$word."%') OR LOWER(color) LIKE LOWER('%".$word."%')
+                ORDER BY sku DESC;";
+
       $res = pg_exec($conn, $query);
       if (!$res) {
           echo "An error occurred.\n";

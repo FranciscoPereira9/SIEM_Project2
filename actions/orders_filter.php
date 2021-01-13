@@ -35,6 +35,13 @@ if(isset($_POST['action']))
         if($first){$query .= "WHERE order_status IN('".$status."')";$first = false;}
         else{$query .= "AND order_status IN('".$status."')";}
     }
+    // Payment Method restrictions
+    if(isset($_POST["payment_method"]) && !empty($_POST["payment_method"]))
+    {
+        $payment = $_POST["payment_method"];
+        if($first){$query .= "WHERE payment_method IN('".$payment."')";$first = false;}
+        else{$query .= "AND payment_method IN('".$payment."')";}
+    }
 
     // Order by date 
     $query .= " ORDER BY order_id DESC";
@@ -60,7 +67,7 @@ if(isset($_POST['action']))
         }
     }
     else {
-        $output .='<h3>No Data Found</h3>';
+        $output .='';
     }
  echo $output;
 }

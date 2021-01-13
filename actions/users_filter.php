@@ -33,6 +33,9 @@ if(isset($_POST['action']))
         else{$query .= "AND city IN('".$city."')";}
     }
 
+    // Order by id 
+    $query .= " ORDER BY id DESC";
+
     // Execute query
     $result_array = query_execute($conn,$query);
     // output users found according to filter options
@@ -54,7 +57,7 @@ if(isset($_POST['action']))
         }
     }
     else {
-        $output .='<h3>No Data Found</h3>';
+        $output .='';
     }
  echo $output;
 }

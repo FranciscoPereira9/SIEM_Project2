@@ -146,7 +146,9 @@
           <th scope="col">#</th>
           <th scope="col">Name</th>
           <th scope="col">Brand</th>
+          <th scope="col">Color</th>
           <th scope="col">Price</th>
+          <th scope="col">Stock</th>
         </tr>
       </thead>
       <tbody id="txtHint" class="filter_data">

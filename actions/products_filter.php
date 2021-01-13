@@ -39,6 +39,9 @@ if(isset($_POST['action']))
         else{$query .= "AND brand IN('".$brand."') ";}
     }
 
+    // Order by id 
+    $query .= " ORDER BY sku DESC";
+
     // Execute query
     $result_array = query_execute($conn,$query);
     // output products found according to filter options
@@ -49,12 +52,14 @@ if(isset($_POST['action']))
             <th scope=\"row\">".$n['sku']."</th>
             <td>".$n['name']."</td>
             <td>".$n['brand']."</td>
+            <td>".$n['color']."</td>
             <td>".$n['price']." €</td>
+            <td>".$n['stock']."</td>
             </tr>";         
         }
     }
     else {
-        $output .='<h3>No Data Found</h3>';
+        $output .='';
     }
  echo $output;
 }
@@ -68,7 +73,9 @@ else{
         <th scope=\"row\">".$n['sku']."</th>
         <td>".$n['name']."</td>
         <td>".$n['brand']."</td>
+        <td>".$n['color']."</td>
         <td>".$n['price']." €</td>
+        <td>".$n['stock']."</td>
         </tr>";         
     }
     echo $output;

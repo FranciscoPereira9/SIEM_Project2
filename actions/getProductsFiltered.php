@@ -25,9 +25,17 @@ function display_products_table($arr) {
         print("<td>");
         echo $n['brand'];
         print("</td>");
+
+        print("<td>");
+        echo $n['color'];
+        print("</td>");
     
         print("<td>");
         echo $n['price'];
+        print("€ </td>");
+
+        print("<td>");
+        echo $n['stock'];
         print("</td>");
     
         print("</tr>");

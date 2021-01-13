@@ -9,11 +9,12 @@ $(document).ready(function(){
         var maximum_price = document.getElementById("max_hiden_price").value; // Get filter maximum price value
         var city = document.getElementById("city").value; // Get filter city value
         var order_status = document.getElementById("status").value; // Get filter status value
+        var payment_method = document.getElementById("pay_method").value; // Get filter status value
         // Send AJAX request
         $.ajax({
             url:"../actions/orders_filter.php",
             method:"POST",
-            data:{action:action, minimum_price:minimum_price, maximum_price:maximum_price, city:city, order_status:order_status}, // JSON data to send
+            data:{action:action, minimum_price:minimum_price, maximum_price:maximum_price, city:city, order_status:order_status, payment_method:payment_method}, // JSON data to send
             success:function(data){ //callback function
                 // Update data on html orders table
                 $('.filter_data').html(data);

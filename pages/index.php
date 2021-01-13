@@ -55,8 +55,10 @@
       <script src="../js/show-hint.js"></script>
       <form class="form-inline search-box" id="search" method="GET" action="listProduct.php">
         <input class="form-control form-control-lg mr-3" type="text" placeholder=" Search... " aria-label="Search" name="q">
-		<p style="color:white">Women: <input type="radio" value="Women" name="gender">
-		Men: <input type="radio" value="Men" name="gender" checked="checked"></p>
+        <div class="gender-select">
+          <p>Women: <input type="radio" value="Women" name="gender">
+          Men: <input type="radio" value="Men" name="gender" checked="checked"></p>
+        </div>
       </form>
 	  
 	  <?php if(!empty($_SESSION['checkoutSuccess'])){

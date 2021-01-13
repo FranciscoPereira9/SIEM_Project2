@@ -28,7 +28,13 @@ main {
     justify-self: stretch;
 }
 
-p{
-	color:white;
+.gender-select{
+    margin: 3px 25%;
+    background-color: rgba(196, 195, 195, 0.863);
+    border-radius: 1mm;
+}
+
+.gender-select p{
+	color: black ;
 	text-align: center;
 }
