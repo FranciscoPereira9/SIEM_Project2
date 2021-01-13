@@ -84,5 +84,18 @@ function checkStock($ean, $color){
 		}
 	}
 }
+
+function checkProduct($ean, $color){
+	global $conn;
+	
+	$query = "select * from \"tp_php\".products where ean='".$ean."' and color='$color';";
+	$result = pg_exec($conn, $query);
+	
+	if(pg_num_rows($result)==0){
+		return false;
+	}else{
+		return true;
+	}
+}
 	
 ?>

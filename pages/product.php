@@ -103,6 +103,9 @@
 						<option>L</option>
 						<option>XL</option>
 					</select></td></tr>
+					
+			<?php 
+				if($_SESSION['email']!='admin'){?>
 			<tr><td>Color:</td><td><select name="color">
 						<?php if(checkStock($product_ean, 'Red')){?><option name="red">Red</option><?php }?>
 						<?php if(checkStock($product_ean, 'Orange')){?><option name="orange">Orange</option><?php }?>
@@ -115,6 +118,21 @@
 						<?php if(checkStock($product_ean, 'White')){?><option name="white">White</option><?php }?>
 						<?php if(checkStock($product_ean, 'Black')){?><option name="black">Black</option><?php }?>
 					</select></td></tr>
+			<?php
+				}else{?>
+				<tr><td>Color:</td><td><select name="color">
+						<?php if(checkProduct($product_ean, 'Red')){?><option name="red">Red</option><?php }?>
+						<?php if(checkProduct($product_ean, 'Orange')){?><option name="orange">Orange</option><?php }?>
+						<?php if(checkProduct($product_ean, 'Brown')){?><option name="brown">Brown</option><?php }?>
+						<?php if(checkProduct($product_ean, 'Yellow')){?><option name="yellow">Yellow</option><?php }?>
+						<?php if(checkProduct($product_ean, 'Pink')){?><option name="pink">Pink</option><?php }?>
+						<?php if(checkProduct($product_ean, 'Blue')){?><option name="blue">Blue</option><?php }?>
+						<?php if(checkProduct($product_ean, 'Green')){?><option name="green">Green</option><?php }?>
+						<?php if(checkProduct($product_ean, 'Gray')){?><option name="gray">Gray</option><?php }?>
+						<?php if(checkProduct($product_ean, 'White')){?><option name="white">White</option><?php }?>
+						<?php if(checkProduct($product_ean, 'Black')){?><option name="black">Black</option><?php }?>
+					</select></td></tr>
+				<?php } ?>
 			<?php
 			//CASO ADMINISTRADOR
 			if($_SESSION['email']=='admin'){
