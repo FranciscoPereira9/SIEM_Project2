@@ -197,8 +197,8 @@ main {
     grid-template-areas: 
       ". . . . . . . . search-box search-box search-box search-box . . . . . . . ."
       ". . . . . . . . . header-table header-table . . . . . . . . ."
-      ". . . . . filter filter filter filter filter filter filter filter filter filter . . . . ."
-      ". . . . . table-admin table-admin table-admin table-admin table-admin table-admin table-admin table-admin table-admin table-admin . . . . ."
+      ". . . filter filter filter filter filter filter filter filter filter filter filter filter filter filter . . ."
+      ". . . table-admin table-admin table-admin table-admin table-admin table-admin table-admin table-admin table-admin table-admin table-admin table-admin table-admin table-admin . . ."
       ". . . . . . . . . . . . . . . . . . . ."
 
 }
